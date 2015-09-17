@@ -168,7 +168,7 @@ create table "skdept"
    "tele"               VARCHAR2(20)         not null,
    "fax"                VARCHAR2(20)         not null,
    "discrip"            VARCHAR2(20),
-   "super"              VARCHAR2(20),
+   "superd"              VARCHAR2(20),
    "createtime"         VARCHAR2(20)         not null,
    constraint PK_SKDEPT primary key ("dept_id")
 );
@@ -186,7 +186,7 @@ create table "skemp"
    "toworktime"         VARCHAR2(30)         not null,
    "zzmm"               VARCHAR2(30)         not null,
    "national"           VARCHAR2(30),
-   "native"             VARCHAR2(30),
+   "nativ"             VARCHAR2(30),
    "tele"               VARCHAR2(20),
    "mail"               VARCHAR2(30),
    "height"             VARCHAR2(20),
