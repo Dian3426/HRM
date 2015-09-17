@@ -1,0 +1,11 @@
+# Windows:
+
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# IntelliJ IDEA
+.idea/
+*.iml
+/target/
+/out/
