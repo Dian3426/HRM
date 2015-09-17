@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+       <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+              <property name="locations" value="jdbc.properties" />
+       </bean>
+
+       <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"   destroy-method="close">
+              <property name="driverClass" value="${driver}" />
+              <property name="jdbcUrl" value="${url}" />
+              <property name="user" value="${user}" />
+              <property name="password" value="${password}" />
+       </bean>
+
+       <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+              <property name="configLocation" value="mybatis-config.xml" />
+              <property name="dataSource" ref="dataSource" />
+       </bean>
+       <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+              <property name="basePackage" value="b
+              ean"/>
+       </bean>
+
+       <bean id="TestDAOImpl" class="impl.TestDaoImpl">
+              <property name="dataSource" ref="dataSource" />
+       </bean>
+
+       <bean id="TestService" class="service.TestService">
+              <property name="testImpl" ref="TestDAOImpl" />
+       </bean>
+
+
+</beans>
