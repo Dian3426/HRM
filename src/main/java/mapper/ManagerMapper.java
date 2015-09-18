@@ -10,8 +10,8 @@ import org.apache.ibatis.annotations.Select;
  */
 public interface ManagerMapper {
     @Insert("INSERT into manager(name,pass) VALUES (#{Manager.name},#{Manager.pass})")
-    void insert(@Param("Manager")Manager manager);
+    void createManager(@Param("Manager")Manager manager);
 
     @Select("SELECT name,pass FROM manager WHERE NAME = #{name}")
-    Manager select(@Param("name")String name);
+    Manager getManagerByName(@Param("name")String name);
 }
