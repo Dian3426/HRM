@@ -19,4 +19,8 @@ public class TestService {
         testMapper.insert(test);
     }
 
+    public void delete(int ID){
+        testMapper.delete(ID);
+    }
+
 }

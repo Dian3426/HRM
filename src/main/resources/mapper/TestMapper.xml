@@ -6,4 +6,7 @@
     <insert id="insert" parameterType="Test">
         INSERT INTO TEST VALUES(#{ID},#{username})
     </insert>
+    <delete id="delete" parameterType="int">
+        DELETE FROM TEST WHERE ID = #{ID}
+    </delete>
 </mapper>

@@ -11,6 +11,6 @@ public class Main {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         TestService testService = (TestService)context.getBean("testService");
-        testService.insert(5,"Potter");
+        testService.delete(4);
     }
 }
