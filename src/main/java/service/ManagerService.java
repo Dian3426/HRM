@@ -18,7 +18,7 @@ public class ManagerService {
      * @param manager
      */
     public void createManager(Manager manager) {
-        managerMapper.insert(manager);
+        managerMapper.createManager(manager);
     }
 
     /**
@@ -27,7 +27,7 @@ public class ManagerService {
      * @return
      */
     public boolean login(Manager manager) {
-        String pass=managerMapper.select(manager.getName()).getPass();
+        String pass=managerMapper.getManagerByName(manager.getName()).getPass();
         if(pass.equals(manager.getPass()))
             return  true;
         return false;
