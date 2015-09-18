@@ -21,7 +21,7 @@
        <context:spring-configured/>
 
        <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-              <property name="configLocation" value="classpath:mybatis-config.xml" />
+              <property name="typeAliasesPackage" value="domain" />
               <property name="dataSource" ref="dataSource" />
        </bean>
 
