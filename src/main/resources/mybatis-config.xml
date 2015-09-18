@@ -3,6 +3,6 @@
         "http://ibatis.apache.org/dtd/ibatis-3-config.dtd">
 <configuration>
     <typeAliases>
-        <typeAlias type="bean.Test" alias="Test" />
+        <typeAlias type="domain.Test" alias="Test" />
     </typeAliases>
 </configuration>

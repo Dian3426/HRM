@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
        <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
               <property name="locations" value="jdbc.properties" />
@@ -15,20 +16,17 @@
               <property name="password" value="${password}" />
        </bean>
 
+       <context:annotation-config/>
+       <context:component-scan base-package="service"/>
+       <context:spring-configured/>
+
        <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-              <property name="typeAliasesPackage" value="domain" />
+              <property name="configLocation" value="classpath:mybatis-config.xml" />
               <property name="dataSource" ref="dataSource" />
        </bean>
+
        <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-              <property name="basePackage" value="domain"/>
-       </bean>
-
-       <bean id="TestDAOImpl" class="dao.impl.TestDaoImpl">
-              <property name="dataSource" ref="dataSource" />
-       </bean>
-
-       <bean id="TestService" class="service.TestService">
-              <property name="testImpl" ref="TestDAOImpl" />
+              <property name="basePackage" value="mapper"/>
        </bean>
 
 

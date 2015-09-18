@@ -1,22 +1,22 @@
 package service;
 
-import impl.TestDaoImpl;
+import mapper.TestMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import domain.Test;
 
 /**
  * Created by ZaraN on 2015/9/17.
  */
+@Service
 public class TestService {
-    private TestDaoImpl testImpl;
 
-    public TestDaoImpl getTestImpl() {
-        return testImpl;
+    @Autowired
+    private TestMapper testMapper;
+
+    public void insert(int ID,String username){
+        Test test = new Test(ID,username);
+        testMapper.insert(test);
     }
 
-    public void setTestImpl(TestDaoImpl testImpl) {
-        this.testImpl = testImpl;
-    }
-
-    public void insert(int ID, String username){
-        this.testImpl.insert(ID,username);
-    }
 }
