@@ -1,14 +1,37 @@
 package domain;
 
+import domain.enums.JobTypes;
+import domain.enums.YesOrNo;
+
 /**
  * Created by Jsz on 2015/9/17.
  */
 public class Skjob {
+    private int id;
     private String job_id;
     private String name;
-    private String type;
-    private String limit;
-    private String depto;
+    private JobTypes type;
+    private String limitnum;
+    private YesOrNo islimit;
+    private String dept_id;
+
+    public Skjob(String job_id, String name, JobTypes type, String dept_id,String limitnum, YesOrNo islimit ) {
+        this.job_id = job_id;
+        this.name = name;
+        this.type = type;
+        this.limitnum = limitnum;
+        this.islimit = islimit;
+        this.dept_id = dept_id;
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getJob_id() {
         return job_id;
@@ -26,27 +49,35 @@ public class Skjob {
         this.name = name;
     }
 
-    public String getType() {
+    public JobTypes getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(JobTypes type) {
         this.type = type;
     }
 
-    public String getLimit() {
-        return limit;
+    public String getLimitnum() {
+        return limitnum;
     }
 
-    public void setLimit(String limit) {
-        this.limit = limit;
+    public void setLimitnum(String limitnum) {
+        this.limitnum = limitnum;
     }
 
-    public String getDepto() {
-        return depto;
+    public YesOrNo getIslimit() {
+        return islimit;
     }
 
-    public void setDepto(String depto) {
-        this.depto = depto;
+    public void setIslimit(YesOrNo islimit) {
+        this.islimit = islimit;
+    }
+
+    public String getDept_id() {
+        return dept_id;
+    }
+
+    public void setDept_id(String dept_id) {
+        this.dept_id = dept_id;
     }
 }
