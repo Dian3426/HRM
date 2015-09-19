@@ -5,6 +5,7 @@ import mapper.SkdeptManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -32,5 +33,14 @@ public class SkdpetService {
      */
     public List<Skdept> getDeptsByRows(int start,int end){
         return skdeptManager.getDeptsByRows(start,end);
+    }
+
+    /**
+     * 获取所有的部门编号，以及对应名称，以便填写上级部门
+     * 注意Skdept中上级部门对应的是id而不是名称
+     * @return
+     */
+    public HashMap<String,String> getAllDeptidAndNames(){
+        return skdeptManager.getAllDeptidAndNames();
     }
 }

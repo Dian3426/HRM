@@ -1,5 +1,7 @@
 package domain;
 
+import domain.enums.DeptTypes;
+
 /**
  * Created by Jsz on 2015/9/17.
  */
@@ -7,12 +9,24 @@ public class Skdept {
     private int id;
     private String dept_id;
     private String name;
-    private String type;
+    private DeptTypes type;
     private String tele;
     private String fax;
     private String discrip;
-    private String superd;
-    private String createtime;
+
+    public Skdept(){
+    }
+    public Skdept(String dept_id, String name, DeptTypes type, String tele, String fax, String discrip, String superd, String createtime) {
+
+        this.dept_id = dept_id;
+        this.name = name;
+        this.type = type;
+        this.tele = tele;
+        this.fax = fax;
+        this.discrip = discrip;
+        this.superd = superd;
+        this.createtime = createtime;
+    }
 
     public int getId() {
         return id;
@@ -38,11 +52,11 @@ public class Skdept {
         this.name = name;
     }
 
-    public String getType() {
+    public DeptTypes getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(DeptTypes type) {
         this.type = type;
     }
 
@@ -85,4 +99,8 @@ public class Skdept {
     public void setCreatetime(String createtime) {
         this.createtime = createtime;
     }
-}
+
+    private String superd;
+    private String createtime;
+
+    }
