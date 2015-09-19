@@ -13,13 +13,28 @@ import org.springframework.stereotype.Controller;
  */
 @Controller
 @Scope("prototype")
+@Namespace("/mainFrame")
 @ParentPackage("struts-default")
 public class MainAction extends ActionSupport{
 
-    @Action(value = "mainFrame",results = {
+    @Action(value = "",results = {
             @Result(name = ActionSupport.SUCCESS,location = "/WEB-INF/testStrutsTo.jsp")
     })
     public String mainFrame(){
+        return SUCCESS;
+    }
+
+    @Action(value = "deptInfo",results = {
+            @Result(name = ActionSupport.SUCCESS,location = "/WEB-INF/testStrutsTo.jsp")
+    })
+    public String deptInfo(){
+        return SUCCESS;
+    }
+
+    @Action(value = "deptAdd",results = {
+            @Result(name = ActionSupport.SUCCESS,location = "/WEB-INF/testStrutsTo.jsp")
+    })
+    public String deptAdd(){
         return SUCCESS;
     }
 
