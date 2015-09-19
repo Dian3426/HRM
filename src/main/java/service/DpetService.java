@@ -4,6 +4,7 @@ import domain.Skdept;
 import mapper.SkdeptManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
  * Created by Jsz on 2015/9/18.
  */
 @Service
-public class SkdpetService {
+public class DpetService {
 
     @Autowired
     private SkdeptManager skdeptManager;

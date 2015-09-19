@@ -12,7 +12,7 @@ import java.util.List;
  * Created by Jsz on 2015/9/19.
  */
 @Service
-public class SkjobService {
+public class JobService {
     @Autowired
     private SkjobManager skjobManager;
 
