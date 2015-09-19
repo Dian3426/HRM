@@ -1,5 +1,5 @@
 --------------------------------------------------------
---  文件已创建 - 星期五-九月-18-2015   
+--  文件已创建 - 星期六-九月-19-2015   
 --------------------------------------------------------
 --------------------------------------------------------
 --  DDL for Table SKDEPT
@@ -12,7 +12,7 @@
 	"TYPE" VARCHAR2(20 BYTE), 
 	"TELE" VARCHAR2(20 BYTE), 
 	"FAX" VARCHAR2(20 BYTE), 
-	"DISCRIP" VARCHAR2(20 BYTE), 
+	"DISCRIP" VARCHAR2(50 BYTE), 
 	"SUPERD" VARCHAR2(10 BYTE), 
 	"CREATETIME" VARCHAR2(20 BYTE)
    ) SEGMENT CREATION IMMEDIATE 
@@ -24,7 +24,13 @@
   TABLESPACE "USERS" ;
 REM INSERTING into SCOTT.SKDEPT
 SET DEFINE OFF;
-Insert into SCOTT.SKDEPT (ID,DEPT_ID,NAME,TYPE,TELE,FAX,DISCRIP,SUPERD,CREATETIME) values (2,'1','行政部','部门','2176003','64275080','行政管理',null,'1997-08-06');
+Insert into SCOTT.SKDEPT (ID,DEPT_ID,NAME,TYPE,TELE,FAX,DISCRIP,SUPERD,CREATETIME) values (1,'1','总公司','Enterprice','2176003','64275080','行政管理',null,'1997-08-06');
+Insert into SCOTT.SKDEPT (ID,DEPT_ID,NAME,TYPE,TELE,FAX,DISCRIP,SUPERD,CREATETIME) values (2,'2','行政部','Enterprice','2176003','64275080','行政管理','0','1997-08-06');
+Insert into SCOTT.SKDEPT (ID,DEPT_ID,NAME,TYPE,TELE,FAX,DISCRIP,SUPERD,CREATETIME) values (3,'3','生产部','Enterprice','64275087','64275084','产品生产','1','1997-08-06');
+Insert into SCOTT.SKDEPT (ID,DEPT_ID,NAME,TYPE,TELE,FAX,DISCRIP,SUPERD,CREATETIME) values (4,'0','总经办','Enterprice','2176004','64275060','行政管理',null,'1997-08-06');
+Insert into SCOTT.SKDEPT (ID,DEPT_ID,NAME,TYPE,TELE,FAX,DISCRIP,SUPERD,CREATETIME) values (5,'4','技术部','Dept','2176003','64275080','技术设计','3','1997-08-06');
+Insert into SCOTT.SKDEPT (ID,DEPT_ID,NAME,TYPE,TELE,FAX,DISCRIP,SUPERD,CREATETIME) values (6,'5','销售部','Dept','2176003','64275080','市场销售','3','1997-08-06');
+Insert into SCOTT.SKDEPT (ID,DEPT_ID,NAME,TYPE,TELE,FAX,DISCRIP,SUPERD,CREATETIME) values (7,'6','财务部','Dept','2176003','64275080','财务','2','1997-08-06');
 --------------------------------------------------------
 --  DDL for Index SKDEPT_PK
 --------------------------------------------------------
