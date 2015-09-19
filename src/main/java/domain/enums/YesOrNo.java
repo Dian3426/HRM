@@ -3,7 +3,7 @@ package domain.enums;
 /**
  * Created by Jsz on 2015/9/19.
  */
-public enum YesOrNo implements GenericEnum {
+public enum YesOrNo {
     Yes("ÊÇ"),
     No("·ñ");
 

@@ -1,36 +1,74 @@
 package domain;
 
+import domain.enums.BloodTypes;
+import domain.enums.Degree;
+import domain.enums.Sex;
+import domain.enums.Zzmm;
+
 /**
  * Created by Jsz on 2015/9/17.
  */
 public class Skemp {
-    private int emp_id;
+    private int id;
+    private String emp_id;
     private String name;
-    private String sex;
+    private Sex sex;
     private String bir;
     private String idcard;
     private String toworktime;
-    private String zzmm;
+    private Zzmm zzmm;
     private String national;
     private String nativ;
     private String tele;
     private String mail;
     private String height;
-    private String bloodtype;
+    private BloodTypes bloodtype;
     private String birthplace;
     private String hkplace;
     private String photo;
-    private String xl;
-    private String degree;
+    private Degree degree;
     private String graduateschool;
     private String professional;
     private String graduatetime;
 
-    public int getEmp_id() {
+    public Skemp(String emp_id, String name, Sex sex, String bir, String idcard, String toworktime, Zzmm zzmm,
+                 String national, String nativ, String tele, String mail, String height, BloodTypes bloodtype,
+                 String birthplace, String hkplace, String photo, Degree degree, String graduateschool, String professional, String graduatetime) {
+        this.emp_id = emp_id;
+        this.name = name;
+        this.sex = sex;
+        this.bir = bir;
+        this.idcard = idcard;
+        this.toworktime = toworktime;
+        this.zzmm = zzmm;
+        this.national = national;
+        this.nativ = nativ;
+        this.tele = tele;
+        this.mail = mail;
+        this.height = height;
+        this.bloodtype = bloodtype;
+        this.birthplace = birthplace;
+        this.hkplace = hkplace;
+        this.photo = photo;
+        this.degree = degree;
+        this.graduateschool = graduateschool;
+        this.professional = professional;
+        this.graduatetime = graduatetime;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getEmp_id() {
         return emp_id;
     }
 
-    public void setEmp_id(int emp_id) {
+    public void setEmp_id(String emp_id) {
         this.emp_id = emp_id;
     }
 
@@ -42,11 +80,11 @@ public class Skemp {
         this.name = name;
     }
 
-    public String getSex() {
+    public Sex getSex() {
         return sex;
     }
 
-    public void setSex(String sex) {
+    public void setSex(Sex sex) {
         this.sex = sex;
     }
 
@@ -74,11 +112,11 @@ public class Skemp {
         this.toworktime = toworktime;
     }
 
-    public String getZzmm() {
+    public Zzmm getZzmm() {
         return zzmm;
     }
 
-    public void setZzmm(String zzmm) {
+    public void setZzmm(Zzmm zzmm) {
         this.zzmm = zzmm;
     }
 
@@ -122,11 +160,11 @@ public class Skemp {
         this.height = height;
     }
 
-    public String getBloodtype() {
+    public BloodTypes getBloodtype() {
         return bloodtype;
     }
 
-    public void setBloodtype(String bloodtype) {
+    public void setBloodtype(BloodTypes bloodtype) {
         this.bloodtype = bloodtype;
     }
 
@@ -154,19 +192,11 @@ public class Skemp {
         this.photo = photo;
     }
 
-    public String getXl() {
-        return xl;
-    }
-
-    public void setXl(String xl) {
-        this.xl = xl;
-    }
-
-    public String getDegree() {
+    public Degree getDegree() {
         return degree;
     }
 
-    public void setDegree(String degree) {
+    public void setDegree(Degree degree) {
         this.degree = degree;
     }
 

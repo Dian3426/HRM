@@ -3,13 +3,14 @@ package domain.enums;
 /**
  * Created by Jsz on 2015/9/19.
  */
-public enum DeptTypes  {
-    Enterprice("公司"),
-    Dept("部门");
+public enum SourceTypes {
+    Social("社会招聘"),
+    School("校园招聘"),
+    OtherSource("其他来源");
 
     private String des;
 
-    DeptTypes(String s){
+    SourceTypes(String s){
         des = s;
     }
 

@@ -3,13 +3,13 @@ package domain.enums;
 /**
  * Created by Jsz on 2015/9/19.
  */
-public enum DeptTypes  {
-    Enterprice("公司"),
-    Dept("部门");
+public enum Sex {
+    Male("男"),
+    Female("女");
 
     private String des;
 
-    DeptTypes(String s){
+    Sex(String s){
         des = s;
     }
 

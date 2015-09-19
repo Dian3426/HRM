@@ -3,13 +3,12 @@ package domain.enums;
 /**
  * Created by Jsz on 2015/9/19.
  */
-public enum DeptTypes  {
-    Enterprice("公司"),
-    Dept("部门");
-
+public enum EmpTypes {
+    Official("正式员工"),
+    Temporary("临时员工");
     private String des;
 
-    DeptTypes(String s){
+    EmpTypes(String s){
         des = s;
     }
 

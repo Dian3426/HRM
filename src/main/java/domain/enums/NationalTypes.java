@@ -3,13 +3,16 @@ package domain.enums;
 /**
  * Created by Jsz on 2015/9/19.
  */
-public enum DeptTypes  {
-    Enterprice("公司"),
-    Dept("部门");
+public enum  NationalTypes {
+    Han("汉族"),
+    Miao("苗族"),
+    Man("满族"),
+    Hui("回族"),
+    OtherNation("其他民族");
 
     private String des;
 
-    DeptTypes(String s){
+    NationalTypes(String s){
         des = s;
     }
 

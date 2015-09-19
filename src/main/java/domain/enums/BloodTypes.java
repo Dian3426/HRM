@@ -3,13 +3,16 @@ package domain.enums;
 /**
  * Created by Jsz on 2015/9/19.
  */
-public enum DeptTypes  {
-    Enterprice("公司"),
-    Dept("部门");
+public enum BloodTypes {
+    A("A型"),
+    B("B型"),
+    AB("AB型"),
+    O("O型"),
+    OtherBlood("其他血型");
 
     private String des;
 
-    DeptTypes(String s){
+    BloodTypes(String s){
         des = s;
     }
 

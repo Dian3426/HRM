@@ -3,13 +3,15 @@ package domain.enums;
 /**
  * Created by Jsz on 2015/9/19.
  */
-public enum DeptTypes  {
-    Enterprice("公司"),
-    Dept("部门");
-
+public enum Degree {
+    Postgraduate("研究生"),
+    Undergraduate("本科生"),
+    SHStudent("高中生"),
+    JHStudent("初中生"),
+    OtherDegree("其他学历");
     private String des;
 
-    DeptTypes(String s){
+    Degree(String s){
         des = s;
     }
 

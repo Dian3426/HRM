@@ -1,15 +1,15 @@
 package domain.enums;
 
 /**
- * Created by Jsz on 2015/9/19.
+ * Created by Jsz on 2015/9/20.
  */
-public enum DeptTypes  {
-    Enterprice("公司"),
-    Dept("部门");
-
+public enum Relations {
+    Father("父亲"),
+    Mother("母亲"),
+    Spouse("配偶");
     private String des;
 
-    DeptTypes(String s){
+    Relations(String s){
         des = s;
     }
 
