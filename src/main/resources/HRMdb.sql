@@ -118,7 +118,7 @@ create table "leave"
 /*==============================================================*/
 create table "manager" 
 (
-   "id"                 VARCHAR2(10)         not null,
+   "id"                 INTEGER          not null,
    "name"               VARCHAR2(20)         not null,
    "pass"               VARCHAR2(20)         not null,
    constraint PK_MANAGER primary key ("id")
@@ -172,7 +172,22 @@ create table "skdept"
    "createtime"         VARCHAR2(20)         not null,
    constraint PK_SKDEPT primary key ("dept_id")
 );
-
+/*  mysql  ×îÖÕÐÞ¸Ä°æ
+create table skdept
+(
+   id  int not null  AUTO_INCREMENT,
+   dept_id            VARCHAR(10)      unique   not null,
+   name               VARCHAR(20)      unique   not null,
+   type               VARCHAR(20)         not null,
+   tele               VARCHAR(20)         not null,
+   fax                VARCHAR(20)         not null,
+   discrip            VARCHAR(20),
+   superd             VARCHAR(10),
+   createtime         VARCHAR(20)         not null,
+   constraint PK_SKDEPT primary key (id),
+   foreign key (superd) references skdept(dept_id)
+);
+*/
 /*==============================================================*/
 /* Table: "skemp"                                               */
 /*==============================================================*/

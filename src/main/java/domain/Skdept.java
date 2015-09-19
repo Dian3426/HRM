@@ -4,6 +4,7 @@ package domain;
  * Created by Jsz on 2015/9/17.
  */
 public class Skdept {
+    private int id;
     private String dept_id;
     private String name;
     private String type;
@@ -12,6 +13,14 @@ public class Skdept {
     private String discrip;
     private String superd;
     private String createtime;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getDept_id() {
         return dept_id;
