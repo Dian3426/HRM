@@ -1,9 +1,6 @@
 package domain;
 
-import domain.enums.BloodTypes;
-import domain.enums.Degree;
-import domain.enums.Sex;
-import domain.enums.Zzmm;
+import domain.enums.*;
 
 /**
  * Created by Jsz on 2015/9/17.
@@ -30,11 +27,9 @@ public class Skemp {
     private String graduateschool;
     private String professional;
     private String graduatetime;
+    private SourceTypes source;
 
-    public Skemp(String emp_id, String name, Sex sex, String bir, String idcard, String toworktime, Zzmm zzmm,
-                 String national, String nativ, String tele, String mail, String height, BloodTypes bloodtype,
-                 String birthplace, String hkplace, String photo, Degree degree, String graduateschool, String professional, String graduatetime) {
-        this.emp_id = emp_id;
+    public Skemp(String name, Sex sex, String bir, String idcard, String toworktime, Zzmm zzmm, String national, String nativ, String tele, String mail, String height, BloodTypes bloodtype, String birthplace, String hkplace, String photo, Degree degree, String graduateschool, String professional, String graduatetime, SourceTypes source, String emp_id) {
         this.name = name;
         this.sex = sex;
         this.bir = bir;
@@ -54,6 +49,8 @@ public class Skemp {
         this.graduateschool = graduateschool;
         this.professional = professional;
         this.graduatetime = graduatetime;
+        this.source = source;
+        this.emp_id = emp_id;
     }
 
     public int getId() {
@@ -222,5 +219,13 @@ public class Skemp {
 
     public void setGraduatetime(String graduatetime) {
         this.graduatetime = graduatetime;
+    }
+
+    public SourceTypes getSource() {
+        return source;
+    }
+
+    public void setSource(SourceTypes source) {
+        this.source = source;
     }
 }

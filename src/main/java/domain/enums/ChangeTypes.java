@@ -1,14 +1,15 @@
 package domain.enums;
 
 /**
- * Created by Jsz on 2015/9/19.
+ * Created by Jsz on 2015/9/20.
  */
-public enum EmpTypes {
-    Official("正式员工"),
-    Temporary("临时员工");
+public enum ChangeTypes {
+    Initiative("主动"),
+    Passive("被动");
+
     private String des;
 
-    EmpTypes(String s){
+    ChangeTypes(String s){
         des = s;
     }
 

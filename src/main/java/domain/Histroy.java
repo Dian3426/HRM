@@ -1,23 +1,37 @@
 package domain;
 
+import org.apache.ibatis.annotations.Select;
+
 /**
  * Created by Jsz on 2015/9/17.
  */
 public class Histroy {
-    private String id;
+    private int id;
     private String dept_id;
+    private String job_id;
     private String type;
-    private String people;
+    private int peoplenum;
     private String changetime;
-    private String oldpeople;
-    private String newpeople;
-    private String name;
+    private int oldnum;
+    private String newnum;
+    private String mangagername;
 
-    public String getId() {
+    public Histroy(String dept_id, String job_id, String type, int peoplenum, String changetime, int oldnum, String newnum, String mangagername) {
+        this.dept_id = dept_id;
+        this.job_id = job_id;
+        this.type = type;
+        this.peoplenum = peoplenum;
+        this.changetime = changetime;
+        this.oldnum = oldnum;
+        this.newnum = newnum;
+        this.mangagername = mangagername;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -29,6 +43,14 @@ public class Histroy {
         this.dept_id = dept_id;
     }
 
+    public String getJob_id() {
+        return job_id;
+    }
+
+    public void setJob_id(String job_id) {
+        this.job_id = job_id;
+    }
+
     public String getType() {
         return type;
     }
@@ -37,12 +59,12 @@ public class Histroy {
         this.type = type;
     }
 
-    public String getPeople() {
-        return people;
+    public int getPeoplenum() {
+        return peoplenum;
     }
 
-    public void setPeople(String people) {
-        this.people = people;
+    public void setPeoplenum(int peoplenum) {
+        this.peoplenum = peoplenum;
     }
 
     public String getChangetime() {
@@ -53,27 +75,27 @@ public class Histroy {
         this.changetime = changetime;
     }
 
-    public String getOldpeople() {
-        return oldpeople;
+    public int getOldnum() {
+        return oldnum;
     }
 
-    public void setOldpeople(String oldpeople) {
-        this.oldpeople = oldpeople;
+    public void setOldnum(int oldnum) {
+        this.oldnum = oldnum;
     }
 
-    public String getNewpeople() {
-        return newpeople;
+    public String getNewnum() {
+        return newnum;
     }
 
-    public void setNewpeople(String newpeople) {
-        this.newpeople = newpeople;
+    public void setNewnum(String newnum) {
+        this.newnum = newnum;
     }
 
-    public String getName() {
-        return name;
+    public String getMangagername() {
+        return mangagername;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setMangagername(String mangagername) {
+        this.mangagername = mangagername;
     }
 }

@@ -1,5 +1,7 @@
 package domain;
 
+import domain.enums.YesOrNo;
+
 /**
  * Created by Jsz on 2015/9/17.
  */
@@ -8,21 +10,20 @@ public class Temporary {
     private String begintime;
     private String endtime;
     private int result;
-    private String dealtime;
     private String ope_id;
     private String emp_id;
     private String job_id;
-    private String explanation;
+    private YesOrNo status;
 
-    public Temporary( String emp_id, String job_id,String begintime, String endtime, int result, String dealtime, String ope_id, String explanation) {
+    public Temporary(String begintime, String endtime, int result, String ope_id, String emp_id, String job_id, YesOrNo status) {
         this.begintime = begintime;
         this.endtime = endtime;
         this.result = result;
-        this.dealtime = dealtime;
+
         this.ope_id = ope_id;
         this.emp_id = emp_id;
         this.job_id = job_id;
-        this.explanation = explanation;
+        this.status = status;
     }
 
     public int getId() {
@@ -57,14 +58,6 @@ public class Temporary {
         this.result = result;
     }
 
-    public String getDealtime() {
-        return dealtime;
-    }
-
-    public void setDealtime(String dealtime) {
-        this.dealtime = dealtime;
-    }
-
     public String getOpe_id() {
         return ope_id;
     }
@@ -89,11 +82,11 @@ public class Temporary {
         this.job_id = job_id;
     }
 
-    public String getExplanation() {
-        return explanation;
+    public YesOrNo getStatus() {
+        return status;
     }
 
-    public void setExplanation(String explanation) {
-        this.explanation = explanation;
+    public void setStatus(YesOrNo status) {
+        this.status = status;
     }
 }
