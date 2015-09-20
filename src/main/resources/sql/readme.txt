@@ -1,0 +1,1 @@
+在创建其他表之前，请先创建 skemp、 skdept、skjob

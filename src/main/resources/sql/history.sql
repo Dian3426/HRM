@@ -1,0 +1,70 @@
+--------------------------------------------------------
+--  文件已创建 - 星期日-九月-20-2015   
+--------------------------------------------------------
+--------------------------------------------------------
+--  DDL for Table HISTORY
+--------------------------------------------------------
+
+  CREATE TABLE "SCOTT"."HISTORY" 
+   (	"ID" NUMBER(*,0), 
+	"DEPT_ID" VARCHAR2(10 BYTE), 
+	"JOB_ID" VARCHAR2(10 BYTE), 
+	"TYPE" VARCHAR2(20 BYTE), 
+	"PEOPLENUM" NUMBER(*,0), 
+	"CHANGETIME" VARCHAR2(20 BYTE), 
+	"OLDNUM" NUMBER(*,0), 
+	"NEWNUM" NUMBER(*,0), 
+	"MANGERNAME" VARCHAR2(20 BYTE)
+   ) SEGMENT CREATION DEFERRED 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  TABLESPACE "USERS" ;
+REM INSERTING into SCOTT.HISTORY
+SET DEFINE OFF;
+--------------------------------------------------------
+--  DDL for Index HISTORY_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "SCOTT"."HISTORY_PK" ON "SCOTT"."HISTORY" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  Constraints for Table HISTORY
+--------------------------------------------------------
+
+  ALTER TABLE "SCOTT"."HISTORY" MODIFY ("MANGERNAME" NOT NULL ENABLE);
+  ALTER TABLE "SCOTT"."HISTORY" MODIFY ("TYPE" NOT NULL ENABLE);
+  ALTER TABLE "SCOTT"."HISTORY" MODIFY ("JOB_ID" NOT NULL ENABLE);
+  ALTER TABLE "SCOTT"."HISTORY" ADD CONSTRAINT "HISTORY_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  TABLESPACE "USERS"  ENABLE;
+  ALTER TABLE "SCOTT"."HISTORY" MODIFY ("NEWNUM" NOT NULL ENABLE);
+  ALTER TABLE "SCOTT"."HISTORY" MODIFY ("OLDNUM" NOT NULL ENABLE);
+  ALTER TABLE "SCOTT"."HISTORY" MODIFY ("CHANGETIME" NOT NULL ENABLE);
+  ALTER TABLE "SCOTT"."HISTORY" MODIFY ("PEOPLENUM" NOT NULL ENABLE);
+  ALTER TABLE "SCOTT"."HISTORY" MODIFY ("DEPT_ID" NOT NULL ENABLE);
+  ALTER TABLE "SCOTT"."HISTORY" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Ref Constraints for Table HISTORY
+--------------------------------------------------------
+
+  ALTER TABLE "SCOTT"."HISTORY" ADD CONSTRAINT "HISTORY_SKDEPT_FK1" FOREIGN KEY ("DEPT_ID")
+	  REFERENCES "SCOTT"."SKDEPT" ("DEPT_ID") ENABLE;
+  ALTER TABLE "SCOTT"."HISTORY" ADD CONSTRAINT "HISTORY_SKJOB_FK1" FOREIGN KEY ("JOB_ID")
+	  REFERENCES "SCOTT"."SKJOB" ("JOB_ID") ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger HISTORY_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "SCOTT"."HISTORY_TRG" BEFORE INSERT ON HISTORY 
+FOR EACH ROW 
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    IF :NEW.ID IS NULL THEN
+      SELECT HISTORY_SEQ.NEXTVAL INTO :NEW.ID FROM DUAL;
+    END IF;
+  END COLUMN_SEQUENCES;
+END;
+/
+ALTER TRIGGER "SCOTT"."HISTORY_TRG" ENABLE;
