@@ -13,7 +13,7 @@ import java.util.List;
  * Created by Jsz on 2015/9/18.
  */
 @Service
-public class DpetService {
+public class DeptService {
 
     @Autowired
     private SkdeptManager skdeptManager;
@@ -41,7 +41,7 @@ public class DpetService {
      * 注意Skdept中上级部门对应的是id而不是名称
      * @return
      */
-    public HashMap<String,String> getAllDeptidAndNames(){
+    public List<HashMap<String,String>> getAllDeptidAndNames(){
         return skdeptManager.getAllDeptidAndNames();
     }
 }

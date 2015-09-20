@@ -34,7 +34,7 @@ public class JobService {
         return skjobManager.getJobsByRows(start,end);
     }
 
-    public HashMap<String,String> getJobidAndNames(){
+    public  List<HashMap<String,String>> getJobidAndNames(){
         return skjobManager.getJobidAndNames();
     }
 }
