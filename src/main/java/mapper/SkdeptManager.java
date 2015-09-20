@@ -1,9 +1,11 @@
 package mapper;
 
 import domain.Skdept;
+import domain.Skemp;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.HashMap;
 import java.util.List;
@@ -24,5 +26,12 @@ public interface SkdeptManager {
     List<Skdept> getDeptsByRows(@Param("start")int start,@Param("end")int end );
 
     @Select("SELECT DEPT_ID, NAME FROM SKDEPT")
-    HashMap<String,String> getAllDeptidAndNames();
+    List<HashMap<String,String>> getAllDeptidAndNames();
+
+    @Select("SELECT NAME FROM SKDEPT WHERE DEPT_ID=#{dept_id}")
+    String getDeptNameByDeptid(@Param("dept_id")String dept_id);
+
+    @Update("UPDATE SKDEPT SET name=#{name},TYPE=#{TYPE ,typeHandler=org.apache.ibatis.type.EnumTypeHandler},TELE=#{tele}," +
+            "FAX=#{fax},DISCRIP=#{discrip},SUPERD=#{superd},CREATETIME=#{createtime} WHERE DEPT_ID=#{emp_id}")
+    void updateByDeptid(@Param("Skdept")Skdept skdept);
 }

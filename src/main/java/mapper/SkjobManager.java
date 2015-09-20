@@ -4,6 +4,7 @@ import domain.Skjob;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,5 +24,9 @@ public interface SkjobManager {
     List<Skjob> getJobsByRows(@Param("start")int start,@Param("end")int end);
 
     @Select("SELECT JOB_ID,NAME FROM SKJOB")
-    HashMap<String,String> getJobidAndNames();
+    List<HashMap<String,String>> getJobidAndNames();
+
+    @Update("UPDATE SKJOB SET NAME=#{name},TYPE=#{TYPE ,typeHandler=org.apache.ibatis.type.EnumTypeHandler},LIMITNUM=#{limitnum},DEPT_ID=#{dept_id}," +
+            "ISLIMIT=#{islimit,typeHandler=org.apache.ibatis.type.EnumTypeHandler} WHERE JOB_ID=#{job_id}")
+    void updateByJobid(@Param("Skjob")Skjob skjob);
 }
