@@ -1,15 +1,12 @@
 package service;
 
-import domain.Occupationcareer;
-import domain.Skemp;
-import domain.Societyrelation;
-import domain.Temporary;
-import mapper.OccupationcareerMapper;
-import mapper.SkempMapper;
-import mapper.SocietyrelationMapper;
-import mapper.TemporaryMapper;
+import domain.*;
+import mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Jsz on 2015/9/20.
@@ -23,29 +20,40 @@ public class EmpService {
     private SocietyrelationMapper societyrelationMapper;
     @Autowired
     private TemporaryMapper temporaryMapper;
+    @Autowired
+    private TalentMapper talentMapper;
 
     @Transactional
-    void createEmpTotally(Skemp skemp,Occupationcareer occupationcareer, Societyrelation societyrelation){
-        if(skemp.getEmp_id().equals(occupationcareer.getEmp_id())&&skemp.getEmp_id().equals(societyrelation.getEmp_id())){
+    public void createEmpTotally(Skemp skemp,Occupationcareer occupationcareer, Societyrelation societyrelation, Talent talent){
+        String emp_id = skemp.getEmp_id();
+        if(emp_id.equals(occupationcareer.getEmp_id())&&emp_id.equals(societyrelation.getEmp_id())&&emp_id.equals(talent.getEmp_id())){
             createEmp(skemp);
             createOccupationcareer(occupationcareer);
             creatSocietyrelation(societyrelation);
+            createTalent(talent);
         }
     }
 
-    void createEmp(Skemp skemp){
+    public  void createEmp(Skemp skemp){
         skempMapper.createEmp(skemp);
     }
 
-    void createOccupationcareer(Occupationcareer occupationcareer){
+    public void createOccupationcareer(Occupationcareer occupationcareer){
         occupationcareerMapper.createOccupationcareer(occupationcareer);
     }
 
-    void creatSocietyrelation(Societyrelation societyrelation){
+    public  void createTalent(Talent talent){
+        talentMapper.createTalent(talent);
+    }
+    public void creatSocietyrelation(Societyrelation societyrelation){
         societyrelationMapper.creatSocietyrelation(societyrelation);
     }
 
-    void createTemporary(Temporary temporary){
+    public void createTemporary(Temporary temporary){
         temporaryMapper.createTemporary(temporary);
+    }
+
+    public List<HashMap<String,String>> getTemporaryEmpInfo(String emp_id,String empName,String begintime,String endtime){
+        return temporaryMapper.getTemporaryInfo(emp_id, empName, begintime, endtime);
     }
 }
