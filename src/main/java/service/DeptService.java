@@ -104,5 +104,7 @@ public class DeptService extends BaseService{
         return count;
     }
 
-
+    public String getDeptidByName(String name){
+        return skdeptManager.getDeptidByName(name);
+    }
 }
