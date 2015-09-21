@@ -20,12 +20,21 @@ public class DeptService extends BaseService{
     @Autowired
     private SkdeptMapper skdeptManager;
 
+    @Autowired
+    private SkjobMapper skjobMapper;
+
+    @Autowired
+    private  TalentMapper talentMapper;
     /**
      * 创建一个部门
      * @param skdept
      */
     public void createDept(Skdept skdept){
         skdeptManager.createDept(skdept);
+    }
+
+    public Skdept getSkdeptByDeptid(String dept_id){
+        return null;
     }
 
     /**
@@ -82,7 +91,12 @@ public class DeptService extends BaseService{
      * @return
      */
     public int getCountByDeptid(String dept_id){
-        return 0;
+        int count = 0;
+        List<Skjob> skjobList = skjobMapper.getJobsByDeptid(dept_id);
+        for(Skjob job:skjobList){
+            count+=talentMapper.getCountByJobid(job.getJob_id());
+        }
+        return count;
     }
 
 
