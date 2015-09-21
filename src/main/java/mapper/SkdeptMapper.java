@@ -37,4 +37,7 @@ public interface SkdeptMapper {
 
     @Select("SELECT DEPT_ID FROM SKDEPT WHERE NAME=#{name}")
     String getDeptidByName(@Param("name")String name);
+
+    @Select("SELECT * FROM SKDEPT WHERE DEPT_ID=#{dept_id}")
+    Skdept getDeptByDeptid(@Param("dept_id")String dept_id);
 }

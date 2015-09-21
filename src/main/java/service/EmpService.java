@@ -44,7 +44,7 @@ public class EmpService extends BaseService{
         }
     }
 
-    public  void createEmp(Skemp skemp){skempMapper.createEmp(skemp);
+    private  void createEmp(Skemp skemp){skempMapper.createEmp(skemp);
     }
 
     public List<String> getExistEmpid(){

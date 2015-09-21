@@ -80,7 +80,14 @@ public class BaseService{
             return true;
     }
 
-
+    /**
+     * 获取任职job_id对应岗位的总人数
+     * @param job_id
+     * @return
+     */
+    protected int getCountByJobid(String job_id){
+        return talentMapper.getCountByJobid(job_id);
+    }
 
 
 }

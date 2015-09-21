@@ -79,4 +79,12 @@ public class JobService extends BaseService {
     public int getCountByJobid(String job_id){
         return talentMapper.getCountByJobid(job_id);
     }
+
+    public List<Skjob> getJobsByName(String name){
+        return skjobManager.getJobsByName(name);
+    }
+
+    public Skjob getJobByNameAndDeptid(String name,String dept_id){
+        return skjobManager.getJobByNameAndDeptid(name,dept_id);
+    }
 }

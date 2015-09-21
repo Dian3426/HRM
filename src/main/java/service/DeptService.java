@@ -33,8 +33,13 @@ public class DeptService extends BaseService{
         skdeptManager.createDept(skdept);
     }
 
+    /**
+     * 获取对应编号的部门
+     * @param dept_id
+     * @return
+     */
     public Skdept getSkdeptByDeptid(String dept_id){
-        return null;
+        return skdeptManager.getDeptByDeptid(dept_id);
     }
 
     /**

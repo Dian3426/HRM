@@ -37,4 +37,10 @@ public interface SkjobMapper {
     @Select("SELECT * FROM SKJOB WHERE JOB_ID=#{job_id}")
     Skjob getJobByJobid(@Param("job_id")String job_id);
 
+    @Select("SELECT * FROM SKJOB WHERE NAME =#{name}")
+    List<Skjob> getJobsByName(@Param("name") String name);
+
+    @Select("SELECT * FROM SKJOB WHERE NAME =#{name} AND DEPT_ID=#{dept_id}")
+    Skjob getJobByNameAndDeptid(@Param("name")String name,@Param("dept_id")String dept_id);
+
 }
