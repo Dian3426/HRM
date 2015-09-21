@@ -19,13 +19,7 @@ public class Skstaff {
         this.time = time;
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getEmp_id() {
         return emp_id;

@@ -29,13 +29,7 @@ public class Histroy {
         this.mangagername = mangagername;
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getDept_id() {
         return dept_id;

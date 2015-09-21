@@ -30,13 +30,6 @@ public class Occupationcareer {
         this.referencetel = referencetel;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getEmp_id() {
         return emp_id;

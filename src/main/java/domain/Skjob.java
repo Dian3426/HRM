@@ -27,13 +27,7 @@ public class Skjob {
     }
 
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getJob_id() {
         return job_id;
