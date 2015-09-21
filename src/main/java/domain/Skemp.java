@@ -29,6 +29,7 @@ public class Skemp {
     private String graduatetime;
     private SourceTypes source;
 
+    public Skemp(){}
     public Skemp(String name, Sex sex, String bir, String idcard, String toworktime, Zzmm zzmm, String national, String nativ, String tele, String mail, String height, BloodTypes bloodtype, String birthplace, String hkplace, String photo, Degree degree, String graduateschool, String professional, String graduatetime, SourceTypes source, String emp_id) {
         this.name = name;
         this.sex = sex;

@@ -15,6 +15,8 @@ public class Temporary {
     private String job_id;
     private YesOrNo status;
 
+    public Temporary(){}
+
     public Temporary(String begintime, String endtime, int result, String ope_id, String emp_id, String job_id, YesOrNo status) {
         this.begintime = begintime;
         this.endtime = endtime;

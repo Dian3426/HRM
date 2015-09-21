@@ -11,6 +11,8 @@ public class Skstaff {
     private String job_id;
     private String time;
 
+    public Skstaff(){}
+
     public Skstaff(String emp_id, String job_id, String time) {
         this.emp_id = emp_id;
         this.job_id = job_id;

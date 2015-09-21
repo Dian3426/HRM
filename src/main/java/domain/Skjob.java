@@ -11,11 +11,13 @@ public class Skjob {
     private String job_id;
     private String name;
     private JobTypes type;
-    private String limitnum;
+    private int limitnum;
     private YesOrNo islimit;
     private String dept_id;
 
-    public Skjob(String job_id, String name, JobTypes type, String dept_id,String limitnum, YesOrNo islimit ) {
+    public Skjob(){}
+
+    public Skjob(String job_id, String name, JobTypes type, String dept_id,int limitnum, YesOrNo islimit ) {
         this.job_id = job_id;
         this.name = name;
         this.type = type;
@@ -57,11 +59,11 @@ public class Skjob {
         this.type = type;
     }
 
-    public String getLimitnum() {
+    public int getLimitnum() {
         return limitnum;
     }
 
-    public void setLimitnum(String limitnum) {
+    public void setLimitnum(int limitnum) {
         this.limitnum = limitnum;
     }
 

@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 /**
  * Created by Jsz on 2015/9/19.
  */
@@ -18,4 +20,7 @@ public interface SkempMapper {
 
     @Select("SELECT * FROM SKEMP WHERE IDCARD=#{idcard}")
     Skemp getEmpbyIdcard(@Param("idcard")String idcard);
+
+    @Select("SELECT * FROM SKEMP")
+    List<Skemp> getAllEmps();
 }

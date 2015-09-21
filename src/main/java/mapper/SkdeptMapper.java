@@ -2,10 +2,7 @@ package mapper;
 
 import domain.Skdept;
 import domain.Skemp;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +10,7 @@ import java.util.List;
 /**
  * Created by Jsz on 2015/9/18.
  */
-public interface SkdeptManager {
+public interface SkdeptMapper {
 
     @Insert("INSERT INTO SKDEPT VALUES (NULL ,#{Skdept.dept_id},#{Skdept.name},#{Skdept.type,typeHandler=org.apache.ibatis.type.EnumTypeHandler},#{Skdept.tele}," +
             "#{Skdept.fax},#{Skdept.discrip,jdbcType=VARCHAR},#{Skdept.superd,jdbcType=VARCHAR} ,#{Skdept.createtime})")
@@ -34,4 +31,10 @@ public interface SkdeptManager {
     @Update("UPDATE SKDEPT SET name=#{name},TYPE=#{TYPE ,typeHandler=org.apache.ibatis.type.EnumTypeHandler},TELE=#{tele}," +
             "FAX=#{fax},DISCRIP=#{discrip},SUPERD=#{superd},CREATETIME=#{createtime} WHERE DEPT_ID=#{emp_id}")
     void updateByDeptid(@Param("Skdept")Skdept skdept);
+
+    @Delete("DELETE FROM SKDEPT WHERE DEPT_ID=#{dept_id}")
+    void delete(@Param("dept_id")String dept_id);
+
+    @Select("SELECT DEPT_ID FROM SKDEPT WHERE NAME=#{name}")
+    String getDeptidByName(@Param("name")String name);
 }
