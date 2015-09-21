@@ -10,31 +10,18 @@ import org.springframework.stereotype.Controller;
 
 /**
  * Created by ZaraN on 2015/9/19.
+ * this Action is set to index the mainFrame and complete some base functions
  */
 @Controller
 @Scope("prototype")
-@Namespace("/mainFrame")
+@Namespace("/")
 @ParentPackage("struts-default")
 public class MainAction extends ActionSupport{
 
-    @Action(value = "",results = {
+    @Action(value = "mainFrame",results = {
             @Result(name = ActionSupport.SUCCESS,location = "/WEB-INF/testStrutsTo.jsp")
     })
     public String mainFrame(){
-        return SUCCESS;
-    }
-
-    @Action(value = "deptInfo",results = {
-            @Result(name = ActionSupport.SUCCESS,location = "/WEB-INF/testStrutsTo.jsp")
-    })
-    public String deptInfo(){
-        return SUCCESS;
-    }
-
-    @Action(value = "deptAdd",results = {
-            @Result(name = ActionSupport.SUCCESS,location = "/WEB-INF/testStrutsTo.jsp")
-    })
-    public String deptAdd(){
         return SUCCESS;
     }
 
