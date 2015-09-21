@@ -23,4 +23,7 @@ public interface SkempMapper {
 
     @Select("SELECT * FROM SKEMP")
     List<Skemp> getAllEmps();
+
+    @Select("SELECT COUNT(emp_id) FROM SKEMP")
+    int getCount();
 }

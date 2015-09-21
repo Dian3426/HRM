@@ -8,6 +8,8 @@ import mapper.TalentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by JSZ on 2015/9/21.
  */
@@ -18,6 +20,7 @@ public class BaseService{
 
     @Autowired
     private TalentMapper talentMapper;
+
 
     /**
      * 安全的符合完整性约束的方法
@@ -51,5 +54,33 @@ public class BaseService{
             return false;
         }
     }
+    protected boolean empInThisDept(String dept_id){
+        List<Skjob> list = skjobMapper.getJobsByDeptid(dept_id);
+        if(list.isEmpty())
+            return false;
+        else {
+            for(Skjob job:list){
+                if(!talentMapper.getTalentByJobid(job.getJob_id()).isEmpty())
+                    return true;
+            }
+            return false;
+        }
+    }
+
+
+    /**
+     * 监测是否有担任job_id对应岗位的员工
+     * @param job_id
+     * @return
+     */
+    protected boolean empHaveThisJob(String job_id) {
+        if (talentMapper.getTalentByJobid(job_id).isEmpty())
+            return false;
+        else
+            return true;
+    }
+
+
+
 
 }

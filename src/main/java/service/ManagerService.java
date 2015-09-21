@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
  * Created by JSZ on 2015/9/18.
  */
 @Service
-public class ManagerService {
+public class ManagerService extends BaseService{
     @Autowired
     private ManagerMapper managerMapper;
 

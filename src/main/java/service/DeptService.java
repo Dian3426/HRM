@@ -15,16 +15,11 @@ import java.util.List;
  * Created by Jsz on 2015/9/18.
  */
 @Service
-public class DeptService {
+public class DeptService extends BaseService{
 
     @Autowired
     private SkdeptMapper skdeptManager;
 
-    @Autowired
-    private SkjobMapper skjobManager;
-
-    @Autowired
-    private TalentMapper talentMapper;
     /**
      * 创建一个部门
      * @param skdept
@@ -82,16 +77,13 @@ public class DeptService {
         }
     }
 
-    private boolean empInThisDept(String dept_id){
-        List<Skjob> list = skjobManager.getJobsByDeptid(dept_id);
-        if(list.isEmpty())
-            return false;
-        else {
-            for(Skjob job:list){
-                if(!talentMapper.getTalentByJobid(job.getJob_id()).isEmpty())
-                    return true;
-            }
-            return false;
-        }
+    /**
+     * 获取对应dept_id职工总人数
+     * @return
+     */
+    public int getCountByDeptid(String dept_id){
+        return 0;
     }
+
+
 }

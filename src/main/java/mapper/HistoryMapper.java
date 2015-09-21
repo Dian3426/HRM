@@ -1,6 +1,5 @@
 package mapper;
 
-import domain.Histroy;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 
@@ -9,5 +8,5 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface HistoryMapper {
     @Insert("INSERT INTO HISTORY VALUES (null,#{dept_id},#{job_id},#{type},#{peoplenum},#{changtime},#{oldnum},#{newnum},#{managername})")
-    void createHistory(@Param("History")Histroy histroy);
+    void createHistory(@Param("History") Histroy histroy);
 }

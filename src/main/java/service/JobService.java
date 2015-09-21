@@ -13,12 +13,11 @@ import java.util.List;
  * Created by Jsz on 2015/9/19.
  */
 @Service
-public class JobService {
+public class JobService extends BaseService {
     @Autowired
     private SkjobMapper skjobManager;
     @Autowired
     private TalentMapper talentMapper;
-
     public void createJob(Skjob skjob){
         skjobManager.craateJob(skjob);
     }
@@ -64,14 +63,20 @@ public class JobService {
     }
 
     /**
-     * 监测是否有担任job_id对应岗位的员工
+     * 根据dept_id查询旗下所有岗位
+     * @param dept_id
+     * @return
+     */
+    public List<Skjob> getJobsByDeptid(String dept_id){
+        return skjobManager.getJobsByDeptid(dept_id);
+    }
+
+    /**
+     * 获取任职job_id对应岗位的总人数
      * @param job_id
      * @return
      */
-    private boolean empHaveThisJob(String job_id){
-        if(talentMapper.getTalentByJobid(job_id).isEmpty())
-            return false;
-        else
-            return true;
+    public int getCountByJobid(String job_id){
+        return talentMapper.getCountByJobid(job_id);
     }
 }
