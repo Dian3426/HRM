@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Select;
 /**
  * Created by Jsz on 2015/9/17.
  */
-public class Histroy {
+public class History {
     private int id;
     private String dept_id;
     private String job_id;
@@ -16,9 +16,9 @@ public class Histroy {
     private int newnum;
     private String mangagername;
 
-    public Histroy(){}
+    public History(){}
 
-    public Histroy(String dept_id, String job_id, String type, int peoplenum, String changetime, int oldnum, int newnum, String mangagername) {
+    public History(String dept_id, String job_id, String type, int peoplenum, String changetime, int oldnum, int newnum, String mangagername) {
         this.dept_id = dept_id;
         this.job_id = job_id;
         this.type = type;
