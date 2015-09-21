@@ -136,10 +136,4 @@ public class DeptAction extends ActionSupport {
         return SUCCESS;
     }
 
-    public static void main(String[] args) throws Exception{
-        System.out.println(DeptTypes.Dept.toString());
-    }
-
-
-
 }
