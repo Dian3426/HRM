@@ -13,10 +13,12 @@ public class Histroy {
     private int peoplenum;
     private String changetime;
     private int oldnum;
-    private String newnum;
+    private int newnum;
     private String mangagername;
 
-    public Histroy(String dept_id, String job_id, String type, int peoplenum, String changetime, int oldnum, String newnum, String mangagername) {
+    public Histroy(){}
+
+    public Histroy(String dept_id, String job_id, String type, int peoplenum, String changetime, int oldnum, int newnum, String mangagername) {
         this.dept_id = dept_id;
         this.job_id = job_id;
         this.type = type;
@@ -83,11 +85,11 @@ public class Histroy {
         this.oldnum = oldnum;
     }
 
-    public String getNewnum() {
+    public int getNewnum() {
         return newnum;
     }
 
-    public void setNewnum(String newnum) {
+    public void setNewnum(int newnum) {
         this.newnum = newnum;
     }
 

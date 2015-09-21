@@ -13,6 +13,8 @@ public class Leave {
     private String time;
     private LeaveReasons reason;
 
+    public Leave(){}
+
     public Leave(String emp_id, String job_id, String place, String time, LeaveReasons reason) {
         this.emp_id = emp_id;
         this.job_id = job_id;

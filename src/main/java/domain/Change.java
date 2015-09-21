@@ -16,6 +16,19 @@ public class Change {
     private ChangeTypes type;
     private String changetime;
 
+    public Change(){}
+
+    /**
+     *
+     * @param emp_id
+     * @param olddept 旧部门id
+     * @param newdept 新部门id
+     * @param changereason
+     * @param oldjob 旧岗位id
+     * @param newjob 新岗位id
+     * @param type
+     * @param changetime
+     */
     public Change(String emp_id, String olddept, String newdept, String changereason, String oldjob, String newjob, ChangeTypes type, String changetime) {
         this.emp_id = emp_id;
         this.olddept = olddept;

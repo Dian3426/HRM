@@ -16,6 +16,7 @@ public class Occupationcareer {
     private String referenceposition;
     private String referencetel;
 
+    public Occupationcareer(){}
     public Occupationcareer(String emp_id, String begintime, String endtime, String jobname, String jobdiscrip, String position, double salary, String reference, String referenceposition, String referencetel) {
         this.emp_id = emp_id;
         this.begintime = begintime;

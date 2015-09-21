@@ -11,6 +11,8 @@ public class Talent {
     private String job_id;
     private StaffTypes status;
 
+    public Talent() {}
+
     public Talent(String emp_id, String job_id, StaffTypes status) {
         this.emp_id = emp_id;
         this.job_id = job_id;

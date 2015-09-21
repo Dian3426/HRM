@@ -14,6 +14,8 @@ public class Societyrelation {
     private String posi;
     private String tel;
 
+    public Societyrelation(){}
+
     public Societyrelation(String emp_id, Relations relation, String name, String job, String posi, String tel) {
         this.emp_id = emp_id;
         this.relation = relation;

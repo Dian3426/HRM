@@ -3,7 +3,6 @@ package service;
 import domain.*;
 import mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
@@ -12,7 +11,6 @@ import java.util.List;
 /**
  * Created by Jsz on 2015/9/20.
  */
-@Service
 public class EmpService {
     @Autowired
     private SkempMapper skempMapper;
