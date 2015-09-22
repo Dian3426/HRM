@@ -68,11 +68,11 @@ public class EmpAction extends ActionSupport {
     String emp_former_evidence_position;
     String emp_job_attach;
 
-    Relations[] emp_family_relation;
-    String[] emp_family_name;
-    String[] emp_family_comp;
-    String[] emp_family_position;
-    String[] emp_family_tel;
+    Relations emp_family_relation;
+    String emp_family_name;
+    String emp_family_comp;
+    String emp_family_position;
+    String emp_family_tel;
 
     String fileTitle;
     File upload;
@@ -391,43 +391,43 @@ public class EmpAction extends ActionSupport {
         this.emp_job_attach = emp_job_attach;
     }
 
-    public Relations[] getEmp_family_relation() {
+    public Relations getEmp_family_relation() {
         return emp_family_relation;
     }
 
-    public void setEmp_family_relation(Relations[] emp_family_relation) {
+    public void setEmp_family_relation(Relations emp_family_relation) {
         this.emp_family_relation = emp_family_relation;
     }
 
-    public String[] getEmp_family_name() {
+    public String getEmp_family_name() {
         return emp_family_name;
     }
 
-    public void setEmp_family_name(String[] emp_family_name) {
+    public void setEmp_family_name(String emp_family_name) {
         this.emp_family_name = emp_family_name;
     }
 
-    public String[] getEmp_family_comp() {
+    public String getEmp_family_comp() {
         return emp_family_comp;
     }
 
-    public void setEmp_family_comp(String[] emp_family_comp) {
+    public void setEmp_family_comp(String emp_family_comp) {
         this.emp_family_comp = emp_family_comp;
     }
 
-    public String[] getEmp_family_tel() {
+    public String getEmp_family_tel() {
         return emp_family_tel;
     }
 
-    public void setEmp_family_tel(String[] emp_family_tel) {
+    public void setEmp_family_tel(String emp_family_tel) {
         this.emp_family_tel = emp_family_tel;
     }
 
-    public String[] getEmp_family_position() {
+    public String getEmp_family_position() {
         return emp_family_position;
     }
 
-    public void setEmp_family_position(String[] emp_family_position) {
+    public void setEmp_family_position(String emp_family_position) {
         this.emp_family_position = emp_family_position;
     }
 
@@ -459,8 +459,8 @@ public class EmpAction extends ActionSupport {
             Occupationcareer occupationcareer = new Occupationcareer(empNo,getEmp_job_start(),getEmp_job_end(),
                     getEmp_former_position(),"",getEmp_former_position(),getEmp_former_salary(),getEmp_former_evidence(),
                     getEmp_former_evidence_position(),"");
-            Societyrelation societyrelation = new Societyrelation(empNo,getEmp_family_relation()[0],
-                    getEmp_family_name()[0],getEmp_family_position()[0],getEmp_family_comp()[0],getEmp_family_tel()[0]);
+            Societyrelation societyrelation = new Societyrelation(empNo,getEmp_family_relation(),
+                    getEmp_family_name(),getEmp_family_position(),getEmp_family_comp(),getEmp_family_tel());
             Talent talent = new Talent(empNo,skjob.getJob_id(),getEmp_jobtype());
             empService.createEmpTotally(emp,occupationcareer,societyrelation,talent);
             message.put("success", "1");
