@@ -18,6 +18,7 @@ import service.DeptService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.rmi.server.ExportException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -37,6 +38,7 @@ public class DeptAction extends ActionSupport {
     String dept_fax;
     String dept_desc;
     String dept_sdept;
+    String dept_id;
 
     /**
      * format : yyyy/mm/dd
@@ -45,6 +47,14 @@ public class DeptAction extends ActionSupport {
 
     public String getDept_name() {
         return dept_name;
+    }
+
+    public String getDept_id() {
+        return dept_id;
+    }
+
+    public void setDept_id(String dept_id) {
+        this.dept_id = dept_id;
     }
 
     public void setDept_name(String dept_name) {
@@ -118,26 +128,77 @@ public class DeptAction extends ActionSupport {
         response.getOutputStream().write(loginJson.getBytes("UTF-8"));
     }
 
+    @Action(value = "deptDelete")
+    public void deptDelete(){
+        HashMap<String,String> message = new HashMap<String, String>();
+        try{
+            deptService.deleteDept(getDept_id());
+            message.put("success", "1");
+        }catch (Exception e){
+            message.put("success", "0");
+            e.printStackTrace();
+        }
+        try{
+            ObjectMapper objectMapper = new ObjectMapper();
+            String loginJson = objectMapper.writeValueAsString(message);
+            HttpServletResponse response = ServletActionContext.getResponse();
+            response.getOutputStream().write(loginJson.getBytes("UTF-8"));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Action(value = "deptSearch")
+    public void deptSearch() throws Exception{
+        List<Skdept> skdepts = deptService.getAllDepts();
+        List<List<String>> result = new ArrayList<List<String>>();
+        for (Skdept skdept : skdepts) {
+            List<String> strings = new ArrayList<String>();
+            strings.add(skdept.getDept_id());
+            strings.add(skdept.getName());
+            strings.add(skdept.getType().equals(DeptTypes.Dept)? "部门" : "公司");
+            strings.add(skdept.getTele());
+            strings.add(skdept.getFax());
+            strings.add(skdept.getDiscrip());
+            try{
+                strings.add(deptService.getNameByDeptid(skdept.getSuperd()));
+            }catch (Exception e){
+                strings.add("无");
+            }
+            strings.add(skdept.getCreatetime());
+            result.add(strings);
+        }
+        HashMap<String,List<List<String>>> data = new HashMap<String,List<List<String>>>();
+        data.put("data",result);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String loginJson = objectMapper.writeValueAsString(data);
+        HttpServletResponse response = ServletActionContext.getResponse();
+        response.getOutputStream().write(loginJson.getBytes("UTF-8"));
+    }
+
     /**
      * add one new dept
      * @return Action support status
      */
     @Action(value = "deptAdd")
     public void deptAdd(){
-        Skdept skdept = new Skdept();
-        skdept.setCreatetime(getDept_ftime());
-        skdept.setFax(getDept_fax());
-        skdept.setDiscrip(getDept_desc());
-        skdept.setName(getDept_name());
-        skdept.setSuperd(getDept_sdept());
-        skdept.setTele(getDept_tel());
-        skdept.setType(DeptTypes.valueOf(getDept_type()));
         HashMap<String,String> message = new HashMap<String, String>();
         try{
+            Skdept skdept = new Skdept();
+            skdept.setCreatetime(getDept_ftime());
+            skdept.setFax(getDept_fax());
+            skdept.setDiscrip(getDept_desc());
+            skdept.setName(getDept_name());
+            skdept.setSuperd(getDept_sdept());
+            skdept.setTele(getDept_tel());
+            skdept.setType(getDept_type().equals("部门") ? DeptTypes.Dept : DeptTypes.Enterprice);
+            int count = deptService.getCount();
+            skdept.setDept_id(Integer.toString(count));
             deptService.createDept(skdept);
             message.put("success", "1");
         }catch (Exception e){
             message.put("success", "0");
+            e.printStackTrace();
         }
         try{
             ObjectMapper objectMapper = new ObjectMapper();
