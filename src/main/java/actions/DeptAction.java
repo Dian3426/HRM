@@ -135,8 +135,9 @@ public class DeptAction extends ActionSupport {
             strings.add(skdept.getCreatetime());
             result.add(strings);
         }
+        HashMap<String,List<List<String>>> data = new HashMap<String,List<List<String>>>();
         ObjectMapper objectMapper = new ObjectMapper();
-        String loginJson = objectMapper.writeValueAsString(result);
+        String loginJson = objectMapper.writeValueAsString(data);
         HttpServletResponse response = ServletActionContext.getResponse();
         response.getOutputStream().write(loginJson.getBytes("UTF-8"));
     }
