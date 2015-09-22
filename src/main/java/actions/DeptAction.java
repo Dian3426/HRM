@@ -131,7 +131,11 @@ public class DeptAction extends ActionSupport {
             strings.add(skdept.getTele());
             strings.add(skdept.getFax());
             strings.add(skdept.getDiscrip());
-            strings.add(deptService.getNameByDeptid(skdept.getSuperd()));
+            try{
+                strings.add(deptService.getNameByDeptid(skdept.getSuperd()));
+            }catch (Exception e){
+                strings.add("无");
+            }
             strings.add(skdept.getCreatetime());
             result.add(strings);
         }
