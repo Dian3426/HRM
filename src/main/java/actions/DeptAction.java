@@ -106,7 +106,9 @@ public class DeptAction extends ActionSupport {
      * @return Action support status
      * @throws Exception jacksonException
      */
-    @Action(value = "deptInfo")
+    @Action(value = "deptInfo",results = {
+            @Result(name = ActionSupport.SUCCESS,location = "/WEB-INF/orgManage/dept_info.jsp")
+    })
     public String deptInfo() throws Exception{
         List<Skdept> skdepts = deptService.getAllDepts();
         HashMap<String,List> result = new HashMap<String, List>();
@@ -122,7 +124,9 @@ public class DeptAction extends ActionSupport {
      * add one new dept
      * @return Action support status
      */
-    @Action(value = "deptAdd")
+    @Action(value = "deptAdd",results = {
+            @Result(name = ActionSupport.SUCCESS,location = "/WEB-INF/orgManage/dept_add.jsp")
+    })
     public String deptAdd(){
         Skdept skdept = new Skdept();
         skdept.setCreatetime(getDept_ftime());

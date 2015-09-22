@@ -15,7 +15,7 @@ import org.springframework.stereotype.Controller;
 @Scope("prototype")
 @Namespace("/mainFrame")
 @ParentPackage("struts-default")
-public class MainAction extends ActionSupport{
+public class MainFrameAction extends ActionSupport{
 
     @Action(value = "",results = {
             @Result(name = ActionSupport.SUCCESS,location = "/WEB-INF/main_frame.jsp")
@@ -24,38 +24,38 @@ public class MainAction extends ActionSupport{
         return SUCCESS;
     }
 
-    @Action(value = "deptInfo",results = {
-            @Result(name = ActionSupport.SUCCESS,location = "/WEB-INF/orgManage/dept_info.jsp")
-    })
-    public String deptInfo(){
-        return SUCCESS;
-    }
+//    @Action(value = "deptInfo",results = {
+//            @Result(name = ActionSupport.SUCCESS,location = "/WEB-INF/orgManage/dept_info.jsp")
+//    })
+//    public String deptInfo(){
+//        return SUCCESS;
+//    }
 
-    @Action(value = "deptAdd",results = {
-            @Result(name = ActionSupport.SUCCESS,location = "/WEB-INF/orgManage/dept_add.jsp")
-    })
-    public String deptAdd(){
-        return SUCCESS;
-    }
+//    @Action(value = "deptAdd",results = {
+//            @Result(name = ActionSupport.SUCCESS,location = "/WEB-INF/orgManage/dept_add.jsp")
+//    })
+//    public String deptAdd(){
+//        return SUCCESS;
+//    }
 
-    @Action(value = "postAdd",results = {
-            @Result(name = ActionSupport.SUCCESS,location = "/WEB-INF/posManage/post_add.jsp")
-    })
-    public String postAdd(){
-        return SUCCESS;
-    }
+//    @Action(value = "postAdd",results = {
+//            @Result(name = ActionSupport.SUCCESS,location = "/WEB-INF/posManage/post_add.jsp")
+//    })
+//    public String postAdd(){
+//        return SUCCESS;
+//    }
+
+    //    @Action(value = "empAdd",results = {
+//            @Result(name = ActionSupport.SUCCESS,location = "/WEB-INF/empManage/emp_add.jsp")
+//    })
+//    public String empAdd(){
+//        return SUCCESS;
+//    }
 
     @Action(value = "postInfo",results = {
             @Result(name = ActionSupport.SUCCESS,location = "/WEB-INF/posManage/post_info.jsp")
     })
     public String postInfo(){
-        return SUCCESS;
-    }
-
-    @Action(value = "empAdd",results = {
-            @Result(name = ActionSupport.SUCCESS,location = "/WEB-INF/empManage/emp_add.jsp")
-    })
-    public String empAdd(){
         return SUCCESS;
     }
 

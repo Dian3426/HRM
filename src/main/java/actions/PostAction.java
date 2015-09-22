@@ -5,15 +5,20 @@ import com.opensymphony.xwork2.ActionSupport;
 import domain.Skjob;
 import domain.enums.JobTypes;
 import domain.enums.YesOrNo;
+import javafx.application.Application;
+import oracle.jdbc.proxy.annotation.Post;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import service.DeptService;
 import service.JobService;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -78,8 +83,8 @@ public class PostAction extends ActionSupport {
     @Autowired
     DeptService deptService;
 
-    @Action(value = "addPost",results = {
-            @Result(name = ActionSupport.SUCCESS,location = "/WEB-INF/index.jsp")
+    @Action(value = "postAdd",results = {
+            @Result(name = ActionSupport.SUCCESS,location = "/WEB-INF/posManage/post_add.jsp")
     })
     public String addPost(){
         Skjob skjob = new Skjob();
@@ -101,18 +106,36 @@ public class PostAction extends ActionSupport {
     @Action(value = "getPostAndSdept")
     public void getPostAndSDept() throws Exception{
         List<Skjob> jobs = jobService.getAllJobs();
-        HashMap<String,String> result = new HashMap<String, String>();
-        List<HashMap<String,String>> deptidAndNames = deptService.getAllDeptidAndNames();
+        ArrayList<String> result = new ArrayList<String>();
         for (Skjob job : jobs) {
             String id = job.getDept_id();
-            for (HashMap<String, String> deptidAndName : deptidAndNames) {
-                result.put(job.getName(),deptidAndName.get(id));
-            }
+            result.add(deptService.getNameByDeptid(id) + job.getName());
         }
         ObjectMapper objectMapper = new ObjectMapper();
         String loginJson = objectMapper.writeValueAsString(result);
         HttpServletResponse response = ServletActionContext.getResponse();
         response.getOutputStream().write(loginJson.getBytes("UTF-8"));
+    }
+
+    @Action(value = "postInfo",results = {
+            @Result(name = ActionSupport.SUCCESS,location = "/WEB-INF/posManage/post_info.jsp")
+    })
+    public String postInfo(){
+        return SUCCESS;
+    }
+
+    public static void main(String[] args) {
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        PostAction postAction = (PostAction)context.getBean("postAction");
+        List<Skjob> jobs = postAction.jobService.getAllJobs();
+        ArrayList<String> result = new ArrayList<String>();
+        for (Skjob job : jobs) {
+            String id = job.getDept_id();
+            result.add(job.getName() + postAction.deptService.getNameByDeptid(id));
+        }
+        for (String s : result) {
+            System.out.println(s);
+        }
     }
 
 }
