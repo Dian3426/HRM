@@ -29,10 +29,15 @@ public class ManagerService extends BaseService{
      * @return  登录成功返回true否则返回false
      */
     public boolean login(Manager manager) {
-        String pass = managerMapper.getManagerByName(manager.getName()).getPass();
+        try {
+            String pass = managerMapper.getManagerByName(manager.getName()).getPass();
         if(pass.equals(Common.encodingMD5(manager.getPass())))
             return  true;
-        return false;
+        return false;}
+        catch (NullPointerException e){
+            System.err.println("该用户不存在不存在");
+            return false;
+        }
     }
 }
 
