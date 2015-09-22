@@ -16,6 +16,7 @@ import service.EmpService;
 import service.JobService;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.util.HashMap;
 import java.util.List;
 
@@ -72,6 +73,43 @@ public class EmpAction extends ActionSupport {
     String[] emp_family_comp;
     String[] emp_family_position;
     String[] emp_family_tel;
+
+    private String fileTitle;
+    private File upload;
+    private String uploadFileType;
+    private String uploadFileName;
+
+    public String getFileTitle() {
+        return fileTitle;
+    }
+
+    public void setFileTitle(String fileTitle) {
+        this.fileTitle = fileTitle;
+    }
+
+    public File getUpload() {
+        return upload;
+    }
+
+    public void setUpload(File upload) {
+        this.upload = upload;
+    }
+
+    public String getUploadFileType() {
+        return uploadFileType;
+    }
+
+    public void setUploadFileType(String uploadFileType) {
+        this.uploadFileType = uploadFileType;
+    }
+
+    public String getUploadFileName() {
+        return uploadFileName;
+    }
+
+    public void setUploadFileName(String uploadFileName) {
+        this.uploadFileName = uploadFileName;
+    }
 
     public String getEmp_img() {
         return emp_img;
@@ -409,10 +447,13 @@ public class EmpAction extends ActionSupport {
             String empNo = createEmpNo();
             String position =getEmp_position().substring(3);
             String dept = getEmp_position().substring(0,3);
+
+            String path = saveFile();
+
             Skjob skjob = jobService.getJobByNameAndDeptid(position,deptService.getDeptidByName(dept));
             Skemp emp = new Skemp(getEmp_name(),getEmp_sex(),getEmp_birth(),getEmp_idNum(),"2",getEmp_ps(),
                     getEmp_nat(),getEmp_native(),getEmp_tel(),getEmp_mail(),getEmp_height(),getEmp_bloodtype(),
-                    getEmp_birthprov()+getEmp_birthcity(),getEmp_rresidence(),"",getEmp_edu(),getEmp_coll(),
+                    getEmp_birthprov()+getEmp_birthcity(),getEmp_rresidence(),path,getEmp_edu(),getEmp_coll(),
                     getEmp_major(),getEmp_grad(),getEmp_from(),empNo);
             Occupationcareer occupationcareer = new Occupationcareer(empNo,getEmp_job_start(),getEmp_job_end(),
                     getEmp_former_position(),"",getEmp_former_position(),getEmp_former_salary(),getEmp_former_evidence(),
@@ -476,12 +517,26 @@ public class EmpAction extends ActionSupport {
         return deptNo;
     }
 
+    private String saveFile() throws Exception{
+        FileOutputStream fos = new FileOutputStream("/photo" + "//" + getUploadFileName());
+        FileInputStream fis = new FileInputStream(getUpload());
+        byte[] buffer = new byte[1024];
+        int len = 0;
+        try{
+            while((len = fis.read(buffer)) > 0){
+                fos.write(buffer, 0, len);
+            }
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "/photo" + "//" + getUploadFileName();
+    }
+
 
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         EmpAction empAction = (EmpAction)context.getBean("empAction");
-        System.out.println(empAction.createEmpNo());
-        System.out.println(empAction.createEmpDeptNo("技术部"));
+
     }
 
 

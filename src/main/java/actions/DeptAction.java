@@ -148,6 +148,27 @@ public class DeptAction extends ActionSupport {
         }
     }
 
+    @Action(value = "deptGetEmps")
+    public void deptGetEmps() throws Exception{
+        List<HashMap<String, String>> emps = deptService.getStaffByDeptid(getDept_id());
+        List<List<String>> result = new ArrayList<List<String>>();
+        for (HashMap<String, String> emp : emps) {
+            List<String> strings = new ArrayList<String>();
+            strings.add(emp.get(deptService.EMP_NAME));
+            strings.add(emp.get(deptService.EMP_ID));
+            strings.add(emp.get(deptService.JOB_NAME));
+            strings.add(emp.get(deptService.TEL));
+            strings.add(emp.get(deptService.TIME));
+            result.add(strings);
+        }
+        HashMap<String,List<List<String>>> data = new HashMap<String,List<List<String>>>();
+        data.put("data",result);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String loginJson = objectMapper.writeValueAsString(data);
+        HttpServletResponse response = ServletActionContext.getResponse();
+        response.getOutputStream().write(loginJson.getBytes("UTF-8"));
+    }
+
     @Action(value = "deptSearch")
     public void deptSearch() throws Exception{
         List<Skdept> skdepts = deptService.getAllDepts();
