@@ -446,8 +446,8 @@ public class EmpAction extends ActionSupport {
         try{
             String empNo = createEmpNo();
             String[] temp = getEmp_position().split("-");
-            String position = temp[0];
-            String dept = temp[1];
+            String position = temp[1];
+            String dept = temp[0];
 
             String path = saveFile();
 
