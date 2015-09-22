@@ -85,13 +85,17 @@ public class DeptService extends BaseService{
     public static String DEPT_NAME = "DEPTNAME";
     public static String EMP_NAME="EMPNAME";
     public static String EMP_ID="EMP_ID";
-    public static String TEL="TEL";
+    public static String TEL="TELE";
     public static String JOB_NAME="JOBNAME";
     public static String TIME= "TIME";
 
-
+    /**
+     * 键名由服务提供
+     * @param dept_id
+     * @return
+     */
     public List<HashMap<String,String>> getStaffByDeptid(String dept_id){
-        return null;
+        return skdeptManager.getStaffByDeptid(dept_id);
     }
 
     /**
