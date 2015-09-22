@@ -84,21 +84,34 @@ public class PostAction extends ActionSupport {
     DeptService deptService;
 
     @Action(value = "postAdd")
-    public String postAdd(){
-        Skjob skjob = new Skjob();
-        skjob.setName(getPost_name());
-        skjob.setType(JobTypes.valueOf(getPost_type()));
-        skjob.setLimitnum(getPost_num());
-        skjob.setIslimit(isPost_isnum() ? YesOrNo.Yes : YesOrNo.No);
-        List<HashMap<String,String>> deptidAndNames = deptService.getAllDeptidAndNames();
-        int deptID = 0;
-        for (HashMap<String, String> deptidAndName : deptidAndNames) {
-            if(deptidAndName.get(deptID) == getPost_sdept())
-                break;
+    public void postAdd(){
+        HashMap<String,String> message = new HashMap<String, String>();
+        try{
+            Skjob skjob = new Skjob();
+            skjob.setName(getPost_name());
+            skjob.setType(JobTypes.valueOf(getPost_type()));
+            skjob.setLimitnum(getPost_num());
+            skjob.setIslimit(isPost_isnum() ? YesOrNo.Yes : YesOrNo.No);
+            List<HashMap<String,String>> deptidAndNames = deptService.getAllDeptidAndNames();
+            int deptID = 0;
+            for (HashMap<String, String> deptidAndName : deptidAndNames) {
+                if(deptidAndName.get(deptID) == getPost_sdept())
+                    break;
+            }
+            skjob.setDept_id(Integer.toString(deptID));
+            jobService.createJob(skjob);
+            message.put("success", "1");
+        }catch (Exception e){
+            message.put("success", "0");
         }
-        skjob.setDept_id(Integer.toString(deptID));
-        jobService.createJob(skjob);
-        return SUCCESS;
+        try{
+            ObjectMapper objectMapper = new ObjectMapper();
+            String loginJson = objectMapper.writeValueAsString(message);
+            HttpServletResponse response = ServletActionContext.getResponse();
+            response.getOutputStream().write(loginJson.getBytes("UTF-8"));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Action(value = "getPostAndSdept")
