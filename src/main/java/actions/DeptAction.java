@@ -18,6 +18,7 @@ import service.DeptService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.rmi.server.ExportException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -112,6 +113,28 @@ public class DeptAction extends ActionSupport {
         List<Skdept> skdepts = deptService.getAllDepts();
         HashMap<String,List> result = new HashMap<String, List>();
         result.put("skdepts",skdepts);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String loginJson = objectMapper.writeValueAsString(result);
+        HttpServletResponse response = ServletActionContext.getResponse();
+        response.getOutputStream().write(loginJson.getBytes("UTF-8"));
+    }
+
+    @Action(value = "deptSearch")
+    public void deptSearch() throws Exception{
+        List<Skdept> skdepts = deptService.getAllDepts();
+        List<List<String>> result = new ArrayList<List<String>>();
+        for (Skdept skdept : skdepts) {
+            List<String> strings = new ArrayList<String>();
+            strings.add(skdept.getDept_id());
+            strings.add(skdept.getName());
+            strings.add(skdept.getType().equals(DeptTypes.Dept)? "部门" : "公司");
+            strings.add(skdept.getTele());
+            strings.add(skdept.getFax());
+            strings.add(skdept.getDiscrip());
+            strings.add(skdept.getSuperd());
+            strings.add(skdept.getCreatetime());
+            result.add(strings);
+        }
         ObjectMapper objectMapper = new ObjectMapper();
         String loginJson = objectMapper.writeValueAsString(result);
         HttpServletResponse response = ServletActionContext.getResponse();
