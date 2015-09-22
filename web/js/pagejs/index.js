@@ -27,3 +27,21 @@ function inputWrong(div, msg) {
         }, 1000
     )
 }
+
+$("#log_btn").click(function () {
+    $.ajax({
+        url: '/login',
+        type: 'POST',
+        data: {
+            emp_id: $("#emp_id").val(),
+            emp_pass: $("#emp_pass").val(),
+            emp_rem: $("#emp_rem").is(":checked")
+        },
+        dataType: 'json',
+        success: function (data) {
+            if (data['success'] == "1") {
+                window.location.href = "/mainFrame/";
+            }
+        }
+    });
+});

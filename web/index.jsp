@@ -44,24 +44,24 @@
 
         <form id="loginForm" action="" method="post"> <!--登录窗口的表单-->
             <div class="form-group has-feedback" id="emp_id_div">
-                <input type="text" name="emp_id" class="form-control" placeholder="请输入工号" data-toggle="tooltip" required
+                <input type="text" name="emp_id" id="emp_id" class="form-control" placeholder="请输入工号" data-toggle="tooltip" required
                        autofocus>
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback" id="emp_pass_div" data-toggle="tooltip">
-                <input type="password" name="emp_pass" class="form-control" placeholder="请输入密码" required>
+                <input type="password" id="emp_pass" name="emp_pass" class="form-control" placeholder="请输入密码" required>
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="row">
                 <div class="col-xs-8">
                     <div class="checkbox icheck">
                         <label>
-                            <input name="emp_rem" type="checkbox"> 记住登录状态
+                            <input id="emp_rem" name="emp_rem" type="checkbox"> 记住登录状态
                         </label>
                     </div>
                 </div><!-- 记住我按钮 -->
                 <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">登录</button>
+                    <button type="button" id="log_btn" class="btn btn-primary btn-block btn-flat">登录</button>
                 </div><!-- /.col -->
             </div>
         </form>
