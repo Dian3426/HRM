@@ -74,10 +74,10 @@ public class EmpAction extends ActionSupport {
     String[] emp_family_position;
     String[] emp_family_tel;
 
-    private String fileTitle;
-    private File upload;
-    private String uploadFileType;
-    private String uploadFileName;
+    String fileTitle;
+    File upload;
+    String uploadFileType;
+    String uploadFileName;
 
     public String getFileTitle() {
         return fileTitle;
@@ -440,7 +440,7 @@ public class EmpAction extends ActionSupport {
     @Autowired
     private JobService jobService;
 
-    @Action(value = "empAdd")
+    @Action(value = "empInfoAdd")
     public void empAdd(){
         HashMap<String,String> message = new HashMap<String, String>();
         try{
@@ -538,7 +538,10 @@ public class EmpAction extends ActionSupport {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         EmpAction empAction = (EmpAction)context.getBean("empAction");
-
+        String[] temp = "行政部-技术总监".split("-");
+        String position = temp[1];
+        String dept = temp[0];
+        System.out.println(position + "->" + dept);
     }
 
 
