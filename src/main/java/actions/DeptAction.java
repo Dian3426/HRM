@@ -136,6 +136,7 @@ public class DeptAction extends ActionSupport {
             result.add(strings);
         }
         HashMap<String,List<List<String>>> data = new HashMap<String,List<List<String>>>();
+        data.put("data",result);
         ObjectMapper objectMapper = new ObjectMapper();
         String loginJson = objectMapper.writeValueAsString(data);
         HttpServletResponse response = ServletActionContext.getResponse();
