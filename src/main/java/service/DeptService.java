@@ -81,6 +81,19 @@ public class DeptService extends BaseService{
         skdeptManager.updateByDeptid(dept);
     }
 
+    public static String DEPT_ID="DEPT_ID";
+    public static String DEPT_NAME = "DEPTNAME";
+    public static String EMP_NAME="EMPNAME";
+    public static String EMP_ID="EMP_ID";
+    public static String TEL="TEL";
+    public static String JOB_NAME="JOBNAME";
+    public static String TIME= "TIME";
+
+
+    public List<HashMap<String,String>> getStaffByDeptid(String dept_id){
+        return null;
+    }
+
     /**
      * 删除对应dept_id的数据
      * @param dept_id
