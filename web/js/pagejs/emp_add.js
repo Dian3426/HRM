@@ -29,8 +29,8 @@ $('.input-daterange').datepicker({
 
 $(".select2").select2();
 
-$("#emp_img_btn").click(function () {
-    $("#emp_img_input").trigger("click");
+$("#emp_faceimg_btn").click(function () {
+    $("#emp_faceimg_input").trigger("click");
 });
 
 cities = {};
@@ -88,3 +88,67 @@ function set_city(province, city) {
     }
 
 }
+
+window.URL = window.URL || window.webkitURL;
+var fileElem = document.getElementById("emp_img_input"),
+    fileList = document.getElementById("img_file");
+
+function handleFiles(obj) {
+    var files = obj.files,
+        img = new Image();
+    if (window.URL) {
+        //File API
+        $("#emp_faceimg_btn").attr("class", "btn btn-primary rhide");
+        img.src = window.URL.createObjectURL(files[0]); //创建一个object URL，并不是你的本地路径
+        img.width = 200;
+        img.onload = function (e) {
+            window.URL.revokeObjectURL(this.src); //图片加载后，释放object URL
+        };
+        fileList.appendChild(img);
+    } else if (window.FileReader) {
+        //opera不支持createObjectURL/revokeObjectURL方法。我们用FileReader对象来处理
+        var reader = new FileReader();
+        reader.readAsDataURL(files[0]);
+        reader.onload = function (e) {
+            $("#emp_faceimg_btn").attr("class", "btn btn-primary animated fadeOut");
+            img.src = this.result;
+            img.width = 200;
+            fileList.appendChild(img);
+        }
+    } else {
+        //ie
+        obj.select();
+        obj.blur();
+        var nfile = document.selection.createRange().text;
+        document.selection.empty();
+        img.src = nfile;
+        img.width = 200;
+        img.onload = function () {
+            $("#emp_faceimg_btn").attr("class", "btn btn-primary animated fadeOut");
+        };
+        fileList.appendChild(img);
+        //fileList.style.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='image',src='"+nfile+"')";
+    }
+}
+
+$.ajax({
+    url: '/getPostAndSdept',
+    type: 'POST',
+    dataType: 'json',
+    success: function (data) {
+        for (var i = 0; i < data.length; i++) {
+            $("#emp_position").append("<option value='" + data[i] + "'>" + data[i] + "</option>");
+        }
+    }
+});
+
+$("#emp_save").click(function () {
+    $("#emp_info_table").ajaxSubmit({
+        url: '/empInfoAdd',
+        type: 'POST',
+        dataType: 'json',
+        success: function (data) {
+            alert(data)
+        }
+    });
+});

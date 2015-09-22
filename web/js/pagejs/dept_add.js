@@ -10,4 +10,25 @@ $('.input-group.date').datepicker({
     todayHighlight: true
 });
 
+$.ajax({
+    url: '/deptInfo',
+    type: 'POST',
+    dataType: 'json',
+    success: function (data) {
+        for (var i = 0; i < data['skdepts'].length; i++) {
+            $("#dept_sdept").append("<option value='" + data['skdepts'][i]['dept_id'] + "'>" + data['skdepts'][i]['name'] + "</option>");
+        }
+    }
+});
+
 $('.textarea').wysihtml5();
+
+$("button[id=dept_add_save]").click(function () {
+    $('#dept_add_form').ajaxSubmit({
+        url: '/deptAdd',
+        type: 'POST',
+        success: function (data) {
+            alert(data);
+        }
+    });
+});

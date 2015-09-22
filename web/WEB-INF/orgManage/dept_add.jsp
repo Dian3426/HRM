@@ -7,6 +7,11 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/datepicker/css/bootstrap-datepicker3.min.css">
+<style>
+    .month {
+        font-size: small;
+    }
+</style>
 <section class="content-header">
     <h1>
         部门添加
@@ -29,7 +34,7 @@
                     </h3>
                 </div> <!--herder 结束-->
 
-                <form class="form-horizontal">
+                <form class="form-horizontal" id="dept_add_form">
                     <div class="box-body">
                         <div class="form-group">
                             <label for="dept_name" class="col-sm-2 control-label">部门名称</label>
@@ -80,11 +85,7 @@
 
                             <div class="col-sm-10">
                                 <select class="form-control" name="dept_sdept" id="dept_sdept">
-                                    <option value="1">行政部</option>
-                                    <option value="2">生产部</option>
-                                    <option value="3">技术部</option>
-                                    <option value="4">销售部</option>
-                                    <option value="5">财务部</option>
+                                    <option value="0">无</option>
                                 </select>
                             </div>
                         </div>
@@ -102,7 +103,7 @@
                     </div>
 
                     <div class="box-footer">
-                        <button type="submit" class="btn btn-info pull-right">保存</button>
+                        <button id="dept_add_save" type="button" class="btn btn-info pull-right">保存</button>
                     </div>
                 </form>
             </div>
@@ -113,5 +114,7 @@
         src="${pageContext.request.contextPath}/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript"
         src="${pageContext.request.contextPath}/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/plugins/form/jquery.form.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/plugins/datatables/extensions/fnReloadAjax.js"></script>
 <!--Main.js-->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/pagejs/dept_add.js"></script>

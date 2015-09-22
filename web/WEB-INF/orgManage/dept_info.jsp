@@ -36,7 +36,6 @@
                     <table id="dept_table" class="table table-bordered table-striped table-hover" cellspacing="0">
                         <thead>
                         <tr>
-                            <th></th>
                             <th>部门编号</th>
                             <th>部门名称</th>
                             <th>类型</th>
@@ -48,23 +47,8 @@
                             <th>操作</th>
                         </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td></td>
-                                <td>部门编号</td>
-                                <td>部门名称</td>
-                                <td>类型</td>
-                                <td>电话</td>
-                                <td>传真</td>
-                                <td></td>
-                                <td>上级部门</td>
-                                <td>成立日期</td>
-                                <td></td>
-                            </tr>
-                        </tbody>
                         <tfoot>
                         <tr>
-                            <th></th>
                             <th>部门编号</th>
                             <th>部门名称</th>
                             <th>类型</th>
@@ -88,5 +72,6 @@
 <!--dataTables-bootstrap-->
 <script type="text/javascript"
         src="${pageContext.request.contextPath}/plugins/datatables/media/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/plugins/datatables/extensions/fnReloadAjax.js"></script>
 <!--dept_info.js-->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/pagejs/dept_info.js"></script>

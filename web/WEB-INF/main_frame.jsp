@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: ML3426
@@ -73,7 +74,7 @@
                     <li class="dropdown user user-menu">
                         <a href="javascript: null;" class="dropdown-toggle" data-toggle="dropdown">
                             <img src="/img/user.png" class="user-image" alt="User Image">
-                            <span class="hidden-xs">Zhang Ran</span>
+                            <span class="hidden-xs"><s:property value="#session.emp_id"/></span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- 用户头像 -->
@@ -81,7 +82,7 @@
                                 <img src="/img/user.png" class="img-circle" alt="User Image">
 
                                 <p>
-                                    Zhang Ran - CEO
+                                    <s:property value="#session.emp_id"/> - CEO
                                     <small>入职时间 11月. 2012</small>
                                 </p>
                             </li>
@@ -114,7 +115,7 @@
                     <img src="/img/user.png" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>Zhang Ran</p>
+                    <p><s:property value="#session.emp_id"/></p>
                     <a href="javascript: null;"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
             </div>
@@ -161,8 +162,10 @@
                             <a href="javascript: null;"><i class="fa fa-circle-o"></i> 入职管理 <i
                                     class="fa fa-angle-left pull-right"></i></a>
                             <ul class="treeview-menu">
-                                <li><a href="javascript: null;" id="emp_add"><i class="fa fa-circle-o"></i> 输入员工</a></li>
-                                <li><a href="javascript: null;" id="emp_info"><i class="fa fa-circle-o"></i> 查询人才库</a></li>
+                                <li><a href="javascript: null;" id="emp_add"><i class="fa fa-circle-o"></i> 输入员工</a>
+                                </li>
+                                <li><a href="javascript: null;" id="emp_info"><i class="fa fa-circle-o"></i> 查询人才库</a>
+                                </li>
                             </ul>
                         </li>
 
@@ -170,8 +173,10 @@
                             <a href="javascript: null;"><i class="fa fa-circle-o"></i> 试用期管理 <i
                                     class="fa fa-angle-left pull-right"></i></a>
                             <ul class="treeview-menu">
-                                <li><a href="javascript: null;" id="prob_info"><i class="fa fa-circle-o"></i> 试用期审查</a></li>
-                                <li><a href="javascript: null;" id="probed_info"><i class="fa fa-circle-o"></i> 已转正员工查询</a></li>
+                                <li><a href="javascript: null;" id="prob_info"><i class="fa fa-circle-o"></i> 试用期审查</a>
+                                </li>
+                                <li><a href="javascript: null;" id="probed_info"><i class="fa fa-circle-o"></i> 已转正员工查询</a>
+                                </li>
                             </ul>
                         </li>
 
@@ -179,8 +184,10 @@
                             <a href="javascript: null;"><i class="fa fa-circle-o"></i> 离职管理 <i
                                     class="fa fa-angle-left pull-right"></i></a>
                             <ul class="treeview-menu">
-                                <li><a href="javascript: null;" id="emp_exit"><i class="fa fa-circle-o"></i> 员工离职办理</a></li>
-                                <li><a href="javascript: null;" id="emp_exited"><i class="fa fa-circle-o"></i> 已离职员工查询</a></li>
+                                <li><a href="javascript: null;" id="emp_exit"><i class="fa fa-circle-o"></i> 员工离职办理</a>
+                                </li>
+                                <li><a href="javascript: null;" id="emp_exited"><i class="fa fa-circle-o"></i>
+                                    已离职员工查询</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -192,7 +199,8 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="javascript: null;" id="post_trans"><i class="fa fa-circle-o"></i> 部门岗位调动</a></li>
-                        <li><a href="javascript: null;" id="post_transed"><i class="fa fa-circle-o"></i> 已调动员工查询</a></li>
+                        <li><a href="javascript: null;" id="post_transed"><i class="fa fa-circle-o"></i> 已调动员工查询</a>
+                        </li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -211,8 +219,10 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="javascript: null;" id="newemp_table"><i class="fa fa-circle-o"></i> 新聘员工报表</a></li>
-                        <li><a href="javascript: null;" id="exitemp_table"><i class="fa fa-circle-o"></i> 离职员工报表</a></li>
-                        <li><a href="javascript: null;" id="dept_trans"><i class="fa fa-circle-o"></i> 部门岗位调动员工报表</a></li>
+                        <li><a href="javascript: null;" id="exitemp_table"><i class="fa fa-circle-o"></i> 离职员工报表</a>
+                        </li>
+                        <li><a href="javascript: null;" id="dept_trans"><i class="fa fa-circle-o"></i> 部门岗位调动员工报表</a>
+                        </li>
                         <li><a href="javascript: null;" id="hr_month"><i class="fa fa-circle-o"></i> 人事月报</a></li>
                     </ul>
                 </li>
@@ -252,7 +262,7 @@
                             <img class="profile-user-img img-responsive img-circle"
                                  src="/img/user.png" alt="User profile picture">
 
-                            <h3 class="profile-username text-center">Zhang Ran</h3>
+                            <h3 class="profile-username text-center"><s:property value="#session.emp_id"/></h3>
 
                             <p class="text-muted text-center">CEO</p>
                             <ul class="list-group list-group-unbordered">
@@ -605,6 +615,7 @@
 <!--bootstrap-wysihtml5-->
 <script type="text/javascript"
         src="${pageContext.request.contextPath}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/plugins/form/jquery-form.js"></script>
 <!--Main.js-->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/pagejs/main_frame.js"></script>
 </body>
