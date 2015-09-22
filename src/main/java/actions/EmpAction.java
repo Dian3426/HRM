@@ -441,7 +441,8 @@ public class EmpAction extends ActionSupport {
     private JobService jobService;
 
     @Action(value = "empInfoAdd",interceptorRefs = {
-            @InterceptorRef(value = "fileUpload",params = {"maximumSize","1024000","savePath","/photo"})
+            @InterceptorRef(value = "fileUpload",params = {"maximumSize","1024000","savePath","/photo"}),
+            @InterceptorRef("defaultStack")
     })
     public void empAdd(){
         HashMap<String,String> message = new HashMap<String, String>();

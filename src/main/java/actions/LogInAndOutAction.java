@@ -65,7 +65,7 @@ public class LogInAndOutAction extends ActionSupport{
 
 
     /**
-     * login function,get emp_id¡¢emp_pass and build to a Manager object.use login function to match database
+     * login function,get emp_idï¿½ï¿½emp_pass and build to a Manager object.use login function to match database
      * if success,put emp_id to cookie and session,put a status with a "1" mean login successfully
      * if fail,put a status with a "0" mean login fail,and put a message with why fail
      */
@@ -90,7 +90,7 @@ public class LogInAndOutAction extends ActionSupport{
                 }
             }else{
                 message.put("success","0");
-                message.put("message","ÓÃ»§Ãû»òÃÜÂë´íÎó£¡ÇëÖØÐÂÊäÈë");
+                message.put("message","ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
                 ObjectMapper objectMapper = new ObjectMapper();
                 String loginJson = objectMapper.writeValueAsString(message);
                 HttpServletResponse response = ServletActionContext.getResponse();
@@ -98,7 +98,7 @@ public class LogInAndOutAction extends ActionSupport{
             }
         }catch (Exception e){
             message.put("success","0");
-            message.put("message","·þÎñÆ÷ÏìÓ¦³¬Ê±£¬ÇëÉÔºóÔÙÊÔ");
+            message.put("message","ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Ôºï¿½ï¿½ï¿½ï¿½ï¿½");
             ObjectMapper objectMapper = new ObjectMapper();
             String loginJson = null;
             try {
@@ -132,8 +132,6 @@ public class LogInAndOutAction extends ActionSupport{
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         LogInAndOutAction logInAndOutAction = (LogInAndOutAction)context.getBean("logInAndOutAction");
-        logInAndOutAction.managerService.createManager(new Manager("123456","123456"));
-        logInAndOutAction.managerService.login(new Manager("123456","123456"));
     }
 
 }
