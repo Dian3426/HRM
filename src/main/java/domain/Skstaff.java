@@ -19,8 +19,6 @@ public class Skstaff {
         this.time = time;
     }
 
-
-
     public String getEmp_id() {
         return emp_id;
     }

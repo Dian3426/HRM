@@ -11,4 +11,6 @@ public interface LeaveMapper {
 
     @Insert("INSERT INTO LEAVE VALUES (null,#{emp_id},#{job_id},#{place},#{time},#{reason})")
     void createLeave(@Param("Leave")Leave leave);
+
+
 }

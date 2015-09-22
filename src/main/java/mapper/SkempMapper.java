@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -26,4 +27,8 @@ public interface SkempMapper {
 
     @Select("SELECT COUNT(emp_id) FROM SKEMP")
     int getCount();
+
+    @Select("SELECT * FROM SKEMP WHERE EMP_ID=#{emp_id}" )
+    Skemp getEmpByEmpid(String emp_id);
+
 }

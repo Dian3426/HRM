@@ -9,20 +9,15 @@ public class Temporary {
     private int id;
     private String begintime;
     private String endtime;
-    private int result;
-    private String ope_id;
     private String emp_id;
     private String job_id;
     private YesOrNo status;
 
     public Temporary(){}
 
-    public Temporary(String begintime, String endtime, int result, String ope_id, String emp_id, String job_id, YesOrNo status) {
+    public Temporary(String begintime, String endtime, String emp_id, String job_id, YesOrNo status) {
         this.begintime = begintime;
         this.endtime = endtime;
-        this.result = result;
-
-        this.ope_id = ope_id;
         this.emp_id = emp_id;
         this.job_id = job_id;
         this.status = status;
@@ -46,21 +41,6 @@ public class Temporary {
         this.endtime = endtime;
     }
 
-    public int getResult() {
-        return result;
-    }
-
-    public void setResult(int result) {
-        this.result = result;
-    }
-
-    public String getOpe_id() {
-        return ope_id;
-    }
-
-    public void setOpe_id(String ope_id) {
-        this.ope_id = ope_id;
-    }
 
     public String getEmp_id() {
         return emp_id;

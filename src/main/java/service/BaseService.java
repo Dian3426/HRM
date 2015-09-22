@@ -3,24 +3,30 @@ package service;
 import domain.Skjob;
 import domain.Talent;
 import domain.enums.YesOrNo;
+import mapper.SkdeptMapper;
 import mapper.SkjobMapper;
 import mapper.TalentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by JSZ on 2015/9/21.
  */
 @Service
-public class BaseService{
+public class BaseService {
+
+
     @Autowired
     private SkjobMapper skjobMapper;
 
     @Autowired
     private TalentMapper talentMapper;
 
+    @Autowired
+    private SkdeptMapper skdeptMapper;
 
     /**
      * 安全的符合完整性约束的方法
@@ -89,5 +95,20 @@ public class BaseService{
         return talentMapper.getCountByJobid(job_id);
     }
 
+    /**
+     * 根据 部门名 + 岗位名 获取响应的 dept_id 和 job_id
+     * @param deptName
+     * @param jobName
+     * @return
+     */
+    protected List<String> getDeptAndJobIdsByNames(String deptName,String jobName){
+        List<String> list = new ArrayList<String>();
+        String dept_id = skdeptMapper.getDeptidByName(deptName);
+        list.add(dept_id);
+
+        String job_id = skjobMapper.getJobByNameAndDeptid(jobName,dept_id).getJob_id();
+        list.add(job_id);
+        return list;
+    }
 
 }

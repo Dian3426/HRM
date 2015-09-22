@@ -40,4 +40,7 @@ public interface SkdeptMapper {
 
     @Select("SELECT * FROM SKDEPT WHERE DEPT_ID=#{dept_id}")
     Skdept getDeptByDeptid(@Param("dept_id")String dept_id);
+
+    @Select("SELECT COUNT(dept_id) FROM  SKDEPT")
+    int getDeptNum();
 }
