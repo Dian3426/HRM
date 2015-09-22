@@ -38,6 +38,7 @@ public class DeptAction extends ActionSupport {
     String dept_fax;
     String dept_desc;
     String dept_sdept;
+    String dept_id;
 
     /**
      * format : yyyy/mm/dd
@@ -46,6 +47,14 @@ public class DeptAction extends ActionSupport {
 
     public String getDept_name() {
         return dept_name;
+    }
+
+    public String getDept_id() {
+        return dept_id;
+    }
+
+    public void setDept_id(String dept_id) {
+        this.dept_id = dept_id;
     }
 
     public void setDept_name(String dept_name) {
@@ -117,6 +126,26 @@ public class DeptAction extends ActionSupport {
         String loginJson = objectMapper.writeValueAsString(result);
         HttpServletResponse response = ServletActionContext.getResponse();
         response.getOutputStream().write(loginJson.getBytes("UTF-8"));
+    }
+
+    @Action(value = "deptDelete")
+    public void deptDelete(){
+        HashMap<String,String> message = new HashMap<String, String>();
+        try{
+            deptService.deleteDept(getDept_id());
+            message.put("success", "1");
+        }catch (Exception e){
+            message.put("success", "0");
+            e.printStackTrace();
+        }
+        try{
+            ObjectMapper objectMapper = new ObjectMapper();
+            String loginJson = objectMapper.writeValueAsString(message);
+            HttpServletResponse response = ServletActionContext.getResponse();
+            response.getOutputStream().write(loginJson.getBytes("UTF-8"));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Action(value = "deptSearch")
