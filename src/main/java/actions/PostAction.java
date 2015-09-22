@@ -120,7 +120,7 @@ public class PostAction extends ActionSupport {
         ArrayList<String> result = new ArrayList<String>();
         for (Skjob job : jobs) {
             String id = job.getDept_id();
-            result.add(deptService.getNameByDeptid(id) + job.getName());
+            result.add(deptService.getNameByDeptid(id) + "-" + job.getName());
         }
         ObjectMapper objectMapper = new ObjectMapper();
         String loginJson = objectMapper.writeValueAsString(result);

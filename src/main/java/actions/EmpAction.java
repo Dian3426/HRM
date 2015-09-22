@@ -445,8 +445,9 @@ public class EmpAction extends ActionSupport {
         HashMap<String,String> message = new HashMap<String, String>();
         try{
             String empNo = createEmpNo();
-            String position =getEmp_position().substring(3);
-            String dept = getEmp_position().substring(0,3);
+            String[] temp = getEmp_position().split("-");
+            String position = temp[0];
+            String dept = temp[1];
 
             String path = saveFile();
 
