@@ -43,4 +43,8 @@ public interface SkdeptMapper {
 
     @Select("SELECT COUNT(dept_id) FROM  SKDEPT")
     int getDeptNum();
+
+    @Select("SELECT d.DEPT_ID,d.NAME DEPTNAME,e.NAME EMPNAME,e.EMP_ID,j.NAME JOBNAME,e.TELE,s.TIME FROM SKEMP e,SKSTAFF s,SKJOB j WHERE " +
+            "e.EMP_ID=s.EMP_ID AND j.JOB_ID=s.JOB_ID AND j.DEPT_ID=d.DEPT_ID AND d.DEPT_ID=#{dept_id}")
+    List<HashMap<String,String>> getStaffByDeptid(@Param("dept_id")String dept_id);
 }
