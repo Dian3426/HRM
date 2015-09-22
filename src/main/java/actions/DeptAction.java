@@ -107,10 +107,8 @@ public class DeptAction extends ActionSupport {
      * @return Action support status
      * @throws Exception jacksonException
      */
-    @Action(value = "deptInfo",results = {
-            @Result(name = ActionSupport.SUCCESS,location = "/WEB-INF/orgManage/dept_info.jsp")
-    })
-    public String deptInfo() throws Exception{
+    @Action(value = "deptInfo")
+    public void deptInfo() throws Exception{
         List<Skdept> skdepts = deptService.getAllDepts();
         HashMap<String,List> result = new HashMap<String, List>();
         result.put("skdepts",skdepts);
@@ -118,7 +116,6 @@ public class DeptAction extends ActionSupport {
         String loginJson = objectMapper.writeValueAsString(result);
         HttpServletResponse response = ServletActionContext.getResponse();
         response.getOutputStream().write(loginJson.getBytes("UTF-8"));
-        return SUCCESS;
     }
 
     /**
