@@ -448,12 +448,7 @@ public class EmpAction extends ActionSupport {
      * @return empDeptNo
      */
     private String createEmpDeptNo(String dept){
-        List<HashMap<String,String>> deptidAndNames = deptService.getAllDeptidAndNames();
-        int deptID = 0;
-        for (HashMap<String, String> deptidAndName : deptidAndNames) {
-            if(deptidAndName.get(deptID) == dept)
-                break;
-        }
+        int deptID = Integer.parseInt(deptService.getDeptidByName(dept));
         int count = deptService.getCountByDeptid(Integer.toString(deptID));
         String deptNo = "";
         if(deptID < 10)
@@ -478,7 +473,7 @@ public class EmpAction extends ActionSupport {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         EmpAction empAction = (EmpAction)context.getBean("empAction");
         System.out.println(empAction.createEmpNo());
-        System.out.println(empAction.createEmpDeptNo("行政部"));
+        System.out.println(empAction.createEmpDeptNo("技术部"));
     }
 
 

@@ -5,8 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import domain.Manager;
-import org.apache.catalina.Session;
-import org.apache.ibatis.annotations.Results;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -33,6 +31,7 @@ import java.util.HashMap;
 @Namespace("/")
 @ParentPackage("struts-default")
 public class LogInAndOutAction extends ActionSupport{
+
     String emp_id;
     String emp_pass;
     boolean emp_rem;
@@ -68,7 +67,7 @@ public class LogInAndOutAction extends ActionSupport{
     /**
      * login function,get emp_id¡¢emp_pass and build to a Manager object.use login function to match database
      * if success,put emp_id to cookie and session,put a status with a "1" mean login successfully
-     * if fail,put a status whit a "0" mean login fail,and put a message with why fail
+     * if fail,put a status with a "0" mean login fail,and put a message with why fail
      */
     @Action(value = "login")
     public void login(){
@@ -83,10 +82,10 @@ public class LogInAndOutAction extends ActionSupport{
                 String loginJson = objectMapper.writeValueAsString(message);
                 HttpServletResponse response = ServletActionContext.getResponse();
                 response.getOutputStream().write(loginJson.getBytes("UTF-8"));
+                HttpServletRequest request = ServletActionContext.getRequest();
+                request.getSession().setAttribute("emp_id", getEmp_id());
                 if(isEmp_rem()){
                     Cookie cookie = new Cookie("emp_id",getEmp_id());
-                    HttpServletRequest request = ServletActionContext.getRequest();
-                    request.getSession().setAttribute("emp_id",getEmp_id());
                     response.addCookie(cookie);
                 }
             }else{
@@ -128,6 +127,13 @@ public class LogInAndOutAction extends ActionSupport{
         }
         request.getSession().setAttribute("emp_id","");
         return SUCCESS;
+    }
+
+    public static void main(String[] args) {
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        LogInAndOutAction logInAndOutAction = (LogInAndOutAction)context.getBean("logInAndOutAction");
+        logInAndOutAction.managerService.createManager(new Manager("123456","123456"));
+        logInAndOutAction.managerService.login(new Manager("123456","123456"));
     }
 
 }

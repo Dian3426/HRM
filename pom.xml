@@ -92,7 +92,11 @@
             <artifactId>tomcat-catalina</artifactId>
             <version>8.0.26</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts2-spring-plugin</artifactId>
+            <version>2.3.24</version>
+        </dependency>
 
     </dependencies>
 

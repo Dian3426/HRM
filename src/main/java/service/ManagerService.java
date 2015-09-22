@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ManagerService extends BaseService{
+
     @Autowired
     private ManagerMapper managerMapper;
 

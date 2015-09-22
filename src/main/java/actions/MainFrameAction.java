@@ -21,6 +21,7 @@ public class MainFrameAction extends ActionSupport{
             @Result(name = ActionSupport.SUCCESS,location = "/WEB-INF/main_frame.jsp")
     })
     public String mainFrame(){
+
         return SUCCESS;
     }
 
