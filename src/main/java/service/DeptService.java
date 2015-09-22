@@ -69,6 +69,10 @@ public class DeptService extends BaseService{
         return skdeptManager.getAllDeptidAndNames();
     }
 
+    public String getNameByDeptid(String dept_id){
+        return skdeptManager.getDeptNameByDeptid(dept_id);
+    }
+
     /**
      * dept_id必须与对应修改的目标一致
      * @param dept
