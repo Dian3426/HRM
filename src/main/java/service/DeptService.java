@@ -26,7 +26,7 @@ public class DeptService extends BaseService{
     @Autowired
     private  TalentMapper talentMapper;
     /**
-     * ´´½¨Ò»¸ö²¿ÃÅ
+     * åˆ›å»ºä¸€ä¸ªéƒ¨é—¨
      * @param skdept
      */
     public void createDept(Skdept skdept){
@@ -34,7 +34,7 @@ public class DeptService extends BaseService{
     }
 
     /**
-     * »ñÈ¡¶ÔÓ¦±àºÅµÄ²¿ÃÅ
+     * è·å–å¯¹åº”ç¼–å·çš„éƒ¨é—¨
      * @param dept_id
      * @return
      */
@@ -43,7 +43,7 @@ public class DeptService extends BaseService{
     }
 
     /**
-     * »ñÈ¡ËùÓĞµÄ²¿ÃÅ
+     * è·å–æ‰€æœ‰çš„éƒ¨é—¨
      * @return
      */
     public List<Skdept> getAllDepts(){
@@ -51,7 +51,7 @@ public class DeptService extends BaseService{
     }
 
     /**
-     * È¡³ö startĞĞºÍendĞĞÖ®¼äµÄÊı¾İ
+     * å–å‡º startè¡Œå’Œendè¡Œä¹‹é—´çš„æ•°æ®
      * @param start
      * @param end
      * @return
@@ -61,8 +61,8 @@ public class DeptService extends BaseService{
     }
 
     /**
-     * »ñÈ¡ËùÓĞµÄ²¿ÃÅ±àºÅ£¬ÒÔ¼°¶ÔÓ¦Ãû³Æ£¬ÒÔ±ãÌîĞ´ÉÏ¼¶²¿ÃÅ
-     * ×¢ÒâSkdeptÖĞÉÏ¼¶²¿ÃÅ¶ÔÓ¦µÄÊÇid¶ø²»ÊÇÃû³Æ
+     * è·å–æ‰€æœ‰çš„éƒ¨é—¨ç¼–å·ï¼Œä»¥åŠå¯¹åº”åç§°ï¼Œä»¥ä¾¿å¡«å†™ä¸Šçº§éƒ¨é—¨
+     * æ³¨æ„Skdeptä¸­ä¸Šçº§éƒ¨é—¨å¯¹åº”çš„æ˜¯idè€Œä¸æ˜¯åç§°
      * @return
      */
     public List<HashMap<String,String>> getAllDeptidAndNames(){
@@ -74,7 +74,7 @@ public class DeptService extends BaseService{
     }
 
     /**
-     * dept_id±ØĞëÓë¶ÔÓ¦ĞŞ¸ÄµÄÄ¿±êÒ»ÖÂ
+     * dept_idå¿…é¡»ä¸å¯¹åº”ä¿®æ”¹çš„ç›®æ ‡ä¸€è‡´
      * @param dept
      */
     public void updateDept(Skdept dept){
@@ -82,7 +82,7 @@ public class DeptService extends BaseService{
     }
 
     /**
-     * É¾³ı¶ÔÓ¦dept_idµÄÊı¾İ
+     * åˆ é™¤å¯¹åº”dept_idçš„æ•°æ®
      * @param dept_id
      */
     public boolean deleteDept(String dept_id){
@@ -90,13 +90,13 @@ public class DeptService extends BaseService{
             skdeptManager.delete(dept_id);
             return true;
         }else {
-            System.err.println("²¿ÃÅÉ¾³ıÊ§°Ü£¬´æÔÚÊôÓÚ¸Ã²¿ÃÅµÄÔ±¹¤");
+            System.err.println("éƒ¨é—¨åˆ é™¤å¤±è´¥ï¼Œå­˜åœ¨å±äºè¯¥éƒ¨é—¨çš„å‘˜å·¥");
             return false;
         }
     }
 
     /**
-     * »ñÈ¡¶ÔÓ¦dept_idÖ°¹¤×ÜÈËÊı
+     * è·å–å¯¹åº”dept_idèŒå·¥æ€»äººæ•°
      * @return
      */
     public int getCountByDeptid(String dept_id){
@@ -110,5 +110,9 @@ public class DeptService extends BaseService{
 
     public String getDeptidByName(String name){
         return skdeptManager.getDeptidByName(name);
+    }
+
+    public int getCount(){
+        return skdeptManager.getDeptNum();
     }
 }
