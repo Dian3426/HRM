@@ -5,7 +5,9 @@ import domain.*;
 import domain.enums.*;
 import org.apache.struts2.convention.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import service.DeptService;
 import service.EmpService;
@@ -397,7 +399,9 @@ public class EmpAction extends ActionSupport {
     @Autowired
     private JobService jobService;
 
-    @Action(value = "addEmp")
+    @Action(value = "empAdd",results = {
+            @Result(name = ActionSupport.SUCCESS,location = "/WEB-INF/empManage/emp_add.jsp")
+    })
     public String addEmp(){
         String empNo = createEmpNo();
         String position =getEmp_position().substring(3);
@@ -463,10 +467,18 @@ public class EmpAction extends ActionSupport {
         return deptNo;
     }
 
+    @Action(value = "empInfo",results = {
+            @Result(name = ActionSupport.SUCCESS,location = "/WEB-INF/empManage/emp_info.jsp")
+    })
+    public String empInfo(){
+        return SUCCESS;
+    }
+
     public static void main(String[] args) {
-        String position ="行政部技术总监".substring(3);
-        String dept = "行政部技术总监".substring(0, 3);
-        System.out.println(position + " -> " + dept);
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        EmpAction empAction = (EmpAction)context.getBean("empAction");
+        System.out.println(empAction.createEmpNo());
+        System.out.println(empAction.createEmpDeptNo("行政部"));
     }
 
 
