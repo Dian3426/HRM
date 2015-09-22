@@ -4,31 +4,38 @@ package domain;
  * Created by Jsz on 2015/9/17.
  */
 public class Occupationcareer {
-    private String id;
-    private int emp_id;
+    private int id;
+    private String emp_id;
     private String begintime;
     private String endtime;
     private String jobname;
     private String jobdiscrip;
     private String position;
-    private String salary;
+    private double salary;
     private String reference;
     private String referenceposition;
     private String referencetel;
 
-    public String getId() {
-        return id;
+    public Occupationcareer(){}
+    public Occupationcareer(String emp_id, String begintime, String endtime, String jobname, String jobdiscrip, String position, double salary, String reference, String referenceposition, String referencetel) {
+        this.emp_id = emp_id;
+        this.begintime = begintime;
+        this.endtime = endtime;
+        this.jobname = jobname;
+        this.jobdiscrip = jobdiscrip;
+        this.position = position;
+        this.salary = salary;
+        this.reference = reference;
+        this.referenceposition = referenceposition;
+        this.referencetel = referencetel;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
 
-    public int getEmp_id() {
+    public String getEmp_id() {
         return emp_id;
     }
 
-    public void setEmp_id(int emp_id) {
+    public void setEmp_id(String emp_id) {
         this.emp_id = emp_id;
     }
 
@@ -72,11 +79,11 @@ public class Occupationcareer {
         this.position = position;
     }
 
-    public String getSalary() {
+    public double getSalary() {
         return salary;
     }
 
-    public void setSalary(String salary) {
+    public void setSalary(double salary) {
         this.salary = salary;
     }
 

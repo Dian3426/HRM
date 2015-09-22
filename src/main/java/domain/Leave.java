@@ -1,29 +1,34 @@
 package domain;
 
+import domain.enums.LeaveReasons;
+
 /**
  * Created by Jsz on 2015/9/17.
  */
 public class Leave {
-    private String id;
-    private int emp_id;
+    private int id;
+    private String emp_id;
     private String job_id;
     private String place;
     private String time;
-    private String reason;
+    private LeaveReasons reason;
 
-    public String getId() {
-        return id;
+    public Leave(){}
+
+    public Leave(String emp_id, String job_id, String place, String time, LeaveReasons reason) {
+        this.emp_id = emp_id;
+        this.job_id = job_id;
+        this.place = place;
+        this.time = time;
+        this.reason = reason;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
 
-    public int getEmp_id() {
+    public String getEmp_id() {
         return emp_id;
     }
 
-    public void setEmp_id(int emp_id) {
+    public void setEmp_id(String emp_id) {
         this.emp_id = emp_id;
     }
 
@@ -51,11 +56,11 @@ public class Leave {
         this.time = time;
     }
 
-    public String getReason() {
+    public LeaveReasons getReason() {
         return reason;
     }
 
-    public void setReason(String reason) {
+    public void setReason(LeaveReasons reason) {
         this.reason = reason;
     }
 }

@@ -1,28 +1,31 @@
 package domain;
 
+import domain.enums.SourceTypes;
+
 /**
  * Created by Jsz on 2015/9/17.
  */
 public class Skstaff {
-    private String id;
-    private int emp_id;
+    private int id;
+    private String emp_id;
     private String job_id;
     private String time;
-    private String source;
 
-    public String getId() {
-        return id;
+    public Skstaff(){}
+
+    public Skstaff(String emp_id, String job_id, String time) {
+        this.emp_id = emp_id;
+        this.job_id = job_id;
+        this.time = time;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
 
-    public int getEmp_id() {
+
+    public String getEmp_id() {
         return emp_id;
     }
 
-    public void setEmp_id(int emp_id) {
+    public void setEmp_id(String emp_id) {
         this.emp_id = emp_id;
     }
 
@@ -42,11 +45,4 @@ public class Skstaff {
         this.time = time;
     }
 
-    public String getSource() {
-        return source;
-    }
-
-    public void setSource(String source) {
-        this.source = source;
-    }
 }
