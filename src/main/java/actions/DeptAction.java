@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import service.DeptService;
 
 import javax.servlet.http.HttpServletResponse;
+import java.rmi.server.ExportException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -106,10 +107,8 @@ public class DeptAction extends ActionSupport {
      * @return Action support status
      * @throws Exception jacksonException
      */
-    @Action(value = "deptInfo",results = {
-            @Result(name = ActionSupport.SUCCESS,location = "/WEB-INF/orgManage/dept_info.jsp")
-    })
-    public String deptInfo() throws Exception{
+    @Action(value = "deptInfo")
+    public void deptInfo() throws Exception{
         List<Skdept> skdepts = deptService.getAllDepts();
         HashMap<String,List> result = new HashMap<String, List>();
         result.put("skdepts",skdepts);
@@ -117,17 +116,14 @@ public class DeptAction extends ActionSupport {
         String loginJson = objectMapper.writeValueAsString(result);
         HttpServletResponse response = ServletActionContext.getResponse();
         response.getOutputStream().write(loginJson.getBytes("UTF-8"));
-        return SUCCESS;
     }
 
     /**
      * add one new dept
      * @return Action support status
      */
-    @Action(value = "deptAdd",results = {
-            @Result(name = ActionSupport.SUCCESS,location = "/WEB-INF/orgManage/dept_add.jsp")
-    })
-    public String deptAdd(){
+    @Action(value = "deptAdd")
+    public void deptAdd(){
         Skdept skdept = new Skdept();
         skdept.setCreatetime(getDept_ftime());
         skdept.setFax(getDept_fax());
@@ -136,8 +132,21 @@ public class DeptAction extends ActionSupport {
         skdept.setSuperd(getDept_sdept());
         skdept.setTele(getDept_tel());
         skdept.setType(DeptTypes.valueOf(getDept_type()));
-        deptService.createDept(skdept);
-        return SUCCESS;
+        HashMap<String,String> message = new HashMap<String, String>();
+        try{
+            deptService.createDept(skdept);
+            message.put("success", "1");
+        }catch (Exception e){
+            message.put("success", "0");
+        }
+        try{
+            ObjectMapper objectMapper = new ObjectMapper();
+            String loginJson = objectMapper.writeValueAsString(message);
+            HttpServletResponse response = ServletActionContext.getResponse();
+            response.getOutputStream().write(loginJson.getBytes("UTF-8"));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 }

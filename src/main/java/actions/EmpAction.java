@@ -1,8 +1,10 @@
 package actions;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.opensymphony.xwork2.ActionSupport;
 import domain.*;
 import domain.enums.*;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -13,6 +15,7 @@ import service.DeptService;
 import service.EmpService;
 import service.JobService;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 
@@ -399,26 +402,37 @@ public class EmpAction extends ActionSupport {
     @Autowired
     private JobService jobService;
 
-    @Action(value = "empAdd",results = {
-            @Result(name = ActionSupport.SUCCESS,location = "/WEB-INF/empManage/emp_add.jsp")
-    })
-    public String addEmp(){
-        String empNo = createEmpNo();
-        String position =getEmp_position().substring(3);
-        String dept = getEmp_position().substring(0,3);
-        Skjob skjob = jobService.getJobByNameAndDeptid(position,deptService.getDeptidByName(dept));
-        Skemp emp = new Skemp(getEmp_name(),getEmp_sex(),getEmp_birth(),getEmp_idNum(),"2",getEmp_ps(),
-                getEmp_nat(),getEmp_native(),getEmp_tel(),getEmp_mail(),getEmp_height(),getEmp_bloodtype(),
-                getEmp_birthprov()+getEmp_birthcity(),getEmp_rresidence(),"",getEmp_edu(),getEmp_coll(),
-                getEmp_major(),getEmp_grad(),getEmp_from(),empNo);
-        Occupationcareer occupationcareer = new Occupationcareer(empNo,getEmp_job_start(),getEmp_job_end(),
-                getEmp_former_position(),"",getEmp_former_position(),getEmp_former_salary(),getEmp_former_evidence(),
-                getEmp_former_evidence_position(),"");
-        Societyrelation societyrelation = new Societyrelation(empNo,getEmp_family_relation()[0],
-                getEmp_family_name()[0],getEmp_family_position()[0],getEmp_family_comp()[0],getEmp_family_tel()[0]);
-        Talent talent = new Talent(empNo,skjob.getJob_id(),getEmp_jobtype());
-        empService.createEmpTotally(emp,occupationcareer,societyrelation,talent);
-        return SUCCESS;
+    @Action(value = "empAdd")
+    public void empAdd(){
+        HashMap<String,String> message = new HashMap<String, String>();
+        try{
+            String empNo = createEmpNo();
+            String position =getEmp_position().substring(3);
+            String dept = getEmp_position().substring(0,3);
+            Skjob skjob = jobService.getJobByNameAndDeptid(position,deptService.getDeptidByName(dept));
+            Skemp emp = new Skemp(getEmp_name(),getEmp_sex(),getEmp_birth(),getEmp_idNum(),"2",getEmp_ps(),
+                    getEmp_nat(),getEmp_native(),getEmp_tel(),getEmp_mail(),getEmp_height(),getEmp_bloodtype(),
+                    getEmp_birthprov()+getEmp_birthcity(),getEmp_rresidence(),"",getEmp_edu(),getEmp_coll(),
+                    getEmp_major(),getEmp_grad(),getEmp_from(),empNo);
+            Occupationcareer occupationcareer = new Occupationcareer(empNo,getEmp_job_start(),getEmp_job_end(),
+                    getEmp_former_position(),"",getEmp_former_position(),getEmp_former_salary(),getEmp_former_evidence(),
+                    getEmp_former_evidence_position(),"");
+            Societyrelation societyrelation = new Societyrelation(empNo,getEmp_family_relation()[0],
+                    getEmp_family_name()[0],getEmp_family_position()[0],getEmp_family_comp()[0],getEmp_family_tel()[0]);
+            Talent talent = new Talent(empNo,skjob.getJob_id(),getEmp_jobtype());
+            empService.createEmpTotally(emp,occupationcareer,societyrelation,talent);
+            message.put("success", "1");
+        }catch (Exception e){
+            message.put("success", "0");
+        }
+        try{
+            ObjectMapper objectMapper = new ObjectMapper();
+            String loginJson = objectMapper.writeValueAsString(message);
+            HttpServletResponse response = ServletActionContext.getResponse();
+            response.getOutputStream().write(loginJson.getBytes("UTF-8"));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -462,12 +476,6 @@ public class EmpAction extends ActionSupport {
         return deptNo;
     }
 
-    @Action(value = "empInfo",results = {
-            @Result(name = ActionSupport.SUCCESS,location = "/WEB-INF/empManage/emp_info.jsp")
-    })
-    public String empInfo(){
-        return SUCCESS;
-    }
 
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
