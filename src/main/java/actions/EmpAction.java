@@ -399,10 +399,8 @@ public class EmpAction extends ActionSupport {
     @Autowired
     private JobService jobService;
 
-    @Action(value = "empAdd",results = {
-            @Result(name = ActionSupport.SUCCESS,location = "/WEB-INF/empManage/emp_add.jsp")
-    })
-    public String addEmp(){
+    @Action(value = "empAdd")
+    public String empAdd(){
         String empNo = createEmpNo();
         String position =getEmp_position().substring(3);
         String dept = getEmp_position().substring(0,3);
@@ -462,12 +460,6 @@ public class EmpAction extends ActionSupport {
         return deptNo;
     }
 
-    @Action(value = "empInfo",results = {
-            @Result(name = ActionSupport.SUCCESS,location = "/WEB-INF/empManage/emp_info.jsp")
-    })
-    public String empInfo(){
-        return SUCCESS;
-    }
 
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");

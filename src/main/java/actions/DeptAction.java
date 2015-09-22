@@ -124,9 +124,7 @@ public class DeptAction extends ActionSupport {
      * add one new dept
      * @return Action support status
      */
-    @Action(value = "deptAdd",results = {
-            @Result(name = ActionSupport.SUCCESS,location = "/WEB-INF/orgManage/dept_add.jsp")
-    })
+    @Action(value = "deptAdd")
     public String deptAdd(){
         Skdept skdept = new Skdept();
         skdept.setCreatetime(getDept_ftime());

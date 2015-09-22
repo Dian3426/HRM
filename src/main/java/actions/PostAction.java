@@ -83,10 +83,8 @@ public class PostAction extends ActionSupport {
     @Autowired
     DeptService deptService;
 
-    @Action(value = "postAdd",results = {
-            @Result(name = ActionSupport.SUCCESS,location = "/WEB-INF/posManage/post_add.jsp")
-    })
-    public String addPost(){
+    @Action(value = "postAdd")
+    public String postAdd(){
         Skjob skjob = new Skjob();
         skjob.setName(getPost_name());
         skjob.setType(JobTypes.valueOf(getPost_type()));
@@ -115,13 +113,6 @@ public class PostAction extends ActionSupport {
         String loginJson = objectMapper.writeValueAsString(result);
         HttpServletResponse response = ServletActionContext.getResponse();
         response.getOutputStream().write(loginJson.getBytes("UTF-8"));
-    }
-
-    @Action(value = "postInfo",results = {
-            @Result(name = ActionSupport.SUCCESS,location = "/WEB-INF/posManage/post_info.jsp")
-    })
-    public String postInfo(){
-        return SUCCESS;
     }
 
     public static void main(String[] args) {
