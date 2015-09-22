@@ -56,7 +56,7 @@
                 <div class="col-xs-8">
                     <div class="checkbox icheck">
                         <label>
-                            <input type="checkbox"> 记住登录状态
+                            <input name="emp_rem" type="checkbox"> 记住登录状态
                         </label>
                     </div>
                 </div><!-- 记住我按钮 -->
