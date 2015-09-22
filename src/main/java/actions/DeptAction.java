@@ -124,16 +124,18 @@ public class DeptAction extends ActionSupport {
      */
     @Action(value = "deptAdd")
     public void deptAdd(){
-        Skdept skdept = new Skdept();
-        skdept.setCreatetime(getDept_ftime());
-        skdept.setFax(getDept_fax());
-        skdept.setDiscrip(getDept_desc());
-        skdept.setName(getDept_name());
-        skdept.setSuperd(getDept_sdept());
-        skdept.setTele(getDept_tel());
-        skdept.setType(DeptTypes.valueOf(getDept_type()));
         HashMap<String,String> message = new HashMap<String, String>();
         try{
+            Skdept skdept = new Skdept();
+            skdept.setCreatetime(getDept_ftime());
+            skdept.setFax(getDept_fax());
+            skdept.setDiscrip(getDept_desc());
+            skdept.setName(getDept_name());
+            skdept.setSuperd(getDept_sdept());
+            skdept.setTele(getDept_tel());
+            skdept.setType(getDept_type().equals("部门") ? DeptTypes.Dept : DeptTypes.Enterprice);
+            int count = deptService.getCount();
+            skdept.setDept_id(Integer.toString(count));
             deptService.createDept(skdept);
             message.put("success", "1");
         }catch (Exception e){
