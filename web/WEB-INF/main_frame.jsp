@@ -233,7 +233,6 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="javascript: null;"><i class="fa fa-circle-o"></i> 添加管理员</a></li>
-                        <li><a href="javascript: null;"><i class="fa fa-circle-o"></i> 查询管理员</a></li>
                     </ul>
                 </li>
             </ul>

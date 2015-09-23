@@ -85,7 +85,7 @@
                     </h3>
                 </div> <!--herder 结束-->
 
-                <form class="form-horizontal">
+                <form class="form-horizontal" id="emp_info_idnum_form">
                     <div class="box-body">
                         <div class="form-group">
                             <label for="emp_idNumS" class="col-sm-6 control-label">请输入您要查询的身份证号</label>

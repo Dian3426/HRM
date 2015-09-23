@@ -28,7 +28,7 @@
                     </h3>
                 </div> <!--herder 结束-->
 
-                <form class="form-horizontal">
+                <form class="form-horizontal" id="post_add_form">
                     <div class="box-body">
                         <div class="form-group">
                             <label for="post_name" class="col-sm-2 control-label">岗位名称</label>
@@ -39,15 +39,10 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="dept_sdept" class="col-sm-2 control-label">上级部门</label>
+                            <label for="post_sdept" class="col-sm-2 control-label">上级部门</label>
 
                             <div class="col-sm-10">
-                                <select class="form-control" name="post_sdept" id="dept_sdept">
-                                    <option value="0">行政部</option>
-                                    <option value="1">生产部</option>
-                                    <option value="2">技术部</option>
-                                    <option value="3">销售部</option>
-                                    <option value="4">财务部</option>
+                                <select class="form-control" name="post_sdept" id="post_sdept">
                                 </select>
                             </div>
                         </div>
@@ -57,10 +52,6 @@
 
                             <div class="col-sm-10">
                                 <select class="form-control" name="post_type" id="post_type">
-                                    <option value="0">管理</option>
-                                    <option value="1">技术</option>
-                                    <option value="2">营销</option>
-                                    <option value="3">市场</option>
                                 </select>
                             </div>
                         </div>
@@ -86,10 +77,11 @@
                     </div>
 
                     <div class="box-footer">
-                        <button type="submit" class="btn btn-info pull-right">保存</button>
+                        <button type="button" id="btn_post_add_save" class="btn btn-info pull-right">保存</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </section>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/pagejs/post_add.js"></script>

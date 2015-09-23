@@ -93,7 +93,7 @@
                     </h3>
                 </div> <!--herder 结束-->
 
-                <form class="form-horizontal">
+                <form class="form-horizontal" id="exitemp_table_form">
                     <div class="box-body">
                         <span>请输入查询条件：（至少填写一项）</span>
 
@@ -142,7 +142,6 @@
                     <table class="table table-bordered table-striped table-hover" id="exitemp_table_table">
                         <thead>
                         <tr>
-                            <th></th>
                             <th>员工编号</th>
                             <th>部门名称</th>
                             <th>部门名称</th>
@@ -152,21 +151,8 @@
                             <th>学历</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr>
-                            <td></td>
-                            <td>员工编号</td>
-                            <td>部门名称</td>
-                            <td>部门名称</td>
-                            <td>姓名</td>
-                            <td>性别</td>
-                            <td>入职日期</td>
-                            <td>学历</td>
-                        </tr>
-                        </tbody>
                         <tfoot>
                         <tr>
-                            <th></th>
                             <th>员工编号</th>
                             <th>部门名称</th>
                             <th>部门名称</th>

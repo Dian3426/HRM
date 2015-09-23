@@ -84,7 +84,7 @@
                     </h3>
                 </div> <!--herder 结束-->
 
-                <form class="form-horizontal">
+                <form class="form-horizontal" id="emp_search_form">
                     <div class="box-body">
                         <span>请输入查询条件：（至少填写一项）</span>
                         <div class="form-group">

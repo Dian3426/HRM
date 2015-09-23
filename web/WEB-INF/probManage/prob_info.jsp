@@ -122,7 +122,6 @@
                     <table class="table table-bordered table-striped table-hover" id="emp_prob_result">
                         <thead>
                             <tr>
-                                <th></th>
                                 <th>员工编号</th>
                                 <th>姓名</th>
                                 <th>部门名称</th>
@@ -136,7 +135,6 @@
 
                         <tbody>
                             <tr>
-                                <td></td>
                                 <td>员工编号</td>
                                 <td>姓名</td>
                                 <td>部门名称</td>
@@ -150,7 +148,6 @@
 
                         <tfoot>
                         <tr>
-                            <th></th>
                             <th>员工编号</th>
                             <th>姓名</th>
                             <th>部门名称</th>

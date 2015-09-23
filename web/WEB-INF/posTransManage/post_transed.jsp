@@ -28,7 +28,7 @@
                     </h3>
                 </div> <!--herder 结束-->
 
-                <form class="form-horizontal">
+                <form class="form-horizontal" id="post_transed_form">
                     <div class="box-body">
                         <div class="form-group">
                             <label for="trans_emp_id" class="col-sm-5 control-label">员工编号：</label>
