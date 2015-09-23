@@ -27,7 +27,7 @@ public class EmpService extends BaseService{
     private TalentMapper talentMapper;
 
     /**
-     * ËÄ¸ö²ÎÊıµÄ emp_id±ØĞëÒ»ÖÂ
+     * å››ä¸ªå‚æ•°çš„ emp_idå¿…é¡»ä¸€è‡´
      * @param skemp
      * @param occupationcareer
      * @param societyrelation
@@ -68,7 +68,7 @@ public class EmpService extends BaseService{
     }
 
     /**
-     * ²»°²È«µÄ·½·¨£¬¿ÉÄÜ»áÆÆ»µÊı¾İ¿âÍêÕûĞÔÔ¼Êø
+     * ä¸å®‰å…¨çš„æ–¹æ³•ï¼Œå¯èƒ½ä¼šç ´åæ•°æ®åº“å®Œæ•´æ€§çº¦æŸ
      * @param talent
      */
     private  void createTalent(Talent talent){
@@ -81,7 +81,7 @@ public class EmpService extends BaseService{
     }
 
     /**
-     * ÓĞÊÔÓÃÆÚµÄÔ±¹¤±ØĞë×¢²á¸Ã±í
+     * æœ‰è¯•ç”¨æœŸçš„å‘˜å·¥å¿…é¡»æ³¨å†Œè¯¥è¡¨
      * @param temporary
      */
     public void createTemporary(Temporary temporary){
@@ -90,7 +90,7 @@ public class EmpService extends BaseService{
 
 
     /**
-     * »ñÈ¡hashmap valuesµÄkeys
+     * è·å–hashmap valuesçš„keys
      */
     public static String EMP_ID = "EMP_ID";
     public static String EMP_NAME = "EMPNAME";
@@ -100,7 +100,7 @@ public class EmpService extends BaseService{
     public static String BEGINTIME = "BEGINTIME";
     public static String ENDTIME = "ENDTIME";
     /**
-     * ËÄ¸ö²ÎÊıÖÁÉÙÒ»¸ö²»Îª¿Õ£¬»ñÈ¡ÏàÓ¦µÄËÑË÷½á¹û£¬keys´¢´æÔÚserviceÖĞ
+     * å››ä¸ªå‚æ•°è‡³å°‘ä¸€ä¸ªä¸ä¸ºç©ºï¼Œè·å–ç›¸åº”çš„æœç´¢ç»“æœï¼Œkeyså‚¨å­˜åœ¨serviceä¸­
      * @param emp_id
      * @param empName
      * @param begintime
@@ -109,14 +109,14 @@ public class EmpService extends BaseService{
      */
     public List<HashMap<String,String>> getTemporaryEmpInfo(String emp_id,String empName,String begintime,String endtime){
         if(emp_id.isEmpty()&&empName.isEmpty()&&begintime.isEmpty()&&endtime.isEmpty()){
-            System.out.println("ÇëÖÁÉÙÊäÈëÒ»¸ö²ÎÊı");
+            System.out.println("è¯·è‡³å°‘è¾“å…¥ä¸€ä¸ªå‚æ•°");
             return null;
         }
         return temporaryMapper.getTemporaryInfo(emp_id, empName, begintime, endtime);
     }
 
     /**
-     * »ñÈ¡ÊäÈë¹«Ë¾Ô±¹¤ĞÅÏ¢±íµÄ×ÜÊı
+     * è·å–è¾“å…¥å…¬å¸å‘˜å·¥ä¿¡æ¯è¡¨çš„æ€»æ•°
      * @return
      */
     public int getCount(){
@@ -124,26 +124,26 @@ public class EmpService extends BaseService{
     }
 
     /**
-     * ÖÁÉÙÒ»¸ö²ÎÊı²»Îª¿Õ
+     * è‡³å°‘ä¸€ä¸ªå‚æ•°ä¸ä¸ºç©º
      * @param idcard
-     * @return ·µ»Ø´øÓĞÈı¸ö¶ÔÏóµÄlist<Object> £¬·Ö±ğÊµÀı»¯Îª @class Skemp£¬Occupationcareer£¬Societyrelation
+     * @return è¿”å›å¸¦æœ‰ä¸‰ä¸ªå¯¹è±¡çš„list<Object> ï¼Œåˆ†åˆ«å®ä¾‹åŒ–ä¸º @class Skempï¼ŒOccupationcareerï¼ŒSocietyrelation
      */
     public List<Object> getTalentInfoByIdcard(String idcard){
         return getEmpInfoByEmpidOrIdcard(null,idcard);
     }
 
     /**
-     * ÖÁÉÙÒ»¸ö²ÎÊı²»Îª¿Õ
+     * è‡³å°‘ä¸€ä¸ªå‚æ•°ä¸ä¸ºç©º
      * @param emp_id
      * @param idcard
-     * @return ·µ»Ø´øÓĞÈı¸ö¶ÔÏóµÄlist<Object> £¬·Ö±ğÊµÀı»¯Îª @class Skemp£¬Occupationcareer£¬Societyrelation
+     * @return è¿”å›å¸¦æœ‰ä¸‰ä¸ªå¯¹è±¡çš„list<Object> ï¼Œåˆ†åˆ«å®ä¾‹åŒ–ä¸º @class Skempï¼ŒOccupationcareerï¼ŒSocietyrelation
      */
     public List<Object> getEmpInfoByEmpidOrIdcard(String emp_id,String idcard){
         List<Object> list = new ArrayList<Object>();
         try{
         Skemp skemp=null;
         if(emp_id.isEmpty()&&idcard.isEmpty()){
-            System.err.println("²ÎÊı²»ÄÜÈ«Îª¿Õ");
+            System.err.println("å‚æ•°ä¸èƒ½å…¨ä¸ºç©º");
             return null;
         }
         boolean flag = true;
@@ -157,20 +157,20 @@ public class EmpService extends BaseService{
         list.add(skemp);
         }
         catch (NullPointerException e){
-            System.err.println("Ã»ÓĞÕÒµ½¶ÔÓ¦µÄÔ±¹¤");
+            System.err.println("æ²¡æœ‰æ‰¾åˆ°å¯¹åº”çš„å‘˜å·¥");
            list.add(null);
         }
         try {
             Occupationcareer occupationcareer =getCareerByEmpid(emp_id);
             list.add(occupationcareer);
         }catch (NullPointerException e){
-            System.err.println("Ã»ÓĞÕÒµ½¶ÔÓ¦µÄÖ°ÒµÉúÑÄ");
+            System.err.println("æ²¡æœ‰æ‰¾åˆ°å¯¹åº”çš„èŒä¸šç”Ÿæ¶¯");
             list.add(null);
         }
         try {
             Societyrelation societyrelation = getRelationByEmpid(emp_id);
         }catch (NullPointerException e){
-            System.err.println("Ã»ÓĞÕÒµ½¶ÔÓ¦µÄÉç»á¹ØÏµ");
+            System.err.println("æ²¡æœ‰æ‰¾åˆ°å¯¹åº”çš„ç¤¾ä¼šå…³ç³»");
             list.add(null);
         }
         return list;

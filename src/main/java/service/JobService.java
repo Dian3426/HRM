@@ -1,11 +1,15 @@
 package service;
 
+import domain.Skemp;
 import domain.Skjob;
+import domain.Talent;
+import mapper.SkempMapper;
 import mapper.SkjobMapper;
 import mapper.TalentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -18,6 +22,9 @@ public class JobService extends BaseService {
     private SkjobMapper skjobManager;
     @Autowired
     private TalentMapper talentMapper;
+    @Autowired
+    private SkempMapper skempMapper;
+
     public void createJob(Skjob skjob){
         skjobManager.craateJob(skjob);
     }
@@ -85,7 +92,7 @@ public class JobService extends BaseService {
     }
 
     public Skjob getJobByNameAndDeptid(String name,String dept_id){
-        return skjobManager.getJobByNameAndDeptid(name,dept_id);
+        return skjobManager.getJobByNameAndDeptid(name, dept_id);
     }
 
     public List<String> getAllJobNames(){
@@ -98,5 +105,21 @@ public class JobService extends BaseService {
      */
     public int getCount(){
         return skjobManager.getCount();
+    }
+
+    public List<Skemp> getAllEmpByJobid(String job_id){
+        List<Talent> talents =null;
+        talents = talentMapper.getTalentByJobid(job_id);
+        if(!talents.isEmpty()) {
+            List<Skemp> emps = new ArrayList<Skemp>();
+            for (Talent talent : talents) {
+                emps.add(skempMapper.getEmpByEmpid(talent.getEmp_id()));
+            }
+            return  emps;
+        }else {
+            System.err.println("尚未有担任该岗位的员工");
+            return null;
+        }
+
     }
 }
