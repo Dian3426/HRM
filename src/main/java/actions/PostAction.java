@@ -103,6 +103,7 @@ public class PostAction extends ActionSupport {
             message.put("success", "1");
         }catch (Exception e){
             message.put("success", "0");
+            e.printStackTrace();
         }
         try{
             ObjectMapper objectMapper = new ObjectMapper();

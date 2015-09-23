@@ -90,7 +90,7 @@ public class LogInAndOutAction extends ActionSupport{
                 }
             }else{
                 message.put("success","0");
-                message.put("message","�û����������������������");
+                message.put("message","用户名或密码错误！请重新输入！");
                 ObjectMapper objectMapper = new ObjectMapper();
                 String loginJson = objectMapper.writeValueAsString(message);
                 HttpServletResponse response = ServletActionContext.getResponse();
@@ -98,7 +98,7 @@ public class LogInAndOutAction extends ActionSupport{
             }
         }catch (Exception e){
             message.put("success","0");
-            message.put("message","��������Ӧ��ʱ�����Ժ�����");
+            message.put("message","服务器响应超时！请稍后再试");
             ObjectMapper objectMapper = new ObjectMapper();
             String loginJson = null;
             try {
