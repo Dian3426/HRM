@@ -86,7 +86,7 @@ public class PostAction extends ActionSupport {
     @Action(value = "getJobs")
     public void getJobs() throws Exception{
         HashMap<String,String> result = new HashMap<String, String>();
-        result.put("Manager",JobTypes.Manage.toString());
+        result.put("Manage",JobTypes.Manage.toString());
         result.put("Market", JobTypes.Market.toString());
         result.put("Marketing", JobTypes.Marketing.toString());
         result.put("Technology",JobTypes.Technology.toString());
