@@ -215,8 +215,8 @@ public class PostAction extends ActionSupport {
         List<Skemp> emps = jobService.getAllEmpByJobid(getPost_id());
         for (Skemp emp : emps) {
             List<String> strings = new ArrayList<String>();
-            strings.add(emp.getName());
             strings.add(emp.getEmp_id());
+            strings.add(emp.getName());
             strings.add(emp.getTele());
             strings.add(emp.getToworktime());
             result.add(strings);

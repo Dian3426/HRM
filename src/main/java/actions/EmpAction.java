@@ -19,10 +19,8 @@ import service.JobService;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by ZaraN on 2015/9/21.
@@ -437,13 +435,13 @@ public class EmpAction extends ActionSupport {
 
 //    @Action(value = "empInfoAdd")
 
-    @Action(value = "empInfoAdd",interceptorRefs = {
+    @Action(value = "empInfoAdd", interceptorRefs = {
             @InterceptorRef("defaultStack"),
-            @InterceptorRef(value = "fileUpload",params = {"maximumSize","1024000"})
+            @InterceptorRef(value = "fileUpload", params = {"maximumSize", "1024000"})
     })
-    public void empAdd(){
-        HashMap<String,String> message = new HashMap<String, String>();
-        try{
+    public void empAdd() {
+        HashMap<String, String> message = new HashMap<String, String>();
+        try {
             String empNo = createEmpNo();
             String[] temp = getEmp_position().split("-");
             String position = temp[1];
@@ -452,37 +450,37 @@ public class EmpAction extends ActionSupport {
             String path = saveFile();
 
 
-            Skjob skjob = jobService.getJobByNameAndDeptid(position,deptService.getDeptidByName(dept));
-            Skemp emp = new Skemp(getEmp_name(),(getEmp_sex() == "0")? Sex.Male : Sex.Female,getEmp_birth(),getEmp_idNum(),"2",Zzmm.PartyMember,
-                    getEmp_nat(),getEmp_native(),getEmp_tel(),getEmp_mail(),getEmp_height(),BloodTypes.A,
-                    getEmp_birthprov()+getEmp_birthcity(),getEmp_rresidence(),path,Degree.College,getEmp_coll(),
-                    getEmp_major(),getEmp_grad(),SourceTypes.Social,empNo);
-            Occupationcareer occupationcareer = new Occupationcareer(empNo,getEmp_job_start(),getEmp_job_end(),
-                    getEmp_former_position(),"无",getEmp_former_position(),getEmp_former_salary(),getEmp_former_evidence(),
-                    getEmp_former_evidence_position(),"2222");
-            Societyrelation societyrelation = new Societyrelation(empNo,Relations.Father,
-                    getEmp_family_name(),getEmp_family_position(),getEmp_family_comp(),getEmp_family_tel());
-            Talent talent = new Talent(empNo,skjob.getJob_id(),(getEmp_jobtype() == "0") ? StaffTypes.Official : StaffTypes.Temporary);
+            Skjob skjob = jobService.getJobByNameAndDeptid(position, deptService.getDeptidByName(dept));
+            Skemp emp = new Skemp(getEmp_name(), (getEmp_sex() == "0") ? Sex.Male : Sex.Female, getEmp_birth(), getEmp_idNum(), new SimpleDateFormat("yyyy/mm/dd").format(new Date()), Zzmm.PartyMember,
+                    getEmp_nat(), getEmp_native(), getEmp_tel(), getEmp_mail(), getEmp_height(), BloodTypes.A,
+                    getEmp_birthprov() + getEmp_birthcity(), getEmp_rresidence(), path, Degree.College, getEmp_coll(),
+                    getEmp_major(), getEmp_grad(), SourceTypes.Social, empNo);
+            Occupationcareer occupationcareer = new Occupationcareer(empNo, getEmp_job_start(), getEmp_job_end(),
+                    getEmp_former_position(), "无", getEmp_former_position(), getEmp_former_salary(), getEmp_former_evidence(),
+                    getEmp_former_evidence_position(), "2222");
+            Societyrelation societyrelation = new Societyrelation(empNo, Relations.Father,
+                    getEmp_family_name(), getEmp_family_position(), getEmp_family_comp(), getEmp_family_tel());
+            Talent talent = new Talent(empNo, skjob.getJob_id(), (getEmp_jobtype() == "0") ? StaffTypes.Official : StaffTypes.Temporary);
 
-            if(getEmp_probation() == "1"){
-                Temporary temporary = new Temporary(getEmp_probation_start(),getEmp_probation_end(),
-                        empNo,skjob.getJob_id(),YesOrNo.Yes);
+            if (getEmp_probation() == "1") {
+                Temporary temporary = new Temporary(getEmp_probation_start(), getEmp_probation_end(),
+                        empNo, skjob.getJob_id(), YesOrNo.Yes);
                 empService.createTemporary(temporary);
             }
 
-            empService.createEmpTotally(emp,occupationcareer,societyrelation,talent);
+            empService.createEmpTotally(emp, occupationcareer, societyrelation, talent);
 
             message.put("success", "1");
-        }catch (Exception e){
+        } catch (Exception e) {
             message.put("success", "0");
             e.printStackTrace();
         }
-        try{
+        try {
             ObjectMapper objectMapper = new ObjectMapper();
             String loginJson = objectMapper.writeValueAsString(message);
             HttpServletResponse response = ServletActionContext.getResponse();
             response.getOutputStream().write(loginJson.getBytes("UTF-8"));
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -490,19 +488,20 @@ public class EmpAction extends ActionSupport {
     /**
      * create employee's emp number;format:xxxx
      * xxxx means he is the No.xxxx of com
+     *
      * @return empNo
      */
-    private String createEmpNo(){
+    private String createEmpNo() {
         int count = empService.getCount();
-        while(empService.isEmpidExist(String.valueOf(count))){
+        while (empService.isEmpidExist(String.valueOf(count))) {
             count++;
         }
         String empNo = "";
-        if(count < 10)
+        if (count < 10)
             empNo += "000";
-        else if(count < 100)
+        else if (count < 100)
             empNo += "00";
-        else if(count < 1000)
+        else if (count < 1000)
             empNo += "0";
         empNo += count + 1;
         return empNo;
@@ -512,41 +511,41 @@ public class EmpAction extends ActionSupport {
      * create employee's dept number,format: aabbb
      * aa means deptid , bbb means how many people in this dept
      * example:if A is a new and belongs to deptId 5 and this dept has haven 53 people;
-     *         A's empPosNo is 05054
+     * A's empPosNo is 05054
+     *
      * @param dept deptName
      * @return empDeptNo
      */
-    private String createEmpDeptNo(String dept){
+    private String createEmpDeptNo(String dept) {
         int deptID = Integer.parseInt(deptService.getDeptidByName(dept));
         int count = deptService.getCountByDeptid(Integer.toString(deptID));
         String deptNo = "";
-        if(deptID < 10)
+        if (deptID < 10)
             deptNo += "0";
         deptNo += deptID;
-        if(count < 10)
+        if (count < 10)
             deptNo += "00";
-        else if(count < 100)
+        else if (count < 100)
             deptNo += "0";
         deptNo += count + 1;
         return deptNo;
     }
 
-    private String saveFile() throws Exception{
-        File file = new File("E:\\HRMResPhoto");
-        String result = "E:\\HRMResPhoto\\" + UUID.randomUUID() + ".png";
-        if  (!file .exists()  && !file .isDirectory())
-        {
-            file .mkdir();
+    private String saveFile() throws Exception {
+        File file = new File(ServletActionContext.getServletContext().getResource("/").getPath().substring(1) + "/img/photo");
+        String result = "/img/photo" + UUID.randomUUID() + getEmp_imgFileName().substring(getEmp_imgFileName().lastIndexOf('.'));
+        if (!file.exists() && !file.isDirectory()) {
+            file.mkdir();
         }
         FileOutputStream fos = new FileOutputStream(result);
         FileInputStream fis = new FileInputStream(getEmp_img());
         byte[] buffer = new byte[1024];
         int len = 0;
-        try{
-            while((len = fis.read(buffer)) > 0){
+        try {
+            while ((len = fis.read(buffer)) > 0) {
                 fos.write(buffer, 0, len);
             }
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return result;
