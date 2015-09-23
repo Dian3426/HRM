@@ -147,6 +147,33 @@ public class PostAction extends ActionSupport {
         response.getOutputStream().write(loginJson.getBytes("UTF-8"));
     }
 
+    @Action(value = "getAllPosts")
+    public void getAllPosts() throws Exception{
+        List<List<String>> result = new ArrayList<List<String>>();
+        List<Skjob> jobs = jobService.getAllJobs();
+        for (Skjob job : jobs) {
+            List<String> strings = new ArrayList<String>();
+            strings.add(job.getJob_id());
+            strings.add(job.getName());
+            strings.add(job.getType().toString());
+            strings.add(deptService.getNameByDeptid(job.getDept_id()));
+            strings.add(job.getIslimit().toString());
+            try{
+                strings.add(String.valueOf(job.getLimitnum()));
+            }
+            catch (Exception e){
+                strings.add("-");
+            }
+            result.add(strings);
+        }
+        HashMap<String,List<List<String>>> data = new HashMap<String,List<List<String>>>();
+        data.put("data",result);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String loginJson = objectMapper.writeValueAsString(data);
+        HttpServletResponse response = ServletActionContext.getResponse();
+        response.getOutputStream().write(loginJson.getBytes("UTF-8"));
+    }
+
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         PostAction postAction = (PostAction)context.getBean("postAction");
