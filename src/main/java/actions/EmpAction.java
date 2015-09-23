@@ -6,6 +6,7 @@ import domain.*;
 import domain.enums.*;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.*;
+import org.apache.struts2.util.ServletContextAware;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
@@ -15,6 +16,7 @@ import service.DeptService;
 import service.EmpService;
 import service.JobService;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.ArrayList;
@@ -32,11 +34,11 @@ import java.util.List;
 public class EmpAction extends ActionSupport {
 
     String emp_name;
-    Sex emp_sex;
+    String emp_sex;
     String emp_nat;
     String emp_birth;
     String emp_height;
-    BloodTypes emp_bloodtype;
+    String emp_bloodtype;
     String emp_birthprov;
     String emp_birthcity;
     String emp_idNum;
@@ -45,17 +47,16 @@ public class EmpAction extends ActionSupport {
     String emp_native;
     String emp_rresidence;
     String emp_marrige;
-    Zzmm emp_ps;
-    Degree emp_edu;
-    String emp_img;
+    String emp_ps;
+    String emp_edu;
     String emp_coll;
     String emp_major;
     String emp_grad;
-    SourceTypes emp_from;
-    StaffTypes emp_jobtype;
+    String emp_from;
+    String emp_jobtype;
     String emp_position;
 
-    YesOrNo emp_probation;
+    String emp_probation;
     String emp_probation_start;
     String emp_probation_end;
     String emp_attach;
@@ -69,16 +70,16 @@ public class EmpAction extends ActionSupport {
     String emp_former_evidence_position;
     String emp_job_attach;
 
-    Relations emp_family_relation;
+    String emp_family_relation;
     String emp_family_name;
     String emp_family_comp;
     String emp_family_position;
     String emp_family_tel;
 
     String fileTitle;
-    File upload;
-    String uploadFileType;
-    String uploadFileName;
+    File emp_img;
+    String emp_imgContentType;
+    String emp_imgFileName;
 
     public String getFileTitle() {
         return fileTitle;
@@ -88,36 +89,28 @@ public class EmpAction extends ActionSupport {
         this.fileTitle = fileTitle;
     }
 
-    public File getUpload() {
-        return upload;
-    }
-
-    public void setUpload(File upload) {
-        this.upload = upload;
-    }
-
-    public String getUploadFileType() {
-        return uploadFileType;
-    }
-
-    public void setUploadFileType(String uploadFileType) {
-        this.uploadFileType = uploadFileType;
-    }
-
-    public String getUploadFileName() {
-        return uploadFileName;
-    }
-
-    public void setUploadFileName(String uploadFileName) {
-        this.uploadFileName = uploadFileName;
-    }
-
-    public String getEmp_img() {
+    public File getEmp_img() {
         return emp_img;
     }
 
-    public void setEmp_img(String emp_img) {
+    public void setEmp_img(File emp_img) {
         this.emp_img = emp_img;
+    }
+
+    public String getEmp_imgContentType() {
+        return emp_imgContentType;
+    }
+
+    public void setEmp_imgContentType(String emp_imgContentType) {
+        this.emp_imgContentType = emp_imgContentType;
+    }
+
+    public String getEmp_imgFileName() {
+        return emp_imgFileName;
+    }
+
+    public void setEmp_imgFileName(String emp_imgFileName) {
+        this.emp_imgFileName = emp_imgFileName;
     }
 
     public String getEmp_name() {
@@ -128,11 +121,11 @@ public class EmpAction extends ActionSupport {
         this.emp_name = emp_name;
     }
 
-    public Sex getEmp_sex() {
+    public String getEmp_sex() {
         return emp_sex;
     }
 
-    public void setEmp_sex(Sex emp_sex) {
+    public void setEmp_sex(String emp_sex) {
         this.emp_sex = emp_sex;
     }
 
@@ -160,11 +153,11 @@ public class EmpAction extends ActionSupport {
         this.emp_height = emp_height;
     }
 
-    public BloodTypes getEmp_bloodtype() {
+    public String getEmp_bloodtype() {
         return emp_bloodtype;
     }
 
-    public void setEmp_bloodtype(BloodTypes emp_bloodtype) {
+    public void setEmp_bloodtype(String emp_bloodtype) {
         this.emp_bloodtype = emp_bloodtype;
     }
 
@@ -232,19 +225,19 @@ public class EmpAction extends ActionSupport {
         this.emp_marrige = emp_marrige;
     }
 
-    public Zzmm getEmp_ps() {
+    public String getEmp_ps() {
         return emp_ps;
     }
 
-    public void setEmp_ps(Zzmm emp_ps) {
+    public void setEmp_ps(String emp_ps) {
         this.emp_ps = emp_ps;
     }
 
-    public Degree getEmp_edu() {
+    public String getEmp_edu() {
         return emp_edu;
     }
 
-    public void setEmp_edu(Degree emp_edu) {
+    public void setEmp_edu(String emp_edu) {
         this.emp_edu = emp_edu;
     }
 
@@ -264,11 +257,11 @@ public class EmpAction extends ActionSupport {
         this.emp_major = emp_major;
     }
 
-    public SourceTypes getEmp_from() {
+    public String getEmp_from() {
         return emp_from;
     }
 
-    public void setEmp_from(SourceTypes emp_from) {
+    public void setEmp_from(String emp_from) {
         this.emp_from = emp_from;
     }
 
@@ -280,11 +273,11 @@ public class EmpAction extends ActionSupport {
         this.emp_grad = emp_grad;
     }
 
-    public StaffTypes getEmp_jobtype() {
+    public String getEmp_jobtype() {
         return emp_jobtype;
     }
 
-    public void setEmp_jobtype(StaffTypes emp_jobtype) {
+    public void setEmp_jobtype(String emp_jobtype) {
         this.emp_jobtype = emp_jobtype;
     }
 
@@ -296,11 +289,11 @@ public class EmpAction extends ActionSupport {
         this.emp_position = emp_position;
     }
 
-    public YesOrNo getEmp_probation() {
+    public String getEmp_probation() {
         return emp_probation;
     }
 
-    public void setEmp_probation(YesOrNo emp_probation) {
+    public void setEmp_probation(String emp_probation) {
         this.emp_probation = emp_probation;
     }
 
@@ -392,11 +385,11 @@ public class EmpAction extends ActionSupport {
         this.emp_job_attach = emp_job_attach;
     }
 
-    public Relations getEmp_family_relation() {
+    public String getEmp_family_relation() {
         return emp_family_relation;
     }
 
-    public void setEmp_family_relation(Relations emp_family_relation) {
+    public void setEmp_family_relation(String emp_family_relation) {
         this.emp_family_relation = emp_family_relation;
     }
 
@@ -441,9 +434,11 @@ public class EmpAction extends ActionSupport {
     @Autowired
     private JobService jobService;
 
+//    @Action(value = "empInfoAdd")
+
     @Action(value = "empInfoAdd",interceptorRefs = {
-            @InterceptorRef(value = "fileUpload",params = {"maximumSize","1024000","savePath","/photo"}),
-            @InterceptorRef("defaultStack")
+            @InterceptorRef("defaultStack"),
+            @InterceptorRef(value = "fileUpload",params = {"maximumSize","1024000"})
     })
     public void empAdd(){
         HashMap<String,String> message = new HashMap<String, String>();
@@ -456,16 +451,16 @@ public class EmpAction extends ActionSupport {
             String path = saveFile();
 
             Skjob skjob = jobService.getJobByNameAndDeptid(position,deptService.getDeptidByName(dept));
-            Skemp emp = new Skemp(getEmp_name(),getEmp_sex(),getEmp_birth(),getEmp_idNum(),"2",getEmp_ps(),
-                    getEmp_nat(),getEmp_native(),getEmp_tel(),getEmp_mail(),getEmp_height(),getEmp_bloodtype(),
-                    getEmp_birthprov()+getEmp_birthcity(),getEmp_rresidence(),path,getEmp_edu(),getEmp_coll(),
-                    getEmp_major(),getEmp_grad(),getEmp_from(),empNo);
+            Skemp emp = new Skemp(getEmp_name(),(getEmp_sex() == "0")? Sex.Male : Sex.Female,getEmp_birth(),getEmp_idNum(),"2",Zzmm.PartyMember,
+                    getEmp_nat(),getEmp_native(),getEmp_tel(),getEmp_mail(),getEmp_height(),BloodTypes.A,
+                    getEmp_birthprov()+getEmp_birthcity(),getEmp_rresidence(),path,Degree.College,getEmp_coll(),
+                    getEmp_major(),getEmp_grad(),SourceTypes.Social,empNo);
             Occupationcareer occupationcareer = new Occupationcareer(empNo,getEmp_job_start(),getEmp_job_end(),
                     getEmp_former_position(),"",getEmp_former_position(),getEmp_former_salary(),getEmp_former_evidence(),
                     getEmp_former_evidence_position(),"");
-            Societyrelation societyrelation = new Societyrelation(empNo,getEmp_family_relation(),
+            Societyrelation societyrelation = new Societyrelation(empNo,Relations.Father,
                     getEmp_family_name(),getEmp_family_position(),getEmp_family_comp(),getEmp_family_tel());
-            Talent talent = new Talent(empNo,skjob.getJob_id(),getEmp_jobtype());
+            Talent talent = new Talent(empNo,skjob.getJob_id(),(getEmp_jobtype() == "0") ? StaffTypes.Official : StaffTypes.Temporary);
             empService.createEmpTotally(emp,occupationcareer,societyrelation,talent);
             message.put("success", "1");
         }catch (Exception e){
@@ -524,8 +519,13 @@ public class EmpAction extends ActionSupport {
     }
 
     private String saveFile() throws Exception{
-        FileOutputStream fos = new FileOutputStream("/photo" + "//" + getUploadFileName());
-        FileInputStream fis = new FileInputStream(getUpload());
+        File file = new File("E:\\HRMResPhoto");
+        if  (!file .exists()  && !file .isDirectory())
+        {
+            file .mkdir();
+        }
+        FileOutputStream fos = new FileOutputStream("E:\\HRMResPhoto\\" + getEmp_name());
+        FileInputStream fis = new FileInputStream(getEmp_img());
         byte[] buffer = new byte[1024];
         int len = 0;
         try{
@@ -535,17 +535,12 @@ public class EmpAction extends ActionSupport {
         }catch (IOException e) {
             e.printStackTrace();
         }
-        return "/photo" + "//" + getUploadFileName();
+        return "E:\\HRMResPhoto\\" + getEmp_name();
     }
 
 
     public static void main(String[] args) {
-        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        EmpAction empAction = (EmpAction)context.getBean("empAction");
-        String[] temp = "行政部-技术总监".split("-");
-        String position = temp[1];
-        String dept = temp[0];
-        System.out.println(position + "->" + dept);
+        System.out.println(new File(System.getProperty("user.dir") + "\\web\\photo\\").getAbsolutePath());
     }
 
 
