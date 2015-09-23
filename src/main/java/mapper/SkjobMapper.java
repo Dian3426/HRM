@@ -43,4 +43,6 @@ public interface SkjobMapper {
     @Select("SELECT * FROM SKJOB WHERE NAME =#{name} AND DEPT_ID=#{dept_id}")
     Skjob getJobByNameAndDeptid(@Param("name")String name,@Param("dept_id")String dept_id);
 
+    @Select("SELECT DISTINCT NAME FROM SKJOB")
+    List<String> getAllJobNames();
 }
