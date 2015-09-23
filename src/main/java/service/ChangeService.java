@@ -3,6 +3,7 @@ package service;
 import domain.*;
 import domain.enums.StaffTypes;
 import mapper.*;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -120,5 +121,9 @@ public class ChangeService extends BaseService {
 
     public List<Leave> getLeave(String begin,String end,String job_id){
         return leaveMapper.getLeaves(begin,end,job_id);
+    }
+
+    public List<HashMap<String,String>> getInfoForLeave(String dept_id,String deptName,String emp_id,String empName){
+        return leaveMapper.getInfoForLeave(dept_id,deptName,emp_id,empName);
     }
 }
