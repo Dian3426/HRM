@@ -25,12 +25,12 @@ public interface TemporaryMapper {
      * @param endtime
      * @return
      */
-    @Select("<script>SELECT t.EMP_ID,e.NAME EMPNAME,d.NAME DEPTNAME,j.NAME JOBNAME,t.STATUS, t,BEGINTIME,t.ENDTIME FROM TEMPORARY t,SKEMP e,SKDEPT d,SKJOB j WHERE " +
+    @Select("<script>SELECT t.EMP_ID,e.NAME EMPNAME,d.NAME DEPTNAME,j.NAME JOBNAME,t.STATUS, t,BEGINTIME,t.ENDTIME FROM TEMPORARY t,SKEMP e,SKDEPT d,SKJOB j <where>" +
             "t.EMP_ID=e.EMP_ID AND t.JOB_ID = j.JOB_ID AND j.DEPT_ID = d.DEPT_ID " +
             "<if test=\"emp_id!=null\"> AND t.EMP_ID=#{emp_id} </if>" +
             "<if test=\"name!=null\"> AND e.NAME like %#{name}%</if>" +
             "<if test=\"begintime!=null\"> AND TO_DATE(#{begintime},\"yyyy-mm-dd\") &gt; TO_DATE(begintime,\"yyyy-mm-dd\") </if>" +
-            "<if test=\"endtime!=null\"> AND TO_DATE(#{endtime},\"yyyy-mm-dd\") &lt; TO_DATE(endtime,\"yyyy-mm-dd\")  </if></script>")
+            "<if test=\"endtime!=null\"> AND TO_DATE(#{endtime},\"yyyy-mm-dd\") &lt; TO_DATE(endtime,\"yyyy-mm-dd\")  </if></where></script>")
     List<HashMap<String,String>> getTemporaryInfo(String emp_id,String name,String begintime,String endtime);
 
     @Update("UPDATE TEMPORARY SET STATUS = #{status,typeHandler=org.apache.ibatis.type.EnumTypeHandler} WHERE EMP_ID =#{emp_id}")
