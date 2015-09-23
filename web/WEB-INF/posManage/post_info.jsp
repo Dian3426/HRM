@@ -16,13 +16,13 @@
 </style>
 <section class="content-header">
     <h1>
-        部门查询
-        <small>查询各部门信息</small>
+        岗位查询
+        <small>查询岗位信息</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-home"></i> 组织管理</a></li>
-        <li>部门管理</li>
-        <li class="active">部门查询</li>
+        <li>岗位管理</li>
+        <li class="active">岗位查询</li>
     </ol>
 </section>
 <section class="content">
@@ -30,44 +30,27 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">查看部门信息</h3>
+                    <h3 class="box-title">查看岗位信息</h3>
                 </div>
                 <div class="box-body">
                     <table id="post_table" class="table table-bordered table-striped table-hover" cellspacing="0">
                         <thead>
                         <tr>
-                            <th></th>
                             <th>岗位编号</th>
                             <th>岗位名称</th>
                             <th>类型</th>
                             <th>所属部门</th>
-                            <th>部门编号</th>
                             <th>岗位编制</th>
                             <th>编制限定</th>
                             <th>操作</th>
                         </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td></td>
-                                <th>岗位编号</th>
-                                <th>岗位名称</th>
-                                <th>类型</th>
-                                <th>所属部门</th>
-                                <th>部门编号</th>
-                                <th>岗位编制</th>
-                                <th>编制限定</th>
-                                <td></td>
-                            </tr>
-                        </tbody>
                         <tfoot>
                         <tr>
-                            <th></th>
                             <th>岗位编号</th>
                             <th>岗位名称</th>
                             <th>类型</th>
                             <th>所属部门</th>
-                            <th>部门编号</th>
                             <th>岗位编制</th>
                             <th>编制限定</th>
                             <th>操作</th>

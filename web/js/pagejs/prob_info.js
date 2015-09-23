@@ -45,10 +45,6 @@ var t = $('#emp_prob_result').DataTable({
     columnDefs: [{
         searchable: false,
         orderable: false,
-        targets: 0
-    }, {
-        searchable: false,
-        orderable: false,
         targets: -1,
         data: null,
         defaultContent: "<button class='btn btn-warning' role='edit_btn' onclick='edit_btn_click()' style='margin-right: 10px;'>修改</button>"
@@ -56,12 +52,6 @@ var t = $('#emp_prob_result').DataTable({
     order: [[1, 'asc']],
     autoWidth: true
 });
-
-t.on('order.dt search.dt', function () {
-    t.column(0, {search: 'applied', order: 'applied'}).nodes().each(function (cell, i) {
-        cell.innerHTML = i + 1;
-    });
-}).draw();
 
 function edit_btn_click() {
     var header = '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +

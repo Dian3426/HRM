@@ -35,20 +35,9 @@ var t = $('#emp_probed_result').DataTable({
     },
     searching: false,
     ordering: false,
-    columnDefs: [{
-        searchable: false,
-        orderable: false,
-        targets: 0
-    }],
-    order: [[1, 'asc']],
+    order: [[0, 'asc']],
     autoWidth: true
 });
-
-t.on('order.dt search.dt', function () {
-    t.column(0, {search: 'applied', order: 'applied'}).nodes().each(function (cell, i) {
-        cell.innerHTML = i + 1;
-    });
-}).draw();
 
 $("#probed_search_btn").click(function () {
     $("#probed_result_div").attr("class", "row animated fadeInDown");

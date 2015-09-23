@@ -38,21 +38,18 @@ var t = $('#dept_trans_table_table').DataTable({
     },
     searching: false,
     ordering: false,
-    columnDefs: [{
-        searchable: false,
-        orderable: false,
-        targets: 0
-    }],
-    order: [[1, 'asc']],
+    order: [[0, 'asc']],
     autoWidth: true
 });
 
-t.on('order.dt search.dt', function () {
-    t.column(0, {search: 'applied', order: 'applied'}).nodes().each(function (cell, i) {
-        cell.innerHTML = i + 1;
-    });
-}).draw();
-
 $("#dept_trans_search_btn").click(function () {
-    $("#newemp_div").attr("class", "row animated fadeInDown");
+    $("#dept_trans_table_form").ajaxSubmit({
+        url: '',
+        type: 'POST',
+        dataType: 'JSON',
+        success: function (data) {
+            alert(data);
+            $("#newemp_div").attr("class", "row animated fadeInDown");
+        }
+    });
 });

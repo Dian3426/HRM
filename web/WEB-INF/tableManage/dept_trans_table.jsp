@@ -93,7 +93,7 @@
                     </h3>
                 </div> <!--herder 结束-->
 
-                <form class="form-horizontal">
+                <form class="form-horizontal" id="dept_trans_table_form">
                     <div class="box-body">
                         <span>请输入查询条件：（至少填写一项）</span>
 

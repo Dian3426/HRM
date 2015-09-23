@@ -126,7 +126,6 @@
                     <table class="table table-bordered table-striped table-hover" id="emp_probed_result">
                         <thead>
                         <tr>
-                            <th></th>
                             <th>员工编号</th>
                             <th>姓名</th>
                             <th>部门名称</th>
@@ -137,22 +136,8 @@
                         </tr>
                         </thead>
 
-                        <tbody>
-                        <tr>
-                            <td></td>
-                            <th>员工编号</th>
-                            <th>姓名</th>
-                            <th>部门名称</th>
-                            <th>岗位名称</th>
-                            <th>试用期开始日期</th>
-                            <th>试用期结束日期</th>
-                            <th>转正时间</th>
-                        </tr>
-                        </tbody>
-
                         <tfoot>
                         <tr>
-                            <th></th>
                             <th>员工编号</th>
                             <th>姓名</th>
                             <th>部门名称</th>

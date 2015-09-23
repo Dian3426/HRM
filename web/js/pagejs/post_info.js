@@ -27,24 +27,17 @@ var t = $('#post_table').DataTable({
     columnDefs: [{
         searchable: false,
         orderable: false,
-        targets: 0
-    }, {
-        searchable: false,
-        orderable: false,
         targets: -1,
         data: null,
-        defaultContent: "<button class='btn btn-warning' role='edit_btn' style='margin-right: 10px;'>编辑</button>" +
-        "<button class='btn btn-danger' style='margin-right: 10px;' role='del_btn'>删除</button><button class='btn btn-info' onclick='view_post_emp()' role='del_btn'>查看员工信息</button>"
+        render: function (data, type, row) {
+            return "<button class='btn btn-warning' role='edit_btn' style='margin-right: 10px;'>编辑</button>" +
+                "<button class='btn btn-danger' onclick='del_post_info(" + row[0] + ")' style='margin-right: 10px;' role='del_btn'>删除</button><button class='btn btn-info' onclick='view_post_emp()' role='del_btn'>查看员工信息</button>";
+        }
     }],
-    order: [[1, 'asc']],
-    autoWidth: true
+    order: [[0, 'asc']],
+    autoWidth: true,
+    ajax: '/getAllPosts'
 });
-
-t.on('order.dt search.dt', function () {
-    t.column(0, {search: 'applied', order: 'applied'}).nodes().each(function (cell, i) {
-        cell.innerHTML = i + 1;
-    });
-}).draw();
 
 $("button[role=edit_btn]").click(function () {
     edit_post_info($(this));
@@ -73,6 +66,24 @@ function edit_post_info(edit_btn) {
     }, 1000);
 }
 
+function del_post_info(post_id) {
+    $.ajax({
+        url: '/postDelete',
+        type: 'POST',
+        dataType: 'JSOM',
+        data: {
+            post_id: post_id
+        },
+        success: function (data) {
+            if (data['success'] == "1") {
+                t.ajax.reload();
+            } else {
+                alert(data);
+            }
+        }
+    });
+}
+
 function save_edit_info() {
     alert("save")
 }
@@ -80,7 +91,7 @@ function save_edit_info() {
 function view_post_emp() {
     var header = '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
         '<h4 class="modal-title" id="myModalLabel">岗位员工信息列表</h4>';
-    var body = '<table id="dept_emp_table" class="table table-bordered table-striped table-hover" cellspacing="0"><thead><tr><th></th><th>岗位编号</th><th>岗位名称</th><th>部门编号</th><th>部门名称</th><th>员工姓名</th><th>员工编号</th><th>职务</th><th>联系电话</th><th>入职日期</th></tr></thead><tbody></tbody><tfoot><tr><th></th><th>岗位编号</th><th>岗位名称</th><th>部门编号</th><th>部门名称</th><th>员工姓名</th><th>员工编号</th><th>职务</th><th>联系电话</th><th>入职日期</th></tr></tfoot></table>';
+    var body = '<table id="dept_emp_table" class="table table-bordered table-striped table-hover" cellspacing="0"><thead><tr><th>员工编号</th><th>员工姓名</th><th>联系电话</th><th>入职日期</th></tr></thead><tbody></tbody><tfoot><tr><th>员工编号</th><th>员工姓名</th><th>联系电话</th><th>入职日期</th></tr></tfoot></table>';
     var footer = '<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>';
     showModal(header, body, footer, {}, function () {
         var t = $("#dept_emp_table").DataTable({
@@ -106,6 +117,8 @@ function view_post_emp() {
                     sortDescending: ": 降序排列"
                 }
             },
+            order: [[0, 'asc']],
+            autoWidth: true,
             searching: false,
             ordering: false
         });

@@ -163,7 +163,7 @@
                                 <td colspan="3" style="width: 25%;">
                                     <div class="td-control">
                                         <label for="emp_birth" class="control-label" style="width: 30%;">出生日期：</label>
-                                        <input id="emp_birth" type="text" placeholder="出生日期" style="width: 60%;">
+                                        <input id="emp_birth" name="emp_birth" type="text" placeholder="出生日期" style="width: 60%;">
                                     </div>
                                 </td>
                                 <td colspan="2" rowspan="3" style=" text-align: center;">
@@ -180,14 +180,14 @@
                                 <td>
                                     <div class="td-control">
                                         <label for="emp_height" style="width:30%;">身高：</label>
-                                        <input id="emp_height" type="number" style="width:60%;" min="120" max="220"
+                                        <input id="emp_height" name="emp_height" type="number" style="width:60%;" min="120" max="220"
                                                placeholder="身高">
                                     </div>
                                 </td>
                                 <td>
                                     <div class="td-control">
                                         <label for="emp_bloodtype" style="width:40%;">血型：</label>
-                                        <select name="emp_sex" id="emp_bloodtype" style="width: 40%;">
+                                        <select name="emp_bloodtype" id="emp_bloodtype" style="width: 40%;">
                                             <option value="A">A</option>
                                             <option value="B">B</option>
                                             <option value="AB">AB</option>
@@ -243,7 +243,7 @@
                                 <td colspan="3">
                                     <div class="td-control">
                                         <label for="emp_idNum" class="control-label" style="width: 30%;">身份证号：</label>
-                                        <input id="emp_idNum" type="text" placeholder="身份证号" style="width: 60%;">
+                                        <input id="emp_idNum" name="emp_idNum" type="text" placeholder="身份证号" style="width: 60%;">
                                     </div>
                                 </td>
                             </tr>
@@ -251,19 +251,19 @@
                                 <td>
                                     <div class="td-control">
                                         <label for="emp_tel" class="control-label" style="width: 40%;">联系电话：</label>
-                                        <input id="emp_tel" type="text" placeholder="联系电话" style="width: 50%;">
+                                        <input id="emp_tel" name="emp_tel" type="text" placeholder="联系电话" style="width: 50%;">
                                     </div>
                                 </td>
                                 <td colspan="2">
                                     <div class="td-control">
                                         <label for="emp_mail" class="control-label" style="width: 40%;">电子邮件：</label>
-                                        <input id="emp_mail" type="text" placeholder="电子邮件" style="width: 50%;">
+                                        <input id="emp_mail" name="emp_name" type="text" placeholder="电子邮件" style="width: 50%;">
                                     </div>
                                 </td>
                                 <td>
                                     <div class="td-control">
                                         <label for="emp_native" class="control-label" style="width: 40%;">籍贯：</label>
-                                        <input id="emp_native" type="text" placeholder="籍贯" style="width: 50%;">
+                                        <input id="emp_native" name="emp_native" type="text" placeholder="籍贯" style="width: 50%;">
                                     </div>
                                 </td>
                                 <td>

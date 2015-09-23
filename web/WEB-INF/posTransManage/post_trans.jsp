@@ -96,3 +96,4 @@
         </div>
     </div>
 </section>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/pagejs/post_trans.js"></script>
