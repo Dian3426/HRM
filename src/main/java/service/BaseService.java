@@ -8,6 +8,8 @@ import mapper.SkjobMapper;
 import mapper.TalentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +35,8 @@ public class BaseService {
      * @param talent
      * @return
      */
-    protected boolean createLegalTalent(Talent talent){
+    @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+    protected boolean createLegalTalent (Talent talent)throws Exception{
 
         String job_id = talent.getJob_id();
         Skjob job = skjobMapper.getJobByJobid(job_id);

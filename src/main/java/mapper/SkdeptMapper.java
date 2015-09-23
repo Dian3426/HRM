@@ -28,7 +28,7 @@ public interface SkdeptMapper {
     @Select("SELECT NAME FROM SKDEPT WHERE DEPT_ID=#{dept_id}")
     String getDeptNameByDeptid(@Param("dept_id")String dept_id);
 
-    @Update("UPDATE SKDEPT SET name=#{name},TYPE=#{TYPE ,typeHandler=org.apache.ibatis.type.EnumTypeHandler},TELE=#{tele}," +
+    @Update("UPDATE SKDEPT SET name=#{name},TYPE=#{type ,typeHandler=org.apache.ibatis.type.EnumTypeHandler},TELE=#{tele}," +
             "FAX=#{fax},DISCRIP=#{discrip},SUPERD=#{superd},CREATETIME=#{createtime} WHERE DEPT_ID=#{emp_id}")
     void updateByDeptid(@Param("Skdept")Skdept skdept);
 
