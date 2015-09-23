@@ -85,11 +85,11 @@ public class PostAction extends ActionSupport {
 
     @Action(value = "getJobs")
     public void getJobs() throws Exception{
-        ArrayList<String> result = new ArrayList<String>();
-        result.add(JobTypes.Manage.toString());
-        result.add(JobTypes.Market.toString());
-        result.add(JobTypes.Marketing.toString());
-        result.add(JobTypes.Technology.toString());
+        HashMap<String,String> result = new HashMap<String, String>();
+        result.put("Manager",JobTypes.Manage.toString());
+        result.put("Market", JobTypes.Market.toString());
+        result.put("Marketing", JobTypes.Marketing.toString());
+        result.put("Technology",JobTypes.Technology.toString());
         ObjectMapper objectMapper = new ObjectMapper();
         String loginJson = objectMapper.writeValueAsString(result);
         HttpServletResponse response = ServletActionContext.getResponse();
