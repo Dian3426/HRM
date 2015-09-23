@@ -22,7 +22,7 @@ public interface ChangeMapper {
     List<HashMap<String,String>> getChangeHistory(@Param("emp_id")String emp_id,@Param("empName")String empName,
                                             @Param("beginTime")String beginTime,@Param("endTime")String endTime);
 
-    @Select("SELECT * FROM CHANGE WHERE TO_DATE(#{begin},\"yyyy-mm-dd\") < TO_DATE(c.changtime,\"yyyy-mm-dd\") AND" +
+    @Select("SELECT * FROM CHANGE c WHERE TO_DATE(#{begin},\"yyyy-mm-dd\") < TO_DATE(c.changtime,\"yyyy-mm-dd\") AND" +
             " TO_DATE( #{end},\"yyyy-mm-dd\") >TO_DATE(c.changtime,\"yyyy-mm-dd\")")
     List<Change> getChangesBetween(String begin,String end);
 }

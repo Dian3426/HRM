@@ -114,4 +114,11 @@ public class ChangeService extends BaseService {
     public  List<Talent> getTalentByEmpid(String emp_id){
         return talentMapper.getTalentByEmpid(emp_id);
     }
+
+    @Autowired
+    private LeaveMapper leaveMapper;
+
+    public List<Leave> getLeave(String begin,String end,String job_id){
+        return leaveMapper.getLeaves(begin,end,job_id);
+    }
 }
