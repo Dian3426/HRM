@@ -111,7 +111,7 @@ public class EmpService extends BaseService{
      * @return
      */
     public List<HashMap<String,String>> getTemporaryEmpInfo(String emp_id,String empName,String begintime,String endtime){
-        if(emp_id.isEmpty()&&empName.isEmpty()&&begintime.isEmpty()&&endtime.isEmpty()){
+        if(emp_id==null&&empName==null&&begintime==null&&endtime==null){
             System.out.println("请至少输入一个参数");
             return null;
         }

@@ -101,4 +101,13 @@ public class ChangeService extends BaseService {
         }
        return changeMapper.getChangeHistory(emp_id,emp_name,beginTime,endTime);
     }
+
+    /**
+     * 根据emp_id获取相应的talent
+     * @param emp_id
+     * @return
+     */
+    public  List<Talent> getTalentByEmpid(String emp_id){
+        return talentMapper.getTalentByEmpid(emp_id);
+    }
 }
