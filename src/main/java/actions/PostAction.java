@@ -18,9 +18,11 @@ import service.DeptService;
 import service.JobService;
 
 import javax.servlet.http.HttpServletResponse;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by ZaraN on 2015/9/21.
@@ -83,11 +85,27 @@ public class PostAction extends ActionSupport {
     @Autowired
     DeptService deptService;
 
+    @Action(value = "getJobs")
+    public void getJobs() throws Exception{
+        ArrayList<HashMap<String,String>> result = new ArrayList<HashMap<String,String>>();
+        for (JobTypes jobTypes : JobTypes.values()) {
+            HashMap<String ,String> temp = new HashMap<String, String>();
+            temp.put("key",jobTypes.name());
+            temp.put("value",jobTypes.toString());
+            result.add(temp);
+        }
+        ObjectMapper objectMapper = new ObjectMapper();
+        String loginJson = objectMapper.writeValueAsString(result);
+        HttpServletResponse response = ServletActionContext.getResponse();
+        response.getOutputStream().write(loginJson.getBytes("UTF-8"));
+    }
+
     @Action(value = "postAdd")
     public void postAdd(){
         HashMap<String,String> message = new HashMap<String, String>();
         try{
             Skjob skjob = new Skjob();
+            skjob.setJob_id(String.valueOf(new Random().nextInt(10000)));
             skjob.setName(getPost_name());
             skjob.setType(JobTypes.valueOf(getPost_type()));
             skjob.setLimitnum(getPost_num());
@@ -135,8 +153,7 @@ public class PostAction extends ActionSupport {
         List<Skjob> jobs = postAction.jobService.getAllJobs();
         ArrayList<String> result = new ArrayList<String>();
         for (Skjob job : jobs) {
-            String id = job.getDept_id();
-            result.add(job.getName() + postAction.deptService.getNameByDeptid(id));
+            result.add(job.getType().toString());
         }
         for (String s : result) {
             System.out.println(s);
