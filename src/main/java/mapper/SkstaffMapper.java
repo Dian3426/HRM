@@ -39,4 +39,7 @@ public interface SkstaffMapper {
 
     @Select("SELECT COUNT(s.EMP_ID) FROM SKSTAFF s,SKJOB j WHERE s.JOB_ID=j.JOB_ID AND j.DEPT_ID =#{dept_id}")
     int getCountByDeptid(String dept_id);
+
+    @Select("SELECT e.* FROM SKEMP e,SKSTAFF s,SKJOB j WHERE s.JOB_ID=j.JOB_ID AND j.DEPT_ID=#{dept_id} AND e.EMP_ID=s.EMP_ID AND s.EMP_ID=#{emp_id}")
+    Skemp getInfoByEmpid(@Param("emp_id")String emp_id,@Param("job_id") String job_id,@Param("dept_id") String dept_id);
 }
