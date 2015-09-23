@@ -17,6 +17,7 @@ import service.JobService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -520,6 +521,22 @@ public class EmpAction extends ActionSupport {
             deptNo += "0";
         deptNo += count + 1;
         return deptNo;
+    }
+
+    @Action(value = "getEmpByPostID")
+    public void getEmpByPostID() throws Exception{
+        List<List<String>> result = new ArrayList<List<String>>();
+//        List<Skemp> emps = ;
+//        for (Skemp emp : emps) {
+//            List<String> strings = new ArrayList<String>();
+//            result.add(strings);
+//        }
+        HashMap<String,List<List<String>>> data = new HashMap<String,List<List<String>>>();
+        data.put("data",result);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String loginJson = objectMapper.writeValueAsString(data);
+        HttpServletResponse response = ServletActionContext.getResponse();
+        response.getOutputStream().write(loginJson.getBytes("UTF-8"));
     }
 
     private String saveFile() throws Exception{
