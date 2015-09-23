@@ -26,7 +26,7 @@ public class JobService extends BaseService {
         return skjobManager.getAllJobs();
     }
     /**
-     * È¡³ö startĞĞºÍendĞĞÖ®¼äµÄÊı¾İ
+     * å–å‡º startè¡Œå’Œendè¡Œä¹‹é—´çš„æ•°æ®
      * @param start
      * @param end
      * @return
@@ -39,8 +39,8 @@ public class JobService extends BaseService {
         return skjobManager.getJobidAndNames();
     }
 
-    /**ĞŞ¸Ä¸ÚÎ»ĞÅÏ¢
-     * job.job_id ±ØĞëºÍ²Ù×÷Ä¿±êÒ»ÖÂ
+    /**ä¿®æ”¹å²—ä½ä¿¡æ¯
+     * job.job_id å¿…é¡»å’Œæ“ä½œç›®æ ‡ä¸€è‡´
      * @param job
      */
     public void updateJob(Skjob job){
@@ -48,7 +48,7 @@ public class JobService extends BaseService {
     }
 
     /**
-     * É¾³ı¶ÔÓ¦job_idµÄÊı¾İ
+     * åˆ é™¤å¯¹åº”job_idçš„æ•°æ®
      * @param job_id
      */
     public boolean deleteJob(String job_id){
@@ -57,13 +57,13 @@ public class JobService extends BaseService {
             return true;
         }
         else{
-            System.err.println("¸ÚÎ»É¾³ı²Ù×÷Ê§°Ü,´æÔÚµ£ÈÎ´Ë¸ÚÎ»µÄÔ±¹¤");
+            System.err.println("å²—ä½åˆ é™¤æ“ä½œå¤±è´¥,å­˜åœ¨æ‹…ä»»æ­¤å²—ä½çš„å‘˜å·¥");
             return false;
         }
     }
 
     /**
-     * ¸ù¾İdept_id²éÑ¯ÆìÏÂËùÓĞ¸ÚÎ»
+     * æ ¹æ®dept_idæŸ¥è¯¢æ——ä¸‹æ‰€æœ‰å²—ä½
      * @param dept_id
      * @return
      */
@@ -72,7 +72,7 @@ public class JobService extends BaseService {
     }
 
     /**
-     * »ñÈ¡ÈÎÖ°job_id¶ÔÓ¦¸ÚÎ»µÄ×ÜÈËÊı
+     * è·å–ä»»èŒjob_idå¯¹åº”å²—ä½çš„æ€»äººæ•°
      * @param job_id
      * @return
      */
@@ -86,5 +86,9 @@ public class JobService extends BaseService {
 
     public Skjob getJobByNameAndDeptid(String name,String dept_id){
         return skjobManager.getJobByNameAndDeptid(name,dept_id);
+    }
+
+    public List<String> getAllJobNames(){
+        return skjobManager.getAllJobNames();
     }
 }
