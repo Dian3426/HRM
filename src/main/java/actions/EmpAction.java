@@ -22,6 +22,7 @@ import java.io.*;
 import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by ZaraN on 2015/9/21.
@@ -77,11 +78,20 @@ public class EmpAction extends ActionSupport {
     String emp_family_tel;
 
     String emp_id;
+    String emp_idcard;
 
     String fileTitle;
     File emp_img;
     String emp_imgContentType;
     String emp_imgFileName;
+
+    public String getEmp_idcard() {
+        return emp_idcard;
+    }
+
+    public void setEmp_idcard(String emp_idcard) {
+        this.emp_idcard = emp_idcard;
+    }
 
     public String getEmp_id() {
         return emp_id;
@@ -452,7 +462,7 @@ public class EmpAction extends ActionSupport {
             @InterceptorRef(value = "fileUpload", params = {"maximumSize", "1024000"})
     })
     public void empAdd() {
-        HashMap<String, String> message = new HashMap<String, String>();
+        HashMap<String, String> message = new HashMap<>();
         try {
             String empNo = createEmpNo();
             String[] temp = getEmp_position().split("-");
@@ -463,7 +473,7 @@ public class EmpAction extends ActionSupport {
 
 
             Skjob skjob = jobService.getJobByNameAndDeptid(position, deptService.getDeptidByName(dept));
-            Skemp emp = new Skemp(getEmp_name(), (getEmp_sex() == "0") ? Sex.Male : Sex.Female, getEmp_birth(), getEmp_idNum(), new SimpleDateFormat("yyyy/mm/dd").format(new Date()), Zzmm.PartyMember,
+            Skemp emp = new Skemp(getEmp_name(), (Objects.equals(getEmp_sex(), "0")) ? Sex.Male : Sex.Female, getEmp_birth(), getEmp_idNum(), new SimpleDateFormat("yyyy/mm/dd").format(new Date()), Zzmm.PartyMember,
                     getEmp_nat(), getEmp_native(), getEmp_tel(), getEmp_mail(), getEmp_height(), BloodTypes.A,
                     getEmp_birthprov() + getEmp_birthcity(), getEmp_rresidence(), path, Degree.College, getEmp_coll(),
                     getEmp_major(), getEmp_grad(), SourceTypes.Social, empNo);
@@ -472,15 +482,14 @@ public class EmpAction extends ActionSupport {
                     getEmp_former_evidence_position(), "2222");
             Societyrelation societyrelation = new Societyrelation(empNo, Relations.Father,
                     getEmp_family_name(), getEmp_family_position(), getEmp_family_comp(), getEmp_family_tel());
-            Talent talent = new Talent(empNo, skjob.getJob_id(), (getEmp_jobtype() == "0") ? StaffTypes.Official : StaffTypes.Temporary);
+            Talent talent = new Talent(empNo, skjob.getJob_id(), (Objects.equals(getEmp_jobtype(), "0")) ? StaffTypes.Official : StaffTypes.Temporary);
 
-            if (getEmp_probation() == "1") {
+            empService.createEmpTotally(emp, occupationcareer, societyrelation, talent);
+            if (getEmp_probation().equals("1")) {
                 Temporary temporary = new Temporary(getEmp_probation_start(), getEmp_probation_end(),
                         empNo, skjob.getJob_id(), YesOrNo.Yes);
                 empService.createTemporary(temporary);
             }
-
-            empService.createEmpTotally(emp, occupationcareer, societyrelation, talent);
 
             message.put("success", "1");
         } catch (Exception e) {
@@ -556,7 +565,7 @@ public class EmpAction extends ActionSupport {
         if (!file.exists() && !file.isDirectory()) {
             file.mkdir();
         }
-        FileOutputStream fos = new FileOutputStream(result);
+        FileOutputStream fos = new FileOutputStream(resultFile);
         FileInputStream fis = new FileInputStream(getEmp_img());
         byte[] buffer = new byte[1024];
         int len = 0;
@@ -591,6 +600,63 @@ public class EmpAction extends ActionSupport {
 
         }
         HashMap<String,List<List<String>>> data = new HashMap<String,List<List<String>>>();
+        data.put("data",result);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String loginJson = objectMapper.writeValueAsString(data);
+        HttpServletResponse response = ServletActionContext.getResponse();
+        response.getOutputStream().write(loginJson.getBytes("UTF-8"));
+    }
+
+    /**
+     * get talent info by idcard
+     * @throws Exception
+     */
+    @Action(value = "getEmpByID")
+    public void getEmpByID() throws Exception{
+        List<Object> talent = empService.getTalentInfoByIdcard(getEmp_idcard());
+        Skemp skemp = (Skemp) talent.get(0);
+        Occupationcareer occupationcareer = (Occupationcareer) talent.get(1);
+        Societyrelation societyrelation = (Societyrelation) talent.get(2);
+        List<List<String>> result = new ArrayList<>();
+        List<String> strings = new ArrayList<>();
+
+        strings.add(skemp.getName());
+        strings.add(skemp.getSex().toString());
+        strings.add(skemp.getNational());
+        strings.add(skemp.getBir());
+        strings.add(skemp.getHeight());
+        strings.add(skemp.getBloodtype().toString());
+        strings.add(skemp.getBirthplace());
+        strings.add(skemp.getIdcard());
+        strings.add(skemp.getTele());
+        strings.add(skemp.getMail());
+        strings.add(skemp.getNativ());
+        strings.add(skemp.getHkplace());
+        strings.add("-");
+        strings.add(skemp.getZzmm().toString());
+        strings.add(skemp.getDegree().toString());
+        strings.add(skemp.getGraduateschool());
+        strings.add(skemp.getProfessional());
+        strings.add(skemp.getGraduatetime());
+        strings.add(skemp.getSource().toString());
+        strings.add("正式员工");
+        strings.add(occupationcareer.getBegintime() + "-" + occupationcareer.getEndtime());
+        strings.add(occupationcareer.getPosition());
+        strings.add(occupationcareer.getJobname());
+        strings.add(String.valueOf(occupationcareer.getSalary()));
+        strings.add(occupationcareer.getReference());
+        strings.add(occupationcareer.getReferenceposition());
+        strings.add(occupationcareer.getJobdiscrip());
+        strings.add("精灵语");
+        strings.add(societyrelation.getRelation().toString());
+        strings.add(societyrelation.getName());
+        strings.add(societyrelation.getPosi());
+        strings.add(societyrelation.getJob());
+        strings.add(societyrelation.getTel());
+
+        result.add(strings);
+
+        HashMap<String,List<List<String>>> data = new HashMap<>();
         data.put("data",result);
         ObjectMapper objectMapper = new ObjectMapper();
         String loginJson = objectMapper.writeValueAsString(data);
