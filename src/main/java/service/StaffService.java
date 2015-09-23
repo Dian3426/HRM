@@ -43,8 +43,13 @@ public class StaffService extends BaseService {
         return skstaffMapper.getNewHiredStaff(beginTime,endTime,dept_id);
     }
 
+    /**
+     * 加入正式员工表
+     * @param staff
+     */
     public void changeToOffical(Skstaff staff){
-        temporaryMapper.endTemporary(staff.getEmp_id(), YesOrNo.No);
+        if(!temporaryMapper.getTemporaryInfo(staff.getEmp_id(),null,null,null).isEmpty())
+            temporaryMapper.endTemporary(staff.getEmp_id(), YesOrNo.No);
         skstaffMapper.createStaff(staff);
     }
 }
