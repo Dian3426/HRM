@@ -102,6 +102,10 @@ public class ChangeService extends BaseService {
        return changeMapper.getChangeHistory(emp_id,emp_name,beginTime,endTime);
     }
 
+    public List<Change> getChangeBetween(String begin,String end){
+        return changeMapper.getChangesBetween(begin,end);
+    }
+
     /**
      * 根据emp_id获取相应的talent
      * @param emp_id
