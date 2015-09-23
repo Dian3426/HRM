@@ -65,7 +65,7 @@ public class LogInAndOutAction extends ActionSupport{
 
 
     /**
-     * login function,get emp_id��emp_pass and build to a Manager object.use login function to match database
+     * login function,get emp_id ,emp_pass and build to a Manager object.use login function to match database
      * if success,put emp_id to cookie and session,put a status with a "1" mean login successfully
      * if fail,put a status with a "0" mean login fail,and put a message with why fail
      */

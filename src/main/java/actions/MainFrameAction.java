@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 
 /**
  * Created by ZaraN on 2015/9/19.
+ * this action's function is all about to operation with page-jump
  */
 @Controller
 @Scope("prototype")

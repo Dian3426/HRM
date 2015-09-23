@@ -433,8 +433,9 @@ public class EmpAction extends ActionSupport {
     @Autowired
     private JobService jobService;
 
-//    @Action(value = "empInfoAdd")
-
+    /**
+     * add one new emp to database
+     */
     @Action(value = "empInfoAdd", interceptorRefs = {
             @InterceptorRef("defaultStack"),
             @InterceptorRef(value = "fileUpload", params = {"maximumSize", "1024000"})
@@ -488,22 +489,22 @@ public class EmpAction extends ActionSupport {
     /**
      * create employee's emp number;format:xxxx
      * xxxx means he is the No.xxxx of com
-     *
      * @return empNo
      */
     private String createEmpNo() {
         int count = empService.getCount();
-        while (empService.isEmpidExist(String.valueOf(count))) {
+        String empNo = "0001";
+        while (empService.isEmpidExist(String.valueOf(empNo))) {
+            empNo = "";
+            if (count < 10)
+                empNo += "000";
+            else if (count < 100)
+                empNo += "00";
+            else if (count < 1000)
+                empNo += "0";
+            empNo += count + 1;
             count++;
         }
-        String empNo = "";
-        if (count < 10)
-            empNo += "000";
-        else if (count < 100)
-            empNo += "00";
-        else if (count < 1000)
-            empNo += "0";
-        empNo += count + 1;
         return empNo;
     }
 
@@ -531,9 +532,16 @@ public class EmpAction extends ActionSupport {
         return deptNo;
     }
 
+    /**
+     * upload user's img to server and return a path
+     * @return path that will be saved in database
+     * @throws Exception about file
+     */
     private String saveFile() throws Exception {
         File file = new File(ServletActionContext.getServletContext().getResource("/").getPath().substring(1) + "\\img/photo");
-        String result = "/img/photo/" + UUID.randomUUID() + getEmp_imgFileName().substring(getEmp_imgFileName().lastIndexOf('.'));
+        String fileName = UUID.randomUUID().toString() + getEmp_imgFileName().substring(getEmp_imgFileName().lastIndexOf('.'));
+        String result = "/img/photo/" + fileName;
+        File resultFile = new File(ServletActionContext.getServletContext().getResource("/").getPath().substring(1) + "\\img/photo/" + fileName);
         if (!file.exists() && !file.isDirectory()) {
             file.mkdir();
         }

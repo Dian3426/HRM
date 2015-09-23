@@ -27,6 +27,7 @@ import java.util.Random;
 
 /**
  * Created by ZaraN on 2015/9/21.
+ * this action's function is all about to operation with positions.
  */
 @Controller
 @Scope("prototype")
@@ -95,6 +96,10 @@ public class PostAction extends ActionSupport {
     @Autowired
     DeptService deptService;
 
+    /**
+     * get all  jobs' infomation
+     * @throws Exception
+     */
     @Action(value = "getJobs")
     public void getJobs() throws Exception{
         ArrayList<HashMap<String,String>> result = new ArrayList<HashMap<String,String>>();
@@ -110,6 +115,9 @@ public class PostAction extends ActionSupport {
         response.getOutputStream().write(loginJson.getBytes("UTF-8"));
     }
 
+    /**
+     * add one new position
+     */
     @Action(value = "postAdd")
     public void postAdd(){
         HashMap<String,String> message = new HashMap<String, String>();
@@ -148,6 +156,10 @@ public class PostAction extends ActionSupport {
         }
     }
 
+    /**
+     * get post and its super dept
+     * @throws Exception
+     */
     @Action(value = "getPostAndSdept")
     public void getPostAndSDept() throws Exception{
         List<Skjob> jobs = jobService.getAllJobs();
@@ -162,6 +174,10 @@ public class PostAction extends ActionSupport {
         response.getOutputStream().write(loginJson.getBytes("UTF-8"));
     }
 
+    /**
+     * get all posts' infomation
+     * @throws Exception
+     */
     @Action(value = "getAllPosts")
     public void getAllPosts() throws Exception{
         List<List<String>> result = new ArrayList<List<String>>();
@@ -189,6 +205,9 @@ public class PostAction extends ActionSupport {
         response.getOutputStream().write(loginJson.getBytes("UTF-8"));
     }
 
+    /**
+     * delete one post by post_id
+     */
     @Action(value = "postDelete")
     public void postDelete(){
         HashMap<String,String> message = new HashMap<String, String>();
@@ -209,6 +228,10 @@ public class PostAction extends ActionSupport {
         }
     }
 
+    /**
+     * get all emps by post_id
+     * @throws Exception
+     */
     @Action(value = "getEmpByPostID")
     public void getEmpByPostID() throws Exception{
         List<List<String>> result = new ArrayList<List<String>>();
