@@ -10,7 +10,7 @@ public class Change {
     private String emp_id;
     private String olddept;
     private String newdept;
-    private String changereason;
+    private String changreason;
     private String oldjob;
     private String newjob;
     private ChangeTypes type;
@@ -21,19 +21,19 @@ public class Change {
     /**
      *
      * @param emp_id
-     * @param olddept 旧部门id
-     * @param newdept 新部门id
-     * @param changereason
-     * @param oldjob 旧岗位id
-     * @param newjob 新岗位id
+     * @param olddept 鏃ч儴闂╥d
+     * @param newdept 鏂伴儴闂╥d
+     * @param changreason
+     * @param oldjob 鏃у矖浣峣d
+     * @param newjob 鏂板矖浣峣d
      * @param type
      * @param changetime
      */
-    public Change(String emp_id, String olddept, String newdept, String changereason, String oldjob, String newjob, ChangeTypes type, String changetime) {
+    public Change(String emp_id, String olddept, String newdept, String changreason, String oldjob, String newjob, ChangeTypes type, String changetime) {
         this.emp_id = emp_id;
         this.olddept = olddept;
         this.newdept = newdept;
-        this.changereason = changereason;
+        this.changreason = changreason;
         this.oldjob = oldjob;
         this.newjob = newjob;
         this.type = type;
@@ -66,11 +66,11 @@ public class Change {
     }
 
     public String getChangereason() {
-        return changereason;
+        return changreason;
     }
 
     public void setChangereason(String changereason) {
-        this.changereason = changereason;
+        this.changreason = changereason;
     }
 
     public String getOldjob() {
