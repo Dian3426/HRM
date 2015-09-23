@@ -45,4 +45,7 @@ public interface SkjobMapper {
 
     @Select("SELECT DISTINCT NAME FROM SKJOB")
     List<String> getAllJobNames();
+
+    @Select("SELECT COUNT(JOB_ID) FROM SKJOB")
+    int getCount();
 }

@@ -4,11 +4,11 @@ package domain.enums;
  * Created by Jsz on 2015/9/19.
  */
 public enum BloodTypes {
-    A("AÐÍ"),
-    B("BÐÍ"),
-    AB("ABÐÍ"),
-    O("OÐÍ"),
-    OtherBlood("ÆäËûÑªÐÍ");
+    A("Aåž‹"),
+    B("Båž‹"),
+    AB("ABåž‹"),
+    O("Oåž‹"),
+    OtherBlood("å…¶ä»–è¡€åž‹");
 
     private String des;
 

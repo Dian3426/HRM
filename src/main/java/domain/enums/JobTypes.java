@@ -1,5 +1,8 @@
 package domain.enums;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Jsz on 2015/9/19.
  */

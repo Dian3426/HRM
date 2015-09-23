@@ -4,8 +4,8 @@ package domain.enums;
  * Created by Jsz on 2015/9/19.
  */
 public enum StaffTypes {
-    Official("正式员工"),
-    Temporary("临时员工");
+    Official("姝ｅ紡鍛樺伐"),
+    Temporary("涓存椂鍛樺伐");
     private String des;
 
     StaffTypes(String s){

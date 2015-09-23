@@ -4,10 +4,10 @@ package domain.enums;
  * Created by Jsz on 2015/9/19.
  */
 public enum Degree {
-    Postgraduate("ÑĞ¾¿Éú"),
-    Undergraduate("±¾¿ÆÉú"),
-    College("´ó×¨"),
-    SHStudent("¸ßÖĞÉú¼°ÒÔÏÂ");
+    Postgraduate("ç ”ç©¶ç”Ÿ"),
+    Undergraduate("æœ¬ç§‘ç”Ÿ"),
+    College("å¤§ä¸“"),
+    SHStudent("é«˜ä¸­ç”ŸåŠä»¥ä¸‹");
     private String des;
 
     Degree(String s){

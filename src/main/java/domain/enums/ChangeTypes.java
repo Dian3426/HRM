@@ -4,8 +4,8 @@ package domain.enums;
  * Created by Jsz on 2015/9/20.
  */
 public enum ChangeTypes {
-    Initiative("主动"),
-    Passive("被动");
+    Initiative("涓诲姩"),
+    Passive("琚姩");
 
     private String des;
 

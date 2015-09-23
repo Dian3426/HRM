@@ -4,11 +4,11 @@ package domain.enums;
  * Created by Jsz on 2015/9/19.
  */
 public enum  NationalTypes {
-    Han("汉族"),
-    Miao("苗族"),
-    Man("满族"),
-    Hui("回族"),
-    OtherNation("其他民族");
+    Han("姹夋棌"),
+    Miao("鑻楁棌"),
+    Man("婊℃棌"),
+    Hui("鍥炴棌"),
+    OtherNation("鍏朵粬姘戞棌");
 
     private String des;
 
