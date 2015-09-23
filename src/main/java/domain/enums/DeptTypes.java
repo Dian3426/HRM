@@ -4,8 +4,8 @@ package domain.enums;
  * Created by Jsz on 2015/9/19.
  */
 public enum DeptTypes  {
-    Enterprice("???"),
-    Dept("????");
+    Enterprise("公司"),
+    Dept("部门");
 
     private String des;
 

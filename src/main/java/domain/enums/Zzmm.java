@@ -4,9 +4,9 @@ package domain.enums;
  * Created by Jsz on 2015/9/19.
  */
 public enum Zzmm {
-    PartyMenber("党员"),
-    Komsomolets("共青团员"),
-    Mass("群众");
+    PartyMenber("鍏氬憳"),
+    Komsomolets("鍏遍潚鍥㈠憳"),
+    Mass("缇や紬");
 
     private String des;
 

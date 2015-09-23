@@ -4,11 +4,11 @@ package domain.enums;
  * Created by Jsz on 2015/9/20.
  */
 public enum LeaveReasons {
-    Resign("Ö÷¶¯´ÇÖ°"),
-    Dismiss("´ÇÍË"),
-    Expel("¿ª³ı"),
-    Retire("ÍËĞİ"),
-    Notby("ÊÔÓÃÆÚÎ´Í¨¹ı");
+    Resign("ä¸»åŠ¨è¾èŒ"),
+    Dismiss("è¾é€€"),
+    Expel("å¼€é™¤"),
+    Retire("é€€ä¼‘"),
+    Notby("è¯•ç”¨æœŸæœªé€šè¿‡");
 
     private String des;
 

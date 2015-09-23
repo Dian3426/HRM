@@ -4,9 +4,9 @@ package domain.enums;
  * Created by Jsz on 2015/9/20.
  */
 public enum Relations {
-    Father("¸¸Ç×"),
-    Mother("Ä¸Ç×"),
-    Spouse("ÅäÅ¼");
+    Father("çˆ¶äº²"),
+    Mother("æ¯äº²"),
+    Spouse("é…å¶");
     private String des;
 
     Relations(String s){

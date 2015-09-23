@@ -4,8 +4,8 @@ package domain.enums;
  * Created by Jsz on 2015/9/19.
  */
 public enum Sex {
-    Male("ÄÐ"),
-    Female("Å®");
+    Male("ç”·"),
+    Female("å¥³");
 
     private String des;
 
