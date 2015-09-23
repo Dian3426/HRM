@@ -91,4 +91,12 @@ public class JobService extends BaseService {
     public List<String> getAllJobNames(){
         return skjobManager.getAllJobNames();
     }
+
+    /**
+     * 获取当前岗位总数
+     * @return
+     */
+    public int getCount(){
+        return skjobManager.getCount();
+    }
 }
