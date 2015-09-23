@@ -4,10 +4,10 @@ package domain.enums;
  * Created by Jsz on 2015/9/19.
  */
 public enum JobTypes  {
-    Manage("¹ÜÀí"),
-    Technology("¼¼Êõ"),
-    Marketing("ÓªÏú"),
-    Market("ÊĞ³¡");
+    Manage("ç®¡ç†"),
+    Technology("æŠ€æœ¯"),
+    Marketing("è¥é”€"),
+    Market("å¸‚åœº");
 
     private String des;
      JobTypes(String s){

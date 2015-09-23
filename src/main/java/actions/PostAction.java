@@ -83,6 +83,15 @@ public class PostAction extends ActionSupport {
     @Autowired
     DeptService deptService;
 
+    @Action(value = "getJobs")
+    public void getJobs() throws Exception{
+        List<String> result = jobService.getAllJobNames();
+        ObjectMapper objectMapper = new ObjectMapper();
+        String loginJson = objectMapper.writeValueAsString(result);
+        HttpServletResponse response = ServletActionContext.getResponse();
+        response.getOutputStream().write(loginJson.getBytes("UTF-8"));
+    }
+
     @Action(value = "postAdd")
     public void postAdd(){
         HashMap<String,String> message = new HashMap<String, String>();
@@ -135,8 +144,7 @@ public class PostAction extends ActionSupport {
         List<Skjob> jobs = postAction.jobService.getAllJobs();
         ArrayList<String> result = new ArrayList<String>();
         for (Skjob job : jobs) {
-            String id = job.getDept_id();
-            result.add(job.getName() + postAction.deptService.getNameByDeptid(id));
+            result.add(job.getType().toString());
         }
         for (String s : result) {
             System.out.println(s);
