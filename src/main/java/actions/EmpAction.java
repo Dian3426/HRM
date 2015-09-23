@@ -532,8 +532,8 @@ public class EmpAction extends ActionSupport {
     }
 
     private String saveFile() throws Exception {
-        File file = new File(ServletActionContext.getServletContext().getResource("/").getPath().substring(1) + "/img/photo");
-        String result = "/img/photo" + UUID.randomUUID() + getEmp_imgFileName().substring(getEmp_imgFileName().lastIndexOf('.'));
+        File file = new File(ServletActionContext.getServletContext().getResource("/").getPath().substring(1) + "\\img/photo");
+        String result = "/img/photo/" + UUID.randomUUID() + getEmp_imgFileName().substring(getEmp_imgFileName().lastIndexOf('.'));
         if (!file.exists() && !file.isDirectory()) {
             file.mkdir();
         }
