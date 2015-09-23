@@ -68,4 +68,28 @@ public class SqlProvider {
 
         return sql;
     }
+
+    public String selectInfoForLeave(final Map<String, Object> paramMap){
+        String sql = new SQL(){{
+            SELECT("e.name EMPNAME,e.emp_id,d.NAME DEPTNAME,d.dept_id,e.idcard");
+            FROM("SKEMP e,SKDEPT d,TALENT t,SKJOB j");
+            WHERE("e.emp_id=t.emp_id");
+            WHERE("t.job_id=j.job_id");
+            WHERE("j.dept_id=d.dept_id");
+            if(paramMap.get("dept_id")!=null){
+                WHERE("d.dept_id="+paramMap.get("dept_id").toString());
+            }
+            if(paramMap.get("deptName")!=null){
+                WHERE("d.name="+paramMap.get("deptName").toString());
+            }
+            if(paramMap.get("emp_id")!=null){
+                WHERE("e.emp_id="+paramMap.get("emp_id").toString());
+            }
+            if(paramMap.get("empName")!=null){
+                WHERE("e.NAME="+paramMap.get("empName").toString());
+            }
+        }}.toString();
+
+        return sql;
+    }
 }

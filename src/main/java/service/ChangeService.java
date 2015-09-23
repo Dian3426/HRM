@@ -93,7 +93,7 @@ public class ChangeService extends BaseService {
      * @param emp_name
      * @param beginTime
      * @param endTime
-     * @return
+     * @return 返回的键值为 EMP_ID NAME OLD_DEPT NEW_DEPT OLD_JOB NEW_JOB CHANGE_TIME TYPE CHANGE_REASON
      */
     public List<HashMap<String,String>> getHistory(String emp_id,String emp_name,String beginTime,String endTime ){
         if(emp_id.isEmpty()&&emp_name.isEmpty()&&beginTime.isEmpty()&&endTime.isEmpty()) {
@@ -123,6 +123,19 @@ public class ChangeService extends BaseService {
         return leaveMapper.getLeaves(begin,end,job_id);
     }
 
+    public static String DEPT_ID="DEPT_ID";
+    public static String DEPT_NAME="DEPTNAME";
+    public static String EMP_NAME="EMPNAME";
+
+
+    /**
+     *
+     * @param dept_id
+     * @param deptName
+     * @param emp_id
+     * @param empName
+     * @return 返回的键值为 EMP_ID ,DEPT_ID, DEPT_NAME, EMP_NAME
+     */
     public List<HashMap<String,String>> getInfoForLeave(String dept_id,String deptName,String emp_id,String empName){
         return leaveMapper.getInfoForLeave(dept_id,deptName,emp_id,empName);
     }

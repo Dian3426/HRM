@@ -52,4 +52,8 @@ public class StaffService extends BaseService {
             temporaryMapper.endTemporary(staff.getEmp_id(), YesOrNo.No);
         skstaffMapper.createStaff(staff);
     }
+
+    public void createStaff(Skstaff staff){
+        skstaffMapper.createStaff(staff);
+    }
 }

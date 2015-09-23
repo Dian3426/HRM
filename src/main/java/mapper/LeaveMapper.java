@@ -22,6 +22,7 @@ public interface LeaveMapper {
             " TO_DATE( #{end},\"yyyy-mm-dd\") >TO_DATE(time,\"yyyy-mm-dd\") AND job_id=#{job_id")
     List<Leave> getLeaves(String begin,String end,String job_id);
 
+
     @SelectProvider(type = SqlProvider.class,method = "selectInfoForLeave")
     List<HashMap<String,String>> getInfoForLeave(@Param("dept_id")String dept_id,@Param("deptName")String deptName,
     @Param("emp_id")String emp_id,@Param("empName")String empName);

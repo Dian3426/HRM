@@ -15,7 +15,7 @@ import java.util.List;
 public interface SkstaffMapper {
 
     @Insert("INSERT INTO SKSTAFF VALUES (null,#{emp_id},#{job_id},#{time})")
-    void createStaff(@Param("Skstaff")Skstaff skstaff);
+    void createStaff(Skstaff skstaff);
 
     @Update("UPDATE SKSTAFF SET job_id=#{job_id},time=#{time} WHERE emp_id = #{emp_id}")
     void updateStaff(@Param("Skstaff")Skstaff skstaff);
