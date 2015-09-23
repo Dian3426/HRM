@@ -143,7 +143,7 @@ public class DeptService extends BaseService{
         return idList;
     }
 
-    public boolean isEmpidExist(String emp_id){
+    public boolean isDeptidExist(String emp_id){
         if(getExistDeptid().contains(emp_id))
             return true;
         return false;
