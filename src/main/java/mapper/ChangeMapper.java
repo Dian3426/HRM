@@ -25,4 +25,10 @@ public interface ChangeMapper {
     @Select("SELECT * FROM CHANGE c WHERE TO_DATE(#{begin},\"yyyy-mm-dd\") < TO_DATE(c.changtime,\"yyyy-mm-dd\") AND" +
             " TO_DATE( #{end},\"yyyy-mm-dd\") >TO_DATE(c.changtime,\"yyyy-mm-dd\")")
     List<Change> getChangesBetween(String begin,String end);
+
+    @Select("SELECT COUNT(EMP_ID) FROM CHANGE WHERE substr(CHANGTIME,0,7)=#{month} AND NEWDEPT=#{dept_id}")
+    int getCountByMonthAndNewDeptid(String month, String dept_id);
+
+    @Select("SELECT COUNT(EMP_ID) FROM CHANGE WHERE substr(CHANGTIME,0,7)=#{month} AND OLDDEPT=#{dept_id}  ")
+    int getCountByMonthAndOldDpetid(String month,String dept_id);
 }

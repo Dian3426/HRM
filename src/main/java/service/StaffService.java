@@ -53,7 +53,15 @@ public class StaffService extends BaseService {
         skstaffMapper.createStaff(staff);
     }
 
+    /**
+     * 不安全的方法，请使用changeToOffical
+     * @param staff
+     */
     public void createStaff(Skstaff staff){
         skstaffMapper.createStaff(staff);
+    }
+
+    public void deleteByEmpid(String emp_id){
+        skstaffMapper.deleteByEmpid(emp_id);
     }
 }

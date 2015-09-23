@@ -114,7 +114,7 @@ public class DeptService extends BaseService{
     }
 
     /**
-     * 获取对应dept_id职工总人数
+     * 获取对应dept_id职工（包括临时员工）总人数
      * @return
      */
     public int getCountByDeptid(String dept_id){
