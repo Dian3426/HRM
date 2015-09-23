@@ -29,7 +29,7 @@ public class BaseService {
     private SkdeptMapper skdeptMapper;
 
     /**
-     * °²È«µÄ·ûºÏÍêÕûĞÔÔ¼ÊøµÄ·½·¨
+     * å®‰å…¨çš„ç¬¦åˆå®Œæ•´æ€§çº¦æŸçš„æ–¹æ³•
      * @param talent
      * @return
      */
@@ -49,7 +49,7 @@ public class BaseService {
             talentMapper.createTalent(talent);
             return true;
         }
-        System.err.println("·Ç·¨µÄ´´½¨£º³¬¹ı±àÖÆÏŞÖÆ");
+        System.err.println("éæ³•çš„åˆ›å»ºï¼šè¶…è¿‡ç¼–åˆ¶é™åˆ¶");
         return false;
     }
 
@@ -75,7 +75,7 @@ public class BaseService {
 
 
     /**
-     * ¼à²âÊÇ·ñÓĞµ£ÈÎjob_id¶ÔÓ¦¸ÚÎ»µÄÔ±¹¤
+     * ç›‘æµ‹æ˜¯å¦æœ‰æ‹…ä»»job_idå¯¹åº”å²—ä½çš„å‘˜å·¥
      * @param job_id
      * @return
      */
@@ -87,7 +87,7 @@ public class BaseService {
     }
 
     /**
-     * »ñÈ¡ÈÎÖ°job_id¶ÔÓ¦¸ÚÎ»µÄ×ÜÈËÊı
+     * è·å–ä»»èŒjob_idå¯¹åº”å²—ä½çš„æ€»äººæ•°
      * @param job_id
      * @return
      */
@@ -96,7 +96,7 @@ public class BaseService {
     }
 
     /**
-     * ¸ù¾İ ²¿ÃÅÃû + ¸ÚÎ»Ãû »ñÈ¡ÏìÓ¦µÄ dept_id ºÍ job_id
+     * æ ¹æ® éƒ¨é—¨å + å²—ä½å è·å–å“åº”çš„ dept_id å’Œ job_id
      * @param deptName
      * @param jobName
      * @return

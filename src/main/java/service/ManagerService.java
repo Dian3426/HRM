@@ -16,7 +16,7 @@ public class ManagerService extends BaseService{
     private ManagerMapper managerMapper;
 
     /**
-     * ×¢²á¹ÜÀíÔ±
+     * æ³¨å†Œç®¡ç†å‘˜
      * @param manager
      */
     public void createManager(Manager manager) {
@@ -24,9 +24,9 @@ public class ManagerService extends BaseService{
         managerMapper.createManager(manager);
     }
     /**
-     * µÇÂ¼
+     * ç™»å½•
      * @param manager
-     * @return  µÇÂ¼³É¹¦·µ»Øtrue·ñÔò·µ»Øfalse
+     * @return  ç™»å½•æˆåŠŸè¿”å›trueå¦åˆ™è¿”å›false
      */
     public boolean login(Manager manager) {
         try {
@@ -35,7 +35,7 @@ public class ManagerService extends BaseService{
             return  true;
         return false;}
         catch (NullPointerException e){
-            System.err.println("¸ÃÓÃ»§²»´æÔÚ²»´æÔÚ");
+            System.err.println("è¯¥ç”¨æˆ·ä¸å­˜åœ¨ä¸å­˜åœ¨");
             return false;
         }
     }

@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface TalentMapper {
     @Insert("INSERT INTO TALENT VALUES (null,#{emp_id},#{job_id},#{status,typeHandler=org.apache.ibatis.type.EnumTypeHandler})")
-    void createTalent(@Param("Talent") Talent talent);
+    void createTalent(Talent talent);
 
     @Select("SELECT * FROM TALENT WHERE JOB_ID=#{job_id}")
     List<Talent> getTalentByJobid(@Param("job_id")String job_id);

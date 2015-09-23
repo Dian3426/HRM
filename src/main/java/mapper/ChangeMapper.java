@@ -14,7 +14,7 @@ import java.util.List;
 public interface ChangeMapper {
 
     @Insert("INSERT INTO CHANGE VALUES (null,#{emp_id},#{olddept},#{newdept},#{changereason},#{oldjob},#{newjob},#{type,typeHandler=org.apache.ibatis.type.EnumTypeHandler},#{changetime})")
-    void createChange(@Param("Change")Change change);
+    void createChange(Change change);
 
     @Select("<script> SELECT c.EMP_ID,e.NAME,c.OLDDPET,c.OLDJOB,c.NEWDEPT,c.NEWJOB,c.CHANGETIME,c.TYPE,c.CHANGEREASON  FROM SKEMP e,CHANGE c WHERE e.EMP_ID=c.EMP_ID "+
             "AND  <if test=\"emp_id!=null \">c.emp_id=#{emp_id} </if> AND " +

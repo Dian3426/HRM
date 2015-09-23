@@ -26,7 +26,7 @@ public interface SkjobMapper {
 
     @Update("UPDATE SKJOB SET NAME=#{name},TYPE=#{TYPE ,typeHandler=org.apache.ibatis.type.EnumTypeHandler},LIMITNUM=#{limitnum},DEPT_ID=#{dept_id}," +
             "ISLIMIT=#{islimit,typeHandler=org.apache.ibatis.type.EnumTypeHandler} WHERE JOB_ID=#{job_id}")
-    void updateByJobid(@Param("Skjob")Skjob skjob);
+    void updateByJobid(Skjob skjob);
 
     @Delete("DELETE  FROM SKJOB WHERE JOB_ID=#{job_id}")
     void delete(@Param("job_id")String job_id);

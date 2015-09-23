@@ -2,6 +2,7 @@ package common;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 /**
  * Created by JSZ on 2015/9/21.

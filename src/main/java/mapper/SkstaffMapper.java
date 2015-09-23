@@ -27,5 +27,5 @@ public interface SkstaffMapper {
             "s.EMP_ID = e.EMP_ID AND s.JOB_ID = j.JOB_ID AND j.DEPT_ID=#{dept_id} AND " +
             "TO_DATE(#{beginTime},\"yyyy-mm-dd\") &gt; TO_DATE(s.TIME,\"yyyy-mm-dd\") AND " +
             "TO_DATE(#{endTime},\"yyyy-mm-dd\") &lt; TO_DATE(begintime,\"yyyy-mm-dd\") ")
-    List<HashMap<String,String>> getNewHiredStaff(String beginTime,String endTime,String dept_id);
+    List<HashMap<String,String>> getNewHiredStaff(@Param("beginTime")String beginTime,@Param("endTime")String endTime,@Param("dept_id")String dept_id);
 }
