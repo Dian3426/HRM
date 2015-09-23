@@ -12,9 +12,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
-import service.DeptService;
-import service.EmpService;
-import service.JobService;
+import service.*;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
@@ -84,6 +82,16 @@ public class EmpAction extends ActionSupport {
     File emp_img;
     String emp_imgContentType;
     String emp_imgFileName;
+
+    String search_dept;
+
+    public String getSearch_dept() {
+        return search_dept;
+    }
+
+    public void setSearch_dept(String search_dept) {
+        this.search_dept = search_dept;
+    }
 
     public String getEmp_idcard() {
         return emp_idcard;
@@ -454,6 +462,12 @@ public class EmpAction extends ActionSupport {
     @Autowired
     private JobService jobService;
 
+    @Autowired
+    private ChangeService changeService;
+
+    @Autowired
+    private StaffService staffService;
+
     /**
      * add one new emp to database
      */
@@ -662,6 +676,80 @@ public class EmpAction extends ActionSupport {
         String loginJson = objectMapper.writeValueAsString(data);
         HttpServletResponse response = ServletActionContext.getResponse();
         response.getOutputStream().write(loginJson.getBytes("UTF-8"));
+    }
+
+    /**
+     * change position
+     */
+    @Action(value = "changePost")
+    public void changePost(){
+        HashMap<String,String> message = new HashMap<String, String>();
+        try{
+//TODO:
+//            Change change = new Change(getEmp_id(),);
+//            changeService.createChange(change);
+            message.put("success", "1");
+        } catch (Exception e){
+            message.put("success", "0");
+            e.printStackTrace();
+        }
+        try{
+            ObjectMapper objectMapper = new ObjectMapper();
+            String loginJson = objectMapper.writeValueAsString(message);
+            HttpServletResponse response = ServletActionContext.getResponse();
+            response.getOutputStream().write(loginJson.getBytes("UTF-8"));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
+     * get emp by change time and emp_id emp_name
+     */
+    @Action(value = "getChangeEmp")
+    public void getChangeEmp(){
+//TODO:
+    }
+
+    /**
+     * get new hired emps between the time zone
+     * @throws Exception
+     */
+    @Action(value = "getNewHiredEmps")
+    public void getNewEmps() throws Exception{
+        List<HashMap<String,String>> emps = staffService.getNewHiredStaff(getEmp_job_start(),getEmp_job_end(),getSearch_dept());
+        List<List<String>> result = new ArrayList<List<String>>();
+        for (HashMap<String, String> emp : emps) {
+            List<String> strings = new ArrayList<String>();
+            strings.add(emp.get(deptService.EMP_ID));
+            strings.add(emp.get(deptService.DEPT_NAME));
+            strings.add(emp.get(deptService.EMP_NAME));
+            strings.add(emp.get(deptService.TIME));
+            result.add(strings);
+        }
+        HashMap<String,List<List<String>>> data = new HashMap<String,List<List<String>>>();
+        data.put("data",result);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String loginJson = objectMapper.writeValueAsString(data);
+        HttpServletResponse response = ServletActionContext.getResponse();
+        response.getOutputStream().write(loginJson.getBytes("UTF-8"));
+    }
+
+    /**
+     * get change record (all emps changing in the time zone)
+     */
+    @Action(value = "getChangeEmpsByTime")
+    public void getChangeEmpsByTime(){
+
+    }
+
+    /**
+     * month change record
+     */
+    @Action(value = "getChangeByMonth")
+    public void getChangeByMonth(){
+
     }
 
 
