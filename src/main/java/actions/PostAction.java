@@ -105,7 +105,7 @@ public class PostAction extends ActionSupport {
         HashMap<String,String> message = new HashMap<String, String>();
         try{
             Skjob skjob = new Skjob();
-            skjob.setJob_id(String.valueOf(new Random().nextInt(10000)));
+            skjob.setJob_id(String.valueOf(jobService.getCount()));
             skjob.setName(getPost_name());
             skjob.setType(JobTypes.valueOf(getPost_type()));
             skjob.setLimitnum(getPost_num());
