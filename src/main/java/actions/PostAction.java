@@ -112,6 +112,7 @@ public class PostAction extends ActionSupport {
         ObjectMapper objectMapper = new ObjectMapper();
         String loginJson = objectMapper.writeValueAsString(result);
         HttpServletResponse response = ServletActionContext.getResponse();
+        response.setHeader("Content-type","text/html;charset-UTF-8");
         response.getOutputStream().write(loginJson.getBytes("UTF-8"));
     }
 
@@ -150,6 +151,7 @@ public class PostAction extends ActionSupport {
             ObjectMapper objectMapper = new ObjectMapper();
             String loginJson = objectMapper.writeValueAsString(message);
             HttpServletResponse response = ServletActionContext.getResponse();
+            response.setHeader("Content-type","text/html;charset-UTF-8");
             response.getOutputStream().write(loginJson.getBytes("UTF-8"));
         }catch (Exception e){
             e.printStackTrace();
@@ -171,6 +173,7 @@ public class PostAction extends ActionSupport {
         ObjectMapper objectMapper = new ObjectMapper();
         String loginJson = objectMapper.writeValueAsString(result);
         HttpServletResponse response = ServletActionContext.getResponse();
+        response.setHeader("Content-type","text/html;charset-UTF-8");
         response.getOutputStream().write(loginJson.getBytes("UTF-8"));
     }
 
@@ -202,6 +205,7 @@ public class PostAction extends ActionSupport {
         ObjectMapper objectMapper = new ObjectMapper();
         String loginJson = objectMapper.writeValueAsString(data);
         HttpServletResponse response = ServletActionContext.getResponse();
+        response.setHeader("Content-type","text/html;charset-UTF-8");
         response.getOutputStream().write(loginJson.getBytes("UTF-8"));
     }
 
@@ -222,6 +226,7 @@ public class PostAction extends ActionSupport {
             ObjectMapper objectMapper = new ObjectMapper();
             String loginJson = objectMapper.writeValueAsString(message);
             HttpServletResponse response = ServletActionContext.getResponse();
+            response.setHeader("Content-type","text/html;charset-UTF-8");
             response.getOutputStream().write(loginJson.getBytes("UTF-8"));
         }catch (Exception e){
             e.printStackTrace();
@@ -249,6 +254,7 @@ public class PostAction extends ActionSupport {
         ObjectMapper objectMapper = new ObjectMapper();
         String loginJson = objectMapper.writeValueAsString(data);
         HttpServletResponse response = ServletActionContext.getResponse();
+        response.setHeader("Content-type","text/html;charset-UTF-8");
         response.getOutputStream().write(loginJson.getBytes("UTF-8"));
     }
 

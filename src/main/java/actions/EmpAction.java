@@ -485,7 +485,6 @@ public class EmpAction extends ActionSupport {
 
             String path = saveFile();
 
-
             Skjob skjob = jobService.getJobByNameAndDeptid(position, deptService.getDeptidByName(dept));
             Skemp emp = new Skemp(getEmp_name(), (Objects.equals(getEmp_sex(), "0")) ? Sex.Male : Sex.Female, getEmp_birth(), getEmp_idNum(), new SimpleDateFormat("yyyy/mm/dd").format(new Date()), Zzmm.PartyMember,
                     getEmp_nat(), getEmp_native(), getEmp_tel(), getEmp_mail(), getEmp_height(), BloodTypes.A,
@@ -503,8 +502,10 @@ public class EmpAction extends ActionSupport {
                 Temporary temporary = new Temporary(getEmp_probation_start(), getEmp_probation_end(),
                         empNo, skjob.getJob_id(), YesOrNo.Yes);
                 empService.createTemporary(temporary);
+            }else{
+                Skstaff staff = new Skstaff(getEmp_id(),skjob.getJob_id(),new SimpleDateFormat("yyyy/mm/dd").format(new Date()));
+                staffService.createStaff(staff);
             }
-
             message.put("success", "1");
         } catch (Exception e) {
             message.put("success", "0");
@@ -618,6 +619,7 @@ public class EmpAction extends ActionSupport {
         ObjectMapper objectMapper = new ObjectMapper();
         String loginJson = objectMapper.writeValueAsString(data);
         HttpServletResponse response = ServletActionContext.getResponse();
+        response.setHeader("Content-type","text/html;charset-UTF-8");
         response.getOutputStream().write(loginJson.getBytes("UTF-8"));
     }
 
@@ -675,6 +677,7 @@ public class EmpAction extends ActionSupport {
         ObjectMapper objectMapper = new ObjectMapper();
         String loginJson = objectMapper.writeValueAsString(data);
         HttpServletResponse response = ServletActionContext.getResponse();
+        response.setHeader("Content-type","text/html;charset-UTF-8");
         response.getOutputStream().write(loginJson.getBytes("UTF-8"));
     }
 
@@ -685,7 +688,7 @@ public class EmpAction extends ActionSupport {
     public void changePost(){
         HashMap<String,String> message = new HashMap<String, String>();
         try{
-//TODO:
+//TODO:wait for data
 //            Change change = new Change(getEmp_id(),);
 //            changeService.createChange(change);
             message.put("success", "1");
@@ -697,6 +700,7 @@ public class EmpAction extends ActionSupport {
             ObjectMapper objectMapper = new ObjectMapper();
             String loginJson = objectMapper.writeValueAsString(message);
             HttpServletResponse response = ServletActionContext.getResponse();
+            response.setHeader("Content-type","text/html;charset-UTF-8");
             response.getOutputStream().write(loginJson.getBytes("UTF-8"));
         }catch (Exception e){
             e.printStackTrace();
@@ -708,8 +712,21 @@ public class EmpAction extends ActionSupport {
      * get emp by change time and emp_id emp_name
      */
     @Action(value = "getChangeEmp")
-    public void getChangeEmp(){
-//TODO:
+    public void getChangeEmp() throws Exception{
+        List<HashMap<String,String>> history = changeService.getHistory(getEmp_id(),getEmp_name(),getEmp_job_start(),getEmp_job_end());
+        List<List<String>> result = new ArrayList<List<String>>();
+        for (HashMap<String, String> stringStringHashMap : history) {
+            List<String> strings = new ArrayList<String>();
+//TODO:wait for data
+            result.add(strings);
+        }
+        HashMap<String,List<List<String>>> data = new HashMap<String,List<List<String>>>();
+        data.put("data",result);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String loginJson = objectMapper.writeValueAsString(data);
+        HttpServletResponse response = ServletActionContext.getResponse();
+        response.setHeader("Content-type","text/html;charset-UTF-8");
+        response.getOutputStream().write(loginJson.getBytes("UTF-8"));
     }
 
     /**
@@ -719,9 +736,9 @@ public class EmpAction extends ActionSupport {
     @Action(value = "getNewHiredEmps")
     public void getNewEmps() throws Exception{
         List<HashMap<String,String>> emps = staffService.getNewHiredStaff(getEmp_job_start(),getEmp_job_end(),getSearch_dept());
-        List<List<String>> result = new ArrayList<List<String>>();
+        List<List<String>> result = new ArrayList<>();
         for (HashMap<String, String> emp : emps) {
-            List<String> strings = new ArrayList<String>();
+            List<String> strings = new ArrayList<>();
             strings.add(emp.get(deptService.EMP_ID));
             strings.add(emp.get(deptService.DEPT_NAME));
             strings.add(emp.get(deptService.EMP_NAME));
@@ -733,6 +750,7 @@ public class EmpAction extends ActionSupport {
         ObjectMapper objectMapper = new ObjectMapper();
         String loginJson = objectMapper.writeValueAsString(data);
         HttpServletResponse response = ServletActionContext.getResponse();
+        response.setHeader("Content-type","text/html;charset-UTF-8");
         response.getOutputStream().write(loginJson.getBytes("UTF-8"));
     }
 
@@ -740,7 +758,28 @@ public class EmpAction extends ActionSupport {
      * get change record (all emps changing in the time zone)
      */
     @Action(value = "getChangeEmpsByTime")
-    public void getChangeEmpsByTime(){
+    public void getChangeEmpsByTime() throws Exception{
+        List<Change> changes = changeService.getChangeBetween(getEmp_job_start(),getEmp_job_end());
+        List<List<String>> result = new ArrayList<>();
+        for (Change change : changes) {
+            List<String> strings = new ArrayList<>();
+            Skemp skemp = (Skemp) empService.getEmpInfoByEmpidOrIdcard(getEmp_id(),null).get(0);
+            strings.add(change.getEmp_id());
+            strings.add(change.getOlddept()+change.getOldjob());
+            strings.add(change.getNewdept()+change.getNewjob());
+            strings.add(skemp.getName());
+            strings.add(skemp.getSex().toString());
+            strings.add(change.getChangetime());
+            strings.add(change.getChangereason());
+            result.add(strings);
+        }
+        HashMap<String,List<List<String>>> data = new HashMap<>();
+        data.put("data",result);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String loginJson = objectMapper.writeValueAsString(data);
+        HttpServletResponse response = ServletActionContext.getResponse();
+        response.setHeader("Content-type","text/html;charset-UTF-8");
+        response.getOutputStream().write(loginJson.getBytes("UTF-8"));
 
     }
 
@@ -749,7 +788,7 @@ public class EmpAction extends ActionSupport {
      */
     @Action(value = "getChangeByMonth")
     public void getChangeByMonth(){
-
+//TODO:wait for function
     }
 
 

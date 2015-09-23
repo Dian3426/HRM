@@ -125,6 +125,7 @@ public class DeptAction extends ActionSupport {
         ObjectMapper objectMapper = new ObjectMapper();
         String loginJson = objectMapper.writeValueAsString(result);
         HttpServletResponse response = ServletActionContext.getResponse();
+        response.setHeader("Content-type","text/html;charset-UTF-8");
         response.getOutputStream().write(loginJson.getBytes("UTF-8"));
     }
 
@@ -135,8 +136,13 @@ public class DeptAction extends ActionSupport {
     public void deptDelete(){
         HashMap<String,String> message = new HashMap<String, String>();
         try{
-            deptService.deleteDept(getDept_id());
-            message.put("success", "1");
+            boolean result = deptService.deleteDept(getDept_id());
+            if(result)
+                message.put("success", "1");
+            else{
+                message.put("success", "0");
+                message.put("msg", "部门删除失败，存在属于该员工的部门");
+            }
         }catch (Exception e){
             message.put("success", "0");
             e.printStackTrace();
@@ -145,6 +151,7 @@ public class DeptAction extends ActionSupport {
             ObjectMapper objectMapper = new ObjectMapper();
             String loginJson = objectMapper.writeValueAsString(message);
             HttpServletResponse response = ServletActionContext.getResponse();
+            response.setHeader("Content-type","text/html;charset-UTF-8");
             response.getOutputStream().write(loginJson.getBytes("UTF-8"));
         }catch (Exception e){
             e.printStackTrace();
@@ -158,9 +165,9 @@ public class DeptAction extends ActionSupport {
     @Action(value = "deptGetEmps")
     public void deptGetEmps() throws Exception{
         List<HashMap<String, String>> emps = deptService.getStaffByDeptid(getDept_id());
-        List<List<String>> result = new ArrayList<List<String>>();
+        List<List<String>> result = new ArrayList<>();
         for (HashMap<String, String> emp : emps) {
-            List<String> strings = new ArrayList<String>();
+            List<String> strings = new ArrayList<>();
             strings.add(emp.get(deptService.EMP_NAME));
             strings.add(emp.get(deptService.EMP_ID));
             strings.add(emp.get(deptService.JOB_NAME));
@@ -168,11 +175,12 @@ public class DeptAction extends ActionSupport {
             strings.add(emp.get(deptService.TIME));
             result.add(strings);
         }
-        HashMap<String,List<List<String>>> data = new HashMap<String,List<List<String>>>();
+        HashMap<String,List<List<String>>> data = new HashMap<>();
         data.put("data",result);
         ObjectMapper objectMapper = new ObjectMapper();
         String loginJson = objectMapper.writeValueAsString(data);
         HttpServletResponse response = ServletActionContext.getResponse();
+        response.setHeader("Content-type","text/html;charset-UTF-8");
         response.getOutputStream().write(loginJson.getBytes("UTF-8"));
     }
 
@@ -205,6 +213,7 @@ public class DeptAction extends ActionSupport {
         ObjectMapper objectMapper = new ObjectMapper();
         String loginJson = objectMapper.writeValueAsString(data);
         HttpServletResponse response = ServletActionContext.getResponse();
+        response.setHeader("Content-type","text/html;charset-UTF-8");
         response.getOutputStream().write(loginJson.getBytes("UTF-8"));
     }
 
@@ -238,6 +247,7 @@ public class DeptAction extends ActionSupport {
             ObjectMapper objectMapper = new ObjectMapper();
             String loginJson = objectMapper.writeValueAsString(message);
             HttpServletResponse response = ServletActionContext.getResponse();
+            response.setHeader("Content-type","text/html;charset-UTF-8");
             response.getOutputStream().write(loginJson.getBytes("UTF-8"));
         }catch (Exception e){
             e.printStackTrace();
