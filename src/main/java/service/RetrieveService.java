@@ -7,6 +7,7 @@ import mapper.ChangeMapper;
 import mapper.LeaveMapper;
 import mapper.SkstaffMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
 /**
  * Created by JSZ on 2015/9/22.
  */
+@Service
 public class RetrieveService extends BaseService {
     @Autowired
     private SkstaffMapper skstaffMapper;
