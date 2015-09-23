@@ -5,6 +5,7 @@ import domain.enums.StaffTypes;
 import mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
@@ -31,8 +32,8 @@ public class ChangeService extends BaseService {
     @Autowired
     private SkempMapper skempMapper;
 
-    @Transactional
-    public void createChange(Change change){
+    @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+    public void createChange(Change change) throws Exception{
         Talent talent = talentMapper.getTalentByEmpidAndJobid(change.getEmp_id(), change.getOldjob());
         Talent newTalent = new Talent(change.getEmp_id(),change.getNewjob(),talent.getStatus());
         talentMapper.deleteTalentByIds(talent.getEmp_id(), talent.getJob_id());
