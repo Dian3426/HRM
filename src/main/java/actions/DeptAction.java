@@ -218,6 +218,37 @@ public class DeptAction extends ActionSupport {
     }
 
     /**
+     * update the dept info
+     */
+    @Action(value = "updateDept")
+    public void updateDept(){
+        HashMap<String,String> message = new HashMap<String, String>();
+        try{
+            if(deptService.isDeptidExist(getDept_id())){
+                message.put("success", "0");
+                message.put("msg","部门编号已存在，无法更换！");
+            }else{
+                Skdept skdept = new Skdept(getDept_id(),getDept_name(),getDept_type().equals("公司")?DeptTypes.Enterprise : DeptTypes.Dept,
+                        getDept_tel(),getDept_fax(),getDept_desc(),getDept_sdept(),getDept_ftime());
+                deptService.updateDept(skdept);
+                message.put("success", "1");
+            }
+        }catch (Exception e){
+            message.put("success","0");
+            message.put("msg","服务器响应超时！");
+        }
+        try{
+            ObjectMapper objectMapper = new ObjectMapper();
+            String loginJson = objectMapper.writeValueAsString(message);
+            HttpServletResponse response = ServletActionContext.getResponse();
+            response.setHeader("Content-type","text/html;charset-UTF-8");
+            response.getOutputStream().write(loginJson.getBytes("UTF-8"));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * add one new dept
      * @return Action support status
      */
