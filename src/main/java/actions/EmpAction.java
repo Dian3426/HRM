@@ -19,6 +19,7 @@ import service.JobService;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -75,10 +76,20 @@ public class EmpAction extends ActionSupport {
     String emp_family_position;
     String emp_family_tel;
 
+    String emp_id;
+
     String fileTitle;
     File emp_img;
     String emp_imgContentType;
     String emp_imgFileName;
+
+    public String getEmp_id() {
+        return emp_id;
+    }
+
+    public void setEmp_id(String emp_id) {
+        this.emp_id = emp_id;
+    }
 
     public String getFileTitle() {
         return fileTitle;
@@ -557,6 +568,34 @@ public class EmpAction extends ActionSupport {
             e.printStackTrace();
         }
         return result;
+    }
+
+    /**
+     * look for the info of the tempory emp
+     * @throws Exception
+     */
+    @Action(value = "getEmpByTempInfo")
+    public void getEmpByTempInfo() throws Exception{
+        List<HashMap<String,String>> skemps = empService.getTemporaryEmpInfo(getEmp_id(), getEmp_name(), getEmp_probation_start(), getEmp_probation_end());
+        List<List<String>> result = new ArrayList<List<String>>();
+        for (HashMap<String, String> skemp : skemps) {
+            List<String> strings = new ArrayList<String>();
+            strings.add(skemp.get(empService.EMP_ID));
+            strings.add(skemp.get(empService.EMP_NAME));
+            strings.add(skemp.get(empService.DEPT_NAME));
+            strings.add(skemp.get(empService.JOB_NAME));
+            strings.add(skemp.get(empService.STATUS));
+            strings.add(skemp.get(empService.BEGINTIME));
+            strings.add(skemp.get(empService.ENDTIME));
+            result.add(strings);
+
+        }
+        HashMap<String,List<List<String>>> data = new HashMap<String,List<List<String>>>();
+        data.put("data",result);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String loginJson = objectMapper.writeValueAsString(data);
+        HttpServletResponse response = ServletActionContext.getResponse();
+        response.getOutputStream().write(loginJson.getBytes("UTF-8"));
     }
 
 
