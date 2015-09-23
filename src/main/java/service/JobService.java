@@ -137,7 +137,7 @@ public class JobService extends BaseService {
         return idList;
     }
 
-    public boolean isEmpidExist(String emp_id){
+    public boolean isJobidExist(String emp_id){
         if(getExistJobid().contains(emp_id))
             return true;
         return false;
