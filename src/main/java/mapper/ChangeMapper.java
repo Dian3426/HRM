@@ -1,9 +1,11 @@
 package mapper;
 
+import common.SqlProvider;
 import domain.Change;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectProvider;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,11 +18,7 @@ public interface ChangeMapper {
     @Insert("INSERT INTO CHANGE VALUES (null,#{emp_id},#{olddept},#{newdept},#{changereason},#{oldjob},#{newjob},#{type,typeHandler=org.apache.ibatis.type.EnumTypeHandler},#{changetime})")
     void createChange(Change change);
 
-    @Select("<script> SELECT c.EMP_ID,e.NAME,c.OLDDPET,c.OLDJOB,c.NEWDEPT,c.NEWJOB,c.CHANGETIME,c.TYPE,c.CHANGEREASON  FROM SKEMP e,CHANGE c WHERE e.EMP_ID=c.EMP_ID "+
-            "<if test=\"emp_id!=null \">AND  c.emp_id=#{emp_id} </if> " +
-            "<if test=\"empName!=null \">AND e.NAME=#{empNAME}</if> " +
-            "<if test=\"beginTime!=null \"> AND TO_DATE(#{beginTime},\"yyyy-mm-dd\") &gt; TO_DATE(c.changetime,\"yyyy-mm-dd\")  </if> " +
-            "<if test=\"endTime!=null \">AND TO_DATE(#{endTime},\"yyyy-mm-dd\") &lt; TO_DATE(c.changetime,\"yyyy-mm-dd\")  </if></script>")
+   @SelectProvider(type = SqlProvider.class,method = "selectChangeHistory")
     List<HashMap<String,String>> getChangeHistory(@Param("emp_id")String emp_id,@Param("empName")String empName,
                                             @Param("beginTime")String beginTime,@Param("endTime")String endTime);
 }
