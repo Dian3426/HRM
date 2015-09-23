@@ -224,7 +224,9 @@ public class DeptAction extends ActionSupport {
             skdept.setSuperd(getDept_sdept());
             skdept.setTele(getDept_tel());
             skdept.setType(getDept_type().equals("部门") ? DeptTypes.Dept : DeptTypes.Enterprise);
-            int count = deptService.getCount();
+            int count = 1;
+            while(deptService.isDeptidExist(Integer.toString(count)))
+                count++;
             skdept.setDept_id(Integer.toString(count));
             deptService.createDept(skdept);
             message.put("success", "1");
