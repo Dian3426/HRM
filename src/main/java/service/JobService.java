@@ -107,6 +107,11 @@ public class JobService extends BaseService {
         return skjobManager.getCount();
     }
 
+    /**
+     * 获取对应job_id的所有员工
+     * @param job_id
+     * @return
+     */
     public List<Skemp> getAllEmpByJobid(String job_id){
         List<Talent> talents =null;
         talents = talentMapper.getTalentByJobid(job_id);
