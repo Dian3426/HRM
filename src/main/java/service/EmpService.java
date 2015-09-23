@@ -4,6 +4,7 @@ import domain.*;
 import mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -33,14 +34,18 @@ public class EmpService extends BaseService{
      * @param societyrelation
      * @param talent
      */
-    @Transactional
-    public void createEmpTotally(Skemp skemp,Occupationcareer occupationcareer, Societyrelation societyrelation, Talent talent){
+    @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+    public void createEmpTotally(Skemp skemp,Occupationcareer occupationcareer, Societyrelation societyrelation, Talent talent) throws Exception {
         String emp_id = skemp.getEmp_id();
         if(emp_id.equals(occupationcareer.getEmp_id())&&emp_id.equals(societyrelation.getEmp_id())&&emp_id.equals(talent.getEmp_id())){
+            try {
             createEmp(skemp);
             createOccupationcareer(occupationcareer);
             creatSocietyrelation(societyrelation);
             createLegalTalent(talent);
+            }catch (Exception e){
+                throw new Exception("员工创建失败");
+            }
         }
     }
 
