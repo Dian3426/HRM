@@ -37,7 +37,6 @@ public class BaseService {
      */
     @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
     protected boolean createLegalTalent (Talent talent)throws Exception{
-
         String job_id = talent.getJob_id();
         Skjob job = skjobMapper.getJobByJobid(job_id);
         if(isLimitThisJob(job.getIslimit())){
