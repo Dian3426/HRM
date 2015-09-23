@@ -3,6 +3,7 @@ package actions;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.opensymphony.xwork2.ActionSupport;
 import domain.Skdept;
+import domain.Skjob;
 import domain.enums.DeptTypes;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
@@ -15,6 +16,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import service.DeptService;
+import service.JobService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.rmi.server.ExportException;
@@ -112,6 +114,9 @@ public class DeptAction extends ActionSupport {
     @Autowired
     private DeptService deptService;
 
+    @Autowired
+    private JobService jobService;
+
     /**
      * get All Depts' info,response a JSON with "sdepts" -> List<Skept>
      * @return Action support status
@@ -125,6 +130,7 @@ public class DeptAction extends ActionSupport {
         ObjectMapper objectMapper = new ObjectMapper();
         String loginJson = objectMapper.writeValueAsString(result);
         HttpServletResponse response = ServletActionContext.getResponse();
+        response.setHeader("Content-type","text/html;charset-UTF-8");
         response.getOutputStream().write(loginJson.getBytes("UTF-8"));
     }
 
@@ -135,8 +141,13 @@ public class DeptAction extends ActionSupport {
     public void deptDelete(){
         HashMap<String,String> message = new HashMap<String, String>();
         try{
-            deptService.deleteDept(getDept_id());
-            message.put("success", "1");
+            boolean result = deptService.deleteDept(getDept_id());
+            if(result)
+                message.put("success", "1");
+            else{
+                message.put("success", "0");
+                message.put("msg", "部门删除失败，存在属于该员工的部门");
+            }
         }catch (Exception e){
             message.put("success", "0");
             e.printStackTrace();
@@ -145,6 +156,7 @@ public class DeptAction extends ActionSupport {
             ObjectMapper objectMapper = new ObjectMapper();
             String loginJson = objectMapper.writeValueAsString(message);
             HttpServletResponse response = ServletActionContext.getResponse();
+            response.setHeader("Content-type","text/html;charset-UTF-8");
             response.getOutputStream().write(loginJson.getBytes("UTF-8"));
         }catch (Exception e){
             e.printStackTrace();
@@ -158,9 +170,9 @@ public class DeptAction extends ActionSupport {
     @Action(value = "deptGetEmps")
     public void deptGetEmps() throws Exception{
         List<HashMap<String, String>> emps = deptService.getStaffByDeptid(getDept_id());
-        List<List<String>> result = new ArrayList<List<String>>();
+        List<List<String>> result = new ArrayList<>();
         for (HashMap<String, String> emp : emps) {
-            List<String> strings = new ArrayList<String>();
+            List<String> strings = new ArrayList<>();
             strings.add(emp.get(deptService.EMP_NAME));
             strings.add(emp.get(deptService.EMP_ID));
             strings.add(emp.get(deptService.JOB_NAME));
@@ -168,11 +180,35 @@ public class DeptAction extends ActionSupport {
             strings.add(emp.get(deptService.TIME));
             result.add(strings);
         }
+        HashMap<String,List<List<String>>> data = new HashMap<>();
+        data.put("data",result);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String loginJson = objectMapper.writeValueAsString(data);
+        HttpServletResponse response = ServletActionContext.getResponse();
+        response.setHeader("Content-type","text/html;charset-UTF-8");
+        response.getOutputStream().write(loginJson.getBytes("UTF-8"));
+    }
+
+    /**
+     * get all position which in dept whose id is dept_id
+     * @throws Exception
+     */
+    @Action(value = "getPostsByDept")
+    public void getPostsByDept() throws Exception{
+        List<Skjob> skjobs = jobService.getJobsByDeptid(getDept_id());
+        List<List<String>> result = new ArrayList<List<String>>();
+        for (Skjob skjob : skjobs) {
+            List<String> strings = new ArrayList<String>();
+            strings.add(skjob.getJob_id());
+            strings.add(skjob.getName());
+            result.add(strings);
+        }
         HashMap<String,List<List<String>>> data = new HashMap<String,List<List<String>>>();
         data.put("data",result);
         ObjectMapper objectMapper = new ObjectMapper();
         String loginJson = objectMapper.writeValueAsString(data);
         HttpServletResponse response = ServletActionContext.getResponse();
+        response.setHeader("Content-type","text/html;charset-UTF-8");
         response.getOutputStream().write(loginJson.getBytes("UTF-8"));
     }
 
@@ -205,7 +241,39 @@ public class DeptAction extends ActionSupport {
         ObjectMapper objectMapper = new ObjectMapper();
         String loginJson = objectMapper.writeValueAsString(data);
         HttpServletResponse response = ServletActionContext.getResponse();
+        response.setHeader("Content-type","text/html;charset-UTF-8");
         response.getOutputStream().write(loginJson.getBytes("UTF-8"));
+    }
+
+    /**
+     * update the dept info
+     */
+    @Action(value = "updateDept")
+    public void updateDept(){
+        HashMap<String,String> message = new HashMap<String, String>();
+        try{
+            if(deptService.isDeptidExist(getDept_id())){
+                message.put("success", "0");
+                message.put("msg","部门编号已存在，无法更换！");
+            }else{
+                Skdept skdept = new Skdept(getDept_id(),getDept_name(),getDept_type().equals("公司")?DeptTypes.Enterprise : DeptTypes.Dept,
+                        getDept_tel(),getDept_fax(),getDept_desc(),getDept_sdept(),getDept_ftime());
+                deptService.updateDept(skdept);
+                message.put("success", "1");
+            }
+        }catch (Exception e){
+            message.put("success","0");
+            message.put("msg","服务器响应超时！");
+        }
+        try{
+            ObjectMapper objectMapper = new ObjectMapper();
+            String loginJson = objectMapper.writeValueAsString(message);
+            HttpServletResponse response = ServletActionContext.getResponse();
+            response.setHeader("Content-type","text/html;charset-UTF-8");
+            response.getOutputStream().write(loginJson.getBytes("UTF-8"));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -238,6 +306,7 @@ public class DeptAction extends ActionSupport {
             ObjectMapper objectMapper = new ObjectMapper();
             String loginJson = objectMapper.writeValueAsString(message);
             HttpServletResponse response = ServletActionContext.getResponse();
+            response.setHeader("Content-type","text/html;charset-UTF-8");
             response.getOutputStream().write(loginJson.getBytes("UTF-8"));
         }catch (Exception e){
             e.printStackTrace();

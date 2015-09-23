@@ -81,6 +81,7 @@ public class LogInAndOutAction extends ActionSupport{
                 ObjectMapper objectMapper = new ObjectMapper();
                 String loginJson = objectMapper.writeValueAsString(message);
                 HttpServletResponse response = ServletActionContext.getResponse();
+                response.setHeader("Content-type","text/html;charset-UTF-8");
                 response.getOutputStream().write(loginJson.getBytes("UTF-8"));
                 HttpServletRequest request = ServletActionContext.getRequest();
                 request.getSession().setAttribute("emp_id", getEmp_id());
@@ -94,6 +95,7 @@ public class LogInAndOutAction extends ActionSupport{
                 ObjectMapper objectMapper = new ObjectMapper();
                 String loginJson = objectMapper.writeValueAsString(message);
                 HttpServletResponse response = ServletActionContext.getResponse();
+                response.setHeader("Content-type","text/html;charset-UTF-8");
                 response.getOutputStream().write(loginJson.getBytes("UTF-8"));
             }
         }catch (Exception e){
@@ -104,6 +106,7 @@ public class LogInAndOutAction extends ActionSupport{
             try {
                 loginJson = objectMapper.writeValueAsString(message);
                 HttpServletResponse response = ServletActionContext.getResponse();
+                response.setHeader("Content-type","text/html;charset-UTF-8");
                 response.getOutputStream().write(loginJson.getBytes("UTF-8"));
             } catch (Exception e1) {
                 e1.printStackTrace();
