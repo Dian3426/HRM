@@ -523,22 +523,6 @@ public class EmpAction extends ActionSupport {
         return deptNo;
     }
 
-    @Action(value = "getEmpByPostID")
-    public void getEmpByPostID() throws Exception{
-        List<List<String>> result = new ArrayList<List<String>>();
-//        List<Skemp> emps = ;
-//        for (Skemp emp : emps) {
-//            List<String> strings = new ArrayList<String>();
-//            result.add(strings);
-//        }
-        HashMap<String,List<List<String>>> data = new HashMap<String,List<List<String>>>();
-        data.put("data",result);
-        ObjectMapper objectMapper = new ObjectMapper();
-        String loginJson = objectMapper.writeValueAsString(data);
-        HttpServletResponse response = ServletActionContext.getResponse();
-        response.getOutputStream().write(loginJson.getBytes("UTF-8"));
-    }
-
     private String saveFile() throws Exception{
         FileOutputStream fos = new FileOutputStream("/photo" + "//" + getUploadFileName());
         FileInputStream fis = new FileInputStream(getUpload());

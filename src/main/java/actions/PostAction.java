@@ -2,6 +2,7 @@ package actions;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.opensymphony.xwork2.ActionSupport;
+import domain.Skemp;
 import domain.Skjob;
 import domain.enums.JobTypes;
 import domain.enums.YesOrNo;
@@ -114,7 +115,12 @@ public class PostAction extends ActionSupport {
         HashMap<String,String> message = new HashMap<String, String>();
         try{
             Skjob skjob = new Skjob();
-            skjob.setJob_id(String.valueOf(jobService.getCount()));
+            for(int i = 0; i < 10000; i++){
+                if(!jobService.isJobidExist(String.valueOf(i))){
+                    skjob.setJob_id(String.valueOf(i));
+                    break;
+                }
+            }
             skjob.setName(getPost_name());
             skjob.setType(JobTypes.valueOf(getPost_type()));
             skjob.setLimitnum(getPost_num());
@@ -201,6 +207,26 @@ public class PostAction extends ActionSupport {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    @Action(value = "getEmpByPostID")
+    public void getEmpByPostID() throws Exception{
+        List<List<String>> result = new ArrayList<List<String>>();
+        List<Skemp> emps = jobService.getAllEmpByJobid(getPost_id());
+        for (Skemp emp : emps) {
+            List<String> strings = new ArrayList<String>();
+            strings.add(emp.getName());
+            strings.add(emp.getEmp_id());
+            strings.add(emp.getTele());
+            strings.add(emp.getToworktime());
+            result.add(strings);
+        }
+        HashMap<String,List<List<String>>> data = new HashMap<String,List<List<String>>>();
+        data.put("data",result);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String loginJson = objectMapper.writeValueAsString(data);
+        HttpServletResponse response = ServletActionContext.getResponse();
+        response.getOutputStream().write(loginJson.getBytes("UTF-8"));
     }
 
     public static void main(String[] args) {
