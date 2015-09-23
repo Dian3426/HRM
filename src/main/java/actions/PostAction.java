@@ -36,8 +36,17 @@ public class PostAction extends ActionSupport {
     String post_name;
     String post_sdept;
     String post_type;
+    String post_id;
     int post_num;
     boolean post_isnum;
+
+    public String getPost_id() {
+        return post_id;
+    }
+
+    public void setPost_id(String post_id) {
+        this.post_id = post_id;
+    }
 
     public String getPost_name() {
         return post_name;
@@ -172,6 +181,26 @@ public class PostAction extends ActionSupport {
         String loginJson = objectMapper.writeValueAsString(data);
         HttpServletResponse response = ServletActionContext.getResponse();
         response.getOutputStream().write(loginJson.getBytes("UTF-8"));
+    }
+
+    @Action(value = "postDelete")
+    public void postDelete(){
+        HashMap<String,String> message = new HashMap<String, String>();
+        try{
+            jobService.deleteJob(getPost_id());
+            message.put("success", "1");
+        }catch (Exception e){
+            message.put("success", "0");
+            e.printStackTrace();
+        }
+        try{
+            ObjectMapper objectMapper = new ObjectMapper();
+            String loginJson = objectMapper.writeValueAsString(message);
+            HttpServletResponse response = ServletActionContext.getResponse();
+            response.getOutputStream().write(loginJson.getBytes("UTF-8"));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
