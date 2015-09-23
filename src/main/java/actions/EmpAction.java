@@ -22,6 +22,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by ZaraN on 2015/9/21.
@@ -450,18 +451,27 @@ public class EmpAction extends ActionSupport {
 
             String path = saveFile();
 
+
             Skjob skjob = jobService.getJobByNameAndDeptid(position,deptService.getDeptidByName(dept));
             Skemp emp = new Skemp(getEmp_name(),(getEmp_sex() == "0")? Sex.Male : Sex.Female,getEmp_birth(),getEmp_idNum(),"2",Zzmm.PartyMember,
                     getEmp_nat(),getEmp_native(),getEmp_tel(),getEmp_mail(),getEmp_height(),BloodTypes.A,
                     getEmp_birthprov()+getEmp_birthcity(),getEmp_rresidence(),path,Degree.College,getEmp_coll(),
                     getEmp_major(),getEmp_grad(),SourceTypes.Social,empNo);
             Occupationcareer occupationcareer = new Occupationcareer(empNo,getEmp_job_start(),getEmp_job_end(),
-                    getEmp_former_position(),"",getEmp_former_position(),getEmp_former_salary(),getEmp_former_evidence(),
-                    getEmp_former_evidence_position(),"");
+                    getEmp_former_position(),"无",getEmp_former_position(),getEmp_former_salary(),getEmp_former_evidence(),
+                    getEmp_former_evidence_position(),"2222");
             Societyrelation societyrelation = new Societyrelation(empNo,Relations.Father,
                     getEmp_family_name(),getEmp_family_position(),getEmp_family_comp(),getEmp_family_tel());
             Talent talent = new Talent(empNo,skjob.getJob_id(),(getEmp_jobtype() == "0") ? StaffTypes.Official : StaffTypes.Temporary);
+
+            if(getEmp_probation() == "1"){
+                Temporary temporary = new Temporary(getEmp_probation_start(),getEmp_probation_end(),
+                        empNo,skjob.getJob_id(),YesOrNo.Yes);
+                empService.createTemporary(temporary);
+            }
+
             empService.createEmpTotally(emp,occupationcareer,societyrelation,talent);
+
             message.put("success", "1");
         }catch (Exception e){
             message.put("success", "0");
@@ -484,6 +494,9 @@ public class EmpAction extends ActionSupport {
      */
     private String createEmpNo(){
         int count = empService.getCount();
+        while(empService.isEmpidExist(String.valueOf(count))){
+            count++;
+        }
         String empNo = "";
         if(count < 10)
             empNo += "000";
@@ -520,11 +533,12 @@ public class EmpAction extends ActionSupport {
 
     private String saveFile() throws Exception{
         File file = new File("E:\\HRMResPhoto");
+        String result = "E:\\HRMResPhoto\\" + UUID.randomUUID() + ".png";
         if  (!file .exists()  && !file .isDirectory())
         {
             file .mkdir();
         }
-        FileOutputStream fos = new FileOutputStream("E:\\HRMResPhoto\\" + getEmp_name());
+        FileOutputStream fos = new FileOutputStream(result);
         FileInputStream fis = new FileInputStream(getEmp_img());
         byte[] buffer = new byte[1024];
         int len = 0;
@@ -535,7 +549,7 @@ public class EmpAction extends ActionSupport {
         }catch (IOException e) {
             e.printStackTrace();
         }
-        return "E:\\HRMResPhoto\\" + getEmp_name();
+        return result;
     }
 
 
