@@ -128,6 +128,9 @@ public class DeptAction extends ActionSupport {
         response.getOutputStream().write(loginJson.getBytes("UTF-8"));
     }
 
+    /**
+     * delete one dept by dept_id
+     */
     @Action(value = "deptDelete")
     public void deptDelete(){
         HashMap<String,String> message = new HashMap<String, String>();
@@ -148,6 +151,10 @@ public class DeptAction extends ActionSupport {
         }
     }
 
+    /**
+     * get all emps by dept
+     * @throws Exception
+     */
     @Action(value = "deptGetEmps")
     public void deptGetEmps() throws Exception{
         List<HashMap<String, String>> emps = deptService.getStaffByDeptid(getDept_id());
@@ -169,6 +176,10 @@ public class DeptAction extends ActionSupport {
         response.getOutputStream().write(loginJson.getBytes("UTF-8"));
     }
 
+    /**
+     * get infomation about dept
+     * @throws Exception
+     */
     @Action(value = "deptSearch")
     public void deptSearch() throws Exception{
         List<Skdept> skdepts = deptService.getAllDepts();

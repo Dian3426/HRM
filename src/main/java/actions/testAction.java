@@ -8,6 +8,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 
+/**
+ * test for SSM
+ */
 @Controller
 @Scope("prototype")
 @Namespace("/Test")
