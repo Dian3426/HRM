@@ -13,7 +13,7 @@ import java.util.List;
 public interface SkjobMapper {
 
     @Insert("INSERT INTO  SKJOB VALUES (null,#{Skjob.name},#{Skjob.job_id},#{Skjob.type,typeHandler=org.apache.ibatis.type.EnumTypeHandler},#{Skjob.limitnum},#{Skjob.dept_id},#{Skjob.islimit,typeHandler=org.apache.ibatis.type.EnumTypeHandler})")
-    void craateJob(@Param("Skjob")Skjob skjob);
+    void createJob(@Param("Skjob")Skjob skjob);
 
     @Select("SELECT * FROM SKJOB")
     List<Skjob> getAllJobs();
@@ -24,7 +24,7 @@ public interface SkjobMapper {
     @Select("SELECT JOB_ID,NAME FROM SKJOB")
     List<HashMap<String,String>> getJobidAndNames();
 
-    @Update("UPDATE SKJOB SET NAME=#{name},TYPE=#{TYPE ,typeHandler=org.apache.ibatis.type.EnumTypeHandler},LIMITNUM=#{limitnum},DEPT_ID=#{dept_id}," +
+    @Update("UPDATE SKJOB SET NAME=#{name},TYPE=#{type ,typeHandler=org.apache.ibatis.type.EnumTypeHandler},LIMITNUM=#{limitnum},DEPT_ID=#{dept_id}," +
             "ISLIMIT=#{islimit,typeHandler=org.apache.ibatis.type.EnumTypeHandler} WHERE JOB_ID=#{job_id}")
     void updateByJobid(Skjob skjob);
 

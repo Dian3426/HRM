@@ -26,7 +26,7 @@ public class JobService extends BaseService {
     private SkempMapper skempMapper;
 
     public void createJob(Skjob skjob){
-        skjobManager.craateJob(skjob);
+        skjobManager.createJob(skjob);
     }
 
     public List<Skjob> getAllJobs(){
