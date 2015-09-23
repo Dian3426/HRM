@@ -38,6 +38,7 @@ public class ChangeService extends BaseService {
         Talent talent = talentMapper.getTalentByEmpidAndJobid(change.getEmp_id(), change.getOldjob());
         Talent newTalent = new Talent(change.getEmp_id(),change.getNewjob(),talent.getStatus());
         talentMapper.deleteTalentByIds(talent.getEmp_id(), talent.getJob_id());
+        skstaffMapper.changeJob(talent.getEmp_id(),newTalent.getJob_id());
         createLegalTalent(newTalent);
         if(talent.getStatus()== StaffTypes.Official){
             skstaffMapper.changeJob(change.getEmp_id(),change.getNewjob());
@@ -68,8 +69,8 @@ public class ChangeService extends BaseService {
         historyNew.setNewnum(historyNew.getOldnum()+1);
     }
 
-    public Skemp getEmpForChange(String emp_id){
-        return skempMapper.getEmpByEmpid(emp_id);
+    public Skemp getInfoForChange(String emp_id,String job_id,String dept_id){
+        return skstaffMapper.getInfoByEmpid(emp_id,job_id,dept_id);
     }
 
 
@@ -138,5 +139,16 @@ public class ChangeService extends BaseService {
      */
     public List<HashMap<String,String>> getInfoForLeave(String dept_id,String deptName,String emp_id,String empName){
         return leaveMapper.getInfoForLeave(dept_id,deptName,emp_id,empName);
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+    public void leave(Leave leave){
+        try {
+        skstaffMapper.deleteByEmpid(leave.getEmp_id());
+        talentMapper.deleteTalentByIds(leave.getEmp_id(),leave.getJob_id());
+        leaveMapper.createLeave(leave);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
