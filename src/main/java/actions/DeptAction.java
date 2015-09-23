@@ -3,6 +3,7 @@ package actions;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.opensymphony.xwork2.ActionSupport;
 import domain.Skdept;
+import domain.Skjob;
 import domain.enums.DeptTypes;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
@@ -15,6 +16,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import service.DeptService;
+import service.JobService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.rmi.server.ExportException;
@@ -112,6 +114,9 @@ public class DeptAction extends ActionSupport {
     @Autowired
     private DeptService deptService;
 
+    @Autowired
+    private JobService jobService;
+
     /**
      * get All Depts' info,response a JSON with "sdepts" -> List<Skept>
      * @return Action support status
@@ -176,6 +181,29 @@ public class DeptAction extends ActionSupport {
             result.add(strings);
         }
         HashMap<String,List<List<String>>> data = new HashMap<>();
+        data.put("data",result);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String loginJson = objectMapper.writeValueAsString(data);
+        HttpServletResponse response = ServletActionContext.getResponse();
+        response.setHeader("Content-type","text/html;charset-UTF-8");
+        response.getOutputStream().write(loginJson.getBytes("UTF-8"));
+    }
+
+    /**
+     * get all position which in dept whose id is dept_id
+     * @throws Exception
+     */
+    @Action(value = "getPostsByDept")
+    public void getPostsByDept() throws Exception{
+        List<Skjob> skjobs = jobService.getJobsByDeptid(getDept_id());
+        List<List<String>> result = new ArrayList<List<String>>();
+        for (Skjob skjob : skjobs) {
+            List<String> strings = new ArrayList<String>();
+            strings.add(skjob.getJob_id());
+            strings.add(skjob.getName());
+            result.add(strings);
+        }
+        HashMap<String,List<List<String>>> data = new HashMap<String,List<List<String>>>();
         data.put("data",result);
         ObjectMapper objectMapper = new ObjectMapper();
         String loginJson = objectMapper.writeValueAsString(data);
