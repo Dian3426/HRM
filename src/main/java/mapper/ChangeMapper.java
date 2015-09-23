@@ -27,8 +27,8 @@ public interface ChangeMapper {
     List<Change> getChangesBetween(String begin,String end);
 
     @Select("SELECT COUNT(EMP_ID) FROM CHANGE WHERE substr(CHANGTIME,0,7)=#{month} AND NEWDEPT=#{dept_id}")
-    int getCountByMonthAndNewDeptid(String month, String dept_id);
+    int getCountByMonthAndNewDeptid(@Param("month")String month,@Param("dept_id") String dept_id);
 
     @Select("SELECT COUNT(EMP_ID) FROM CHANGE WHERE substr(CHANGTIME,0,7)=#{month} AND OLDDEPT=#{dept_id}  ")
-    int getCountByMonthAndOldDpetid(String month,String dept_id);
+    int getCountByMonthAndOldDpetid(@Param("month")String month,@Param("dept_id")String dept_id);
 }
