@@ -85,9 +85,8 @@ public class PostAction extends ActionSupport {
 
     @Action(value = "getJobs")
     public void getJobs() throws Exception{
-        List<String> result = jobService.getAllJobNames();
         ObjectMapper objectMapper = new ObjectMapper();
-        String loginJson = objectMapper.writeValueAsString(result);
+        String loginJson = objectMapper.writeValueAsString(JobTypes.values());
         HttpServletResponse response = ServletActionContext.getResponse();
         response.getOutputStream().write(loginJson.getBytes("UTF-8"));
     }
