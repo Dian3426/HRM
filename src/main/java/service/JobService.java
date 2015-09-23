@@ -127,4 +127,19 @@ public class JobService extends BaseService {
         }
 
     }
+
+    public List<String> getExistJobid(){
+        List<Skjob> jobList = skjobManager.getAllJobs();
+        List<String>  idList = new ArrayList<String>();
+        for (Skjob skjob : jobList) {
+            idList.add(skjob.getJob_id());
+        }
+        return idList;
+    }
+
+    public boolean isEmpidExist(String emp_id){
+        if(getExistJobid().contains(emp_id))
+            return true;
+        return false;
+    }
 }

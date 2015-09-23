@@ -87,8 +87,6 @@ public class EmpService extends BaseService{
     public void createTemporary(Temporary temporary){
         temporaryMapper.createTemporary(temporary);
     }
-
-
     /**
      * 获取hashmap values的keys
      */

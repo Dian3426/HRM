@@ -8,6 +8,7 @@ import mapper.TalentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -131,5 +132,20 @@ public class DeptService extends BaseService{
 
     public int getCount(){
         return skdeptManager.getDeptNum();
+    }
+
+    public List<String> getExistDeptid(){
+        List<Skdept> deptList = skdeptManager.getAllDepts();
+        List<String>  idList = new ArrayList<String>();
+        for (Skdept skdept : deptList) {
+            idList.add(skdept.getDept_id());
+        }
+        return idList;
+    }
+
+    public boolean isEmpidExist(String emp_id){
+        if(getExistDeptid().contains(emp_id))
+            return true;
+        return false;
     }
 }
