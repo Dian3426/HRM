@@ -15,12 +15,10 @@ import java.util.List;
  */
 public interface TemporaryMapper {
     @Insert("INSERT INTO TEMPORARY VALUES (null,#{emp_id},#{job_id},#{begintime},#{endtime},#{status,typeHandler=org.apache.ibatis.type.EnumTypeHandler})")
-    void createTemporary(@Param("Temporary") Temporary temporary);
-
-
+    void createTemporary(Temporary temporary);
 
     /**
-     * Õâ¸ö·½·¨´òÆÆÃ¿¸ömapperÖ»´¦ÀíÒ»ÕÅ±íµÄÔ­Ôò=¡£=
+     * è¿™ä¸ªæ–¹æ³•æ‰“ç ´æ¯ä¸ªmapperåªå¤„ç†ä¸€å¼ è¡¨çš„åŸåˆ™=ã€‚=
      * @param emp_id
      * @param name
      * @param begintime
