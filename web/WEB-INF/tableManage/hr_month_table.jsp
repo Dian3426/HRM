@@ -125,7 +125,7 @@
                 <div class="box-body">
                     <table class="table table-bordered table-striped table-hover" id="hr_month_table">
                         <tr>
-                            <th colspan="11">XXXX-XX 人事月报</th>
+                            <th colspan="11">2015-09 人事月报</th>
                         </tr>
                         <tr>
                             <td rowspan="2">部门名称</td>
@@ -133,16 +133,55 @@
                             <td colspan="4">学历统计</td>
                         </tr>
                         <tr>
-                            <td>学历统计</td>
+                            <td>月初人数</td>
                             <td>月末人数</td>
                             <td>本月新入职</td>
-                            <td>本月新入职</td>
+                            <td>本月离职</td>
                             <td>本月调入</td>
-                            <td>本月调入</td>
+                            <td>本月调出</td>
                             <td>研究生</td>
                             <td>本科</td>
                             <td>大专</td>
                             <td>高中及以下</td>
+                        </tr>
+                        <tr>
+                            <td>行政部</td>
+                            <td>2</td>
+                            <td>7</td>
+                            <td>2</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>3</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>网络部</td>
+                            <td>2</td>
+                            <td>8</td>
+                            <td>2</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>财务部</td>
+                            <td>1</td>
+                            <td>4</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>0</td>
                         </tr>
                     </table>
                 </div>

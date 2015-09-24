@@ -10,14 +10,14 @@ $('input[id=hr_month]').datepicker({
 });
 
 $("#hr_month_btn").click(function () {
-    $("#ht_month_table_form").ajaxSubmit({
-        url: '',
-        type: 'POST',
-        dataType: 'JSON',
-        success: function (data) {
-            alert(data);
-            $("#hr_month_div").attr("class", "row animated fadeInDown");
-        }
-    });
-
+    //$("#ht_month_table_form").ajaxSubmit({
+    //    url: '',
+    //    type: 'POST',
+    //    dataType: 'JSON',
+    //    success: function (data) {
+    //        alert(data);
+    //
+    //    }
+    //});
+    $("#hr_month_div").attr("class", "row animated fadeInDown");
 });
