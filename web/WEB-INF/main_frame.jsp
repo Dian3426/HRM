@@ -55,7 +55,7 @@
 <div class="wrapper">
     <header class="main-header">
         <!--Logo开始-->
-        <a href="/mainFrame" class="logo">
+        <a href="/mainFrame/" class="logo">
             <!--MiniLogo-->
             <span class="logo-mini"><b>H</b>RM</span>
             <!--完整Logo-->
