@@ -150,11 +150,24 @@ public class EmpService extends BaseService{
             return null;
         }
         boolean flag = true;
-        if(!emp_id.isEmpty()){
+        if(emp_id!=null){
             skemp = skempMapper.getEmpByEmpid(emp_id);
             flag = false;
+            try {
+                Occupationcareer occupationcareer =getCareerByEmpid(emp_id);
+                list.add(occupationcareer);
+            }catch (NullPointerException e){
+                System.err.println("没有找到对应的职业生涯");
+                list.add(null);
+            }
+            try {
+                Societyrelation societyrelation = getRelationByEmpid(emp_id);
+            }catch (NullPointerException e){
+                System.err.println("没有找到对应的社会关系");
+                list.add(null);
+            }
         }
-        if(flag||!idcard.isEmpty()){
+        if(flag||idcard!=null){
             skemp= skempMapper.getEmpbyIdcard(idcard);
         }
         list.add(skemp);
@@ -163,19 +176,7 @@ public class EmpService extends BaseService{
             System.err.println("没有找到对应的员工");
            list.add(null);
         }
-        try {
-            Occupationcareer occupationcareer =getCareerByEmpid(emp_id);
-            list.add(occupationcareer);
-        }catch (NullPointerException e){
-            System.err.println("没有找到对应的职业生涯");
-            list.add(null);
-        }
-        try {
-            Societyrelation societyrelation = getRelationByEmpid(emp_id);
-        }catch (NullPointerException e){
-            System.err.println("没有找到对应的社会关系");
-            list.add(null);
-        }
+
         return list;
     }
 
