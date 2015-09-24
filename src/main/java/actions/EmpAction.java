@@ -85,6 +85,53 @@ public class EmpAction extends ActionSupport {
 
     String search_dept;
 
+    String trans_dept_name;
+    String trans_post_name;
+    String trans_emp_name;
+    String trans_new_post;
+
+    String hr_month;
+
+    public String getHr_month() {
+        return hr_month;
+    }
+
+    public void setHr_month(String hr_month) {
+        this.hr_month = hr_month;
+    }
+
+    public String getTrans_dept_name() {
+        return trans_dept_name;
+    }
+
+    public void setTrans_dept_name(String trans_dept_name) {
+        this.trans_dept_name = trans_dept_name;
+    }
+
+    public String getTrans_post_name() {
+        return trans_post_name;
+    }
+
+    public void setTrans_post_name(String trans_post_name) {
+        this.trans_post_name = trans_post_name;
+    }
+
+    public String getTrans_emp_name() {
+        return trans_emp_name;
+    }
+
+    public void setTrans_emp_name(String trans_emp_name) {
+        this.trans_emp_name = trans_emp_name;
+    }
+
+    public String getTrans_new_post() {
+        return trans_new_post;
+    }
+
+    public void setTrans_new_post(String trans_new_post) {
+        this.trans_new_post = trans_new_post;
+    }
+
     public String getSearch_dept() {
         return search_dept;
     }
@@ -468,6 +515,9 @@ public class EmpAction extends ActionSupport {
     @Autowired
     private StaffService staffService;
 
+    @Autowired
+    private RetrieveService retrieveService;
+
     /**
      * add one new emp to database
      */
@@ -689,6 +739,7 @@ public class EmpAction extends ActionSupport {
         HashMap<String,String> message = new HashMap<String, String>();
         try{
 //TODO:wait for data
+            Skemp skemp = (Skemp) empService.getEmpInfoByEmpidOrIdcard(getEmp_id(), null).get(0);
 //            Change change = new Change(getEmp_id(),);
 //            changeService.createChange(change);
             message.put("success", "1");
@@ -713,7 +764,7 @@ public class EmpAction extends ActionSupport {
      */
     @Action(value = "getChangeEmp")
     public void getChangeEmp() throws Exception{
-        List<HashMap<String,String>> history = changeService.getHistory(getEmp_id(),getEmp_name(),getEmp_job_start(),getEmp_job_end());
+        List<HashMap<String,String>> history = changeService.getHistory(getEmp_id(), getEmp_name(), getEmp_job_start(), getEmp_job_end());
         List<List<String>> result = new ArrayList<List<String>>();
         for (HashMap<String, String> stringStringHashMap : history) {
             List<String> strings = new ArrayList<String>();
@@ -735,7 +786,7 @@ public class EmpAction extends ActionSupport {
      */
     @Action(value = "getNewHiredEmps")
     public void getNewEmps() throws Exception{
-        List<HashMap<String,String>> emps = staffService.getNewHiredStaff(getEmp_job_start(),getEmp_job_end(),getSearch_dept());
+        List<HashMap<String,String>> emps = staffService.getNewHiredStaff(getEmp_job_start(), getEmp_job_end(), getSearch_dept());
         List<List<String>> result = new ArrayList<>();
         for (HashMap<String, String> emp : emps) {
             List<String> strings = new ArrayList<>();
@@ -759,7 +810,7 @@ public class EmpAction extends ActionSupport {
      */
     @Action(value = "getChangeEmpsByTime")
     public void getChangeEmpsByTime() throws Exception{
-        List<Change> changes = changeService.getChangeBetween(getEmp_job_start(),getEmp_job_end());
+        List<Change> changes = changeService.getChangeBetween(getEmp_job_start(), getEmp_job_end());
         List<List<String>> result = new ArrayList<>();
         for (Change change : changes) {
             List<String> strings = new ArrayList<>();
@@ -787,13 +838,74 @@ public class EmpAction extends ActionSupport {
      * month change record
      */
     @Action(value = "getChangeByMonth")
-    public void getChangeByMonth(){
-//TODO:wait for function
+    public void getChangeByMonth() throws Exception{
+        List<List<String>> result = new ArrayList<>();
+        List<Skdept> skdepts = deptService.getAllDepts();
+        for (Skdept skdept : skdepts) {
+            List<String> strings = new ArrayList<>();
+            strings.add(skdept.getName());
+            strings.add(String.valueOf(retrieveService.getCountByDeptid(skdept.getDept_id())));
+            strings.add(String.valueOf(retrieveService.getNewCountByByMonthAndDeptid(getHr_month(), skdept.getDept_id())));
+            strings.add(String.valueOf(retrieveService.getLeaveCountByMonthAndDeptid(getHr_month(), skdept.getDept_id())));
+            strings.add(String.valueOf(retrieveService.getInCountByMonthAndDeptid(getHr_month(), skdept.getDept_id())));
+            strings.add(String.valueOf(retrieveService.getOutCountByMonthAndDeptid(getHr_month(), skdept.getDept_id())));
+            strings.add(String.valueOf(retrieveService.getCountByDegree(getHr_month(), skdept.getDept_id(), Degree.Postgraduate)));
+            strings.add(String.valueOf(retrieveService.getCountByDegree(getHr_month(), skdept.getDept_id(), Degree.Undergraduate)));
+            strings.add(String.valueOf(retrieveService.getCountByDegree(getHr_month(), skdept.getDept_id(), Degree.College)));
+            strings.add(String.valueOf(retrieveService.getCountByDegree(getHr_month(), skdept.getDept_id(), Degree.SHStudent)));
+            result.add(strings);
+        }
+
+        HashMap<String,List<List<String>>> data = new HashMap<>();
+        data.put("data",result);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String loginJson = objectMapper.writeValueAsString(data);
+        HttpServletResponse response = ServletActionContext.getResponse();
+        response.setHeader("Content-type","text/html;charset-UTF-8");
+        response.getOutputStream().write(loginJson.getBytes("UTF-8"));
     }
 
+    /**
+     * get last month's String
+     * @param s format: yyyy/mm
+     * @return last month's string
+     */
+    public String getLastMongth(String s){
+        String[] temp = s.split("/");
+        String year = temp[0];
+        String month = temp[1];
+        int m = Integer.parseInt(month);
+        int y = Integer.parseInt(year);
+        if(m == 1){
+            m = 12;
+            y--;
+        }else
+            m--;
+        year = String.valueOf(y);
+        if(m >= 10)
+            month = String.valueOf(m);
+        else
+            month = "0" + String.valueOf(m);
+        return year + "/" + month;
+    }
 
     public static void main(String[] args) {
-        System.out.println(new File(System.getProperty("user.dir") + "\\web\\photo\\").getAbsolutePath());
+        String[] temp = "2015/01".split("/");
+        String year = temp[0];
+        String month = temp[1];
+        int m = Integer.parseInt(month);
+        int y = Integer.parseInt(year);
+        if(m == 1){
+            m = 12;
+            y--;
+        }else
+            m--;
+        year = String.valueOf(y);
+        if(m >= 10)
+            month = String.valueOf(m);
+        else
+            month = "0" + String.valueOf(m);
+        System.out.println(year + "/" + month);
     }
 
 
