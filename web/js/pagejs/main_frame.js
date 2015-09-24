@@ -18,6 +18,17 @@ $(document).ready(function () {
         $.cookie('data-skin', $(this).attr("data-skin"), {expires: 7});
     });
 
+    $("#logout_btn").click(function () {
+        var header = '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+            '<h4 class="modal-title" id="myModalLabel">信息</h4>';
+        var body = '登出成功';
+        var footer = '<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>';
+        showModal(header, body, footer, {})
+        setTimeout(function () {
+            window.location.href = "/";
+        }, 1000)
+    });
+
     $("#dept_info").click(function () {
         $("#page_container").load("./deptInfo");
     });

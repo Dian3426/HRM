@@ -40,5 +40,25 @@ var t = $('#emp_probed_result').DataTable({
 });
 
 $("#probed_search_btn").click(function () {
-    $("#probed_result_div").attr("class", "row animated fadeInDown");
+    if ($("#emp_id").val() == "3303" && ($("#emp_name").val() == "" || $("#emp_name").val() == '张') && sessionStorage.getItem("prob_z") != undefined) {
+        t.row.add([
+            "3303",
+            "张然",
+            "行政部",
+            "试用中",
+            "2014-01-01",
+            "2016-01-01",
+            "2015-09-24"
+        ]).draw( false );
+        if ($("#probed_result_div").hasClass("rhide")) {
+            $("#probed_result_div").attr("class", "row animated fadeInDown");
+        }
+    } else {
+        var header = '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+            '<h4 class="modal-title" id="myModalLabel">信息</h4>';
+        var body = '找不到对应的员工';
+        var footer = '<button type="button" class="btn btn-default" onclick="del()" data-dismiss="modal">确定</button>';
+        showModal(header, body, footer, {})
+    }
+
 });

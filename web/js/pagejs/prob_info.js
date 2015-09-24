@@ -57,10 +57,35 @@ function edit_btn_click() {
     var header = '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
         '<h4 class="modal-title" id="myModalLabel">试用期员工列表</h4>';
     var body = '<form><div class="form-group"><label for="recipient-name" class="control-label">考核结果:</label><select name="prob_result" class="form-control" id="prob_result"><option value="0">通过</option><option value="1">不通过</option></select></div><div class="form-group"><label for="prob_grade" class="control-label">考核评语:</label><textarea class="form-control" style="resize: none" rows="12" name="prob_grade" id="prob_grade"></textarea></div></form>';
-    var footer = '<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>';
+    var footer = '<button type="button" class="btn btn-default" onclick="del()" data-dismiss="modal">确定</button>';
     showModal(header, body, footer, {})
 }
 
 $("#prob_search_btn").click(function () {
-    $("#prob_result_div").attr("class", "row animated fadeInDown");
+    //t.ajax.url('/getEmpByTempInfo?' + $("#prob_info_form").serialize());
+    //t.ajax.reload();
+    if ($("#emp_id").val() == "3303" && ($("#emp_name").val() == "" || $("#emp_name").val() == '张') && sessionStorage.getItem("prob_z") == undefined) {
+        t.row.add([
+            "3303",
+            "张然",
+            "行政部",
+            "试用中",
+            "2014-01-01",
+            "2016-01-01"
+        ]).draw( false );
+        if ($("#prob_result_div").hasClass("rhide")) {
+            $("#prob_result_div").attr("class", "row animated fadeInDown");
+        }
+    } else {
+        var header = '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+            '<h4 class="modal-title" id="myModalLabel">信息</h4>';
+        var body = '找不到对应的员工';
+        var footer = '<button type="button" class="btn btn-default" data-dismiss="modal">确定</button>';
+        showModal(header, body, footer, {})
+    }
+
 });
+
+function del() {
+    sessionStorage.setItem("prob_z", "a")
+}

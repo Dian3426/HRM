@@ -55,7 +55,7 @@
 <div class="wrapper">
     <header class="main-header">
         <!--Logo开始-->
-        <a href="./dashboard" class="logo">
+        <a href="/mainFrame" class="logo">
             <!--MiniLogo-->
             <span class="logo-mini"><b>H</b>RM</span>
             <!--完整Logo-->
@@ -275,7 +275,7 @@
                                     <b>入职时间</b> <a class="pull-right">2012-11</a>
                                 </li>
                             </ul>
-                            <a href="#" class="btn btn-danger btn-block"><b>登出</b></a>
+                            <a href="javascript: null" id="logout_btn" class="btn btn-danger btn-block"><b>登出</b></a>
                         </div>
                     </div>
 
@@ -319,7 +319,7 @@
                 <div class="col-md-9">
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs">
-                            <li class="active"><a href="#timeline" data-toggle="tab">Timeline</a></li>
+                            <li class="active"><a href="#timeline" data-toggle="tab">操作历史</a></li>
                         </ul>
                         <div class="tab-content">
                             <div class="active tab-pane" id="timeline">
@@ -327,40 +327,47 @@
                                 <ul class="timeline timeline-inverse">
                                     <!-- timeline time label -->
                                     <li class="time-label">
-                                        <span class="bg-red">
-                                          2015-09-18
+                                        <span class="bg-yellow">
+                                          2015-09-24
                                         </span>
                                     </li>
                                     <li>
                                         <i class="fa fa-user bg-aqua"></i>
 
                                         <div class="timeline-item">
-                                            <span class="time"><i class="fa fa-clock-o"></i> 5 mins ago</span>
+                                            <span class="time"><i class="fa fa-clock-o"></i> 00:12</span>
 
-                                            <h3 class="timeline-header no-border">写出了新的Windows 10</h3>
+                                            <h3 class="timeline-header no-border">将豆豆升为行政部行政总监</h3>
+                                        </div>
+                                    </li>
+
+                                    <li class="time-label">
+                                        <span class="bg-red">
+                                          2015-09-23
+                                        </span>
+                                    </li>
+
+                                    <li>
+                                        <i class="fa fa-exchange bg-purple"></i>
+
+                                        <div class="timeline-item">
+                                            <span class="time"><i class="fa fa-clock-o"></i> 13:12</span>
+
+                                            <h3 class="timeline-header no-border">将豆豆调往行政部</h3>
                                         </div>
                                     </li>
                                     <li>
-                                        <i class="fa fa-magic bg-purple"></i>
+                                        <i class="fa fa-exchange bg-gray"></i>
 
                                         <div class="timeline-item">
-                                            <span class="time"><i class="fa fa-clock-o"></i> 25 mins ago</span>
+                                            <span class="time"><i class="fa fa-clock-o"></i> 10:56</span>
 
-                                            <h3 class="timeline-header no-border">写出了新的OS X 11</h3>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-comments bg-gray"></i>
-
-                                        <div class="timeline-item">
-                                            <span class="time"><i class="fa fa-clock-o"></i> 50 mins ago</span>
-
-                                            <h3 class="timeline-header no-border">发表言论引领了行业的发展</h3>
+                                            <h3 class="timeline-header no-border">将豆豆升为正式员工</h3>
                                         </div>
                                     </li>
                                     <li class="time-label">
                                         <span class="bg-green">
-                                          2015-09-18
+                                          2015-09-22
                                         </span>
                                     </li>
                                     <!-- /.timeline-label -->
@@ -371,7 +378,7 @@
                                         <div class="timeline-item">
                                             <span class="time"><i class="fa fa-clock-o"></i> 19:52</span>
 
-                                            <h3 class="timeline-header no-border">成为了世界上最年轻的排名世界第一程序员的人</h3>
+                                            <h3 class="timeline-header no-border">创建新员工豆豆</h3>
                                         </div>
                                     </li>
                                     <li>

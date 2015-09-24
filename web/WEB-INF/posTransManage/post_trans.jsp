@@ -34,11 +34,6 @@
 
                             <div class="col-sm-3">
                                 <select class="form-control" id="trans_dept_name" name="trans_dept_name">
-                                    <option value="行政部">行政部</option>
-                                    <option value="技术部">技术部</option>
-                                    <option value="公关部">公关部</option>
-                                    <option value="行政部">行政部</option>
-                                    <option value="网络部">网络部</option>
                                 </select>
                             </div>
                         </div>
@@ -48,9 +43,6 @@
 
                             <div class="col-sm-3">
                                 <select class="form-control" id="trans_post_name" name="trans_post_name">
-                                    <option value="经理">经理</option>
-                                    <option value="总监">总监</option>
-                                    <option value="职工">职工</option>
                                 </select>
                             </div>
                         </div>
@@ -59,9 +51,6 @@
                             <label for="trans_emp_name" class="col-sm-5 control-label">员工姓名</label>
                             <div class="col-sm-3">
                                 <select class="form-control" id="trans_emp_name" name="trans_emp_name">
-                                    <option value="XX">XX</option>
-                                    <option value="XX">XX</option>
-                                    <option value="XX">XX</option>
                                 </select>
                             </div>
                         </div>
@@ -70,9 +59,6 @@
                             <label for="trans_new_post" class="col-sm-5 control-label">新部门岗位</label>
                             <div class="col-sm-3">
                                 <select class="form-control" id="trans_new_post" name="trans_new_post">
-                                    <option value="XX">XX</option>
-                                    <option value="XX">XX</option>
-                                    <option value="XX">XX</option>
                                 </select>
                             </div>
                         </div>

@@ -91,7 +91,7 @@
                             <label for="emp_idNumS" class="col-sm-6 control-label">请输入您要查询的身份证号</label>
 
                             <div class="col-sm-3">
-                                <input type="text" class="form-control" id="emp_idNumS" placeholder="身份证号">
+                                <input type="text" name="emp_idcard" class="form-control" id="emp_idNumS" placeholder="身份证号">
                             </div>
                         </div>
                     </div>
@@ -167,7 +167,7 @@
                             <td colspan="3">
                                 <div class="td-control">
                                     <label for="emp_idNum" class="control-label" style="width: 30%;">身份证号：</label>
-                                    <span id="emp_idNum" style="width: 60%">21093719870901281</span>
+                                    <span id="emp_idNum" style="width: 60%">430430430430430430</span>
                                 </div>
                             </td>
                         </tr>

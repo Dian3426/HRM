@@ -68,7 +68,7 @@
                     </h3>
                 </div> <!--herder 结束-->
 
-                <form class="form-horizontal">
+                <form class="form-horizontal" id="prob_info_form">
                     <div class="box-body">
                         <span>请输入查询条件：（至少填写一项）</span>
                         <div class="form-group">
@@ -125,7 +125,6 @@
                                 <th>员工编号</th>
                                 <th>姓名</th>
                                 <th>部门名称</th>
-                                <th>岗位名称</th>
                                 <th>试用期状态</th>
                                 <th>试用期开始日期</th>
                                 <th>试用期结束日期</th>
@@ -133,25 +132,11 @@
                             </tr>
                         </thead>
 
-                        <tbody>
-                            <tr>
-                                <td>员工编号</td>
-                                <td>姓名</td>
-                                <td>部门名称</td>
-                                <td>岗位名称</td>
-                                <td>试用期状态</td>
-                                <td>试用期开始日期</td>
-                                <td>试用期结束日期</td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-
                         <tfoot>
                         <tr>
                             <th>员工编号</th>
                             <th>姓名</th>
                             <th>部门名称</th>
-                            <th>岗位名称</th>
                             <th>试用期状态</th>
                             <th>试用期开始日期</th>
                             <th>试用期结束日期</th>

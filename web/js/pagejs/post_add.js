@@ -8,7 +8,19 @@ $("#btn_post_add_save").click(function () {
         type: 'POST',
         dataType: 'JSON',
         success: function (data) {
-            alert(data);
+            if (data['success'] == "1") {
+                var header = '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+                    '<h4 class="modal-title" id="myModalLabel">信息</h4>';
+                var body = '添加成功';
+                var footer = '<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>';
+                showModal(header, body, footer, {})
+            } else {
+                var header = '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+                    '<h4 class="modal-title" id="myModalLabel">信息</h4>';
+                var body = '添加失败';
+                var footer = '<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>';
+                showModal(header, body, footer, {})
+            }
         }
     });
 });

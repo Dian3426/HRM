@@ -9,6 +9,9 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/datepicker/css/bootstrap-datepicker3.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/select2/dist/css/select2.min.css">
 <style>
+    body {
+        font-size: small;
+    }
     .table-title {
         text-align: center;
     }
@@ -19,6 +22,7 @@
 
     .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
         vertical-align: middle;
+        font-size: small;
         height: 50px;
     }
 
@@ -257,7 +261,7 @@
                                 <td colspan="2">
                                     <div class="td-control">
                                         <label for="emp_mail" class="control-label" style="width: 40%;">电子邮件：</label>
-                                        <input id="emp_mail" name="emp_name" type="text" placeholder="电子邮件" style="width: 50%;">
+                                        <input id="emp_mail" name="emp_mail" type="text" placeholder="电子邮件" style="width: 50%;">
                                     </div>
                                 </td>
                                 <td>

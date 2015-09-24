@@ -49,14 +49,31 @@ t.on('order.dt search.dt', function () {
 }).draw();
 
 $("#emp_search_btn").click(function () {
-    $("#emp_exit_resultdiv").attr("class", "row animated fadeInDown");
+    if ($("#emp_num").val() == "3303" && ($("#emp_name").val() == "" || $("#emp_name").val() == '张') && sessionStorage.getItem("exit_z") == undefined) {
+        t.row.add([
+            "3303",
+            "张然",
+            "行政部",
+            "员工"
+        ]).draw(false);
+        if ($("#emp_exit_resultdiv").hasClass("rhide")) {
+            $("#emp_exit_resultdiv").attr("class", "row animated fadeInDown");
+        }
+    } else {
+        var header = '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+            '<h4 class="modal-title" id="myModalLabel">信息</h4>';
+        var body = '找不到对应的员工';
+        var footer = '<button type="button" class="btn btn-default" data-dismiss="modal">确定</button>';
+        showModal(header, body, footer, {})
+    }
+
 });
 
 function exit_modal_show() {
     var header = '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
         '<h4 class="modal-title" id="myModalLabel">填写离职信息</h4>';
     var body = '<form><div class="form-group"><label for="exit_date" class="control-label">离职日期:</label><input name="exit_date" class="form-control" id="exit_date"></div><div class="form-group"><label for="exit_type" class="control-label">离职类型:</label><select class="form-control" name="exit_type" id="exit_type"><option value="主动辞职">主动辞职</option><option value="辞退">辞退</option><option value="退休">退休</option><option value="开除">开除</option><option value="试用期未通过">试用期未通过</option></select></div><div class="form-group"><label for="exit_to" class="control-label">离职去向:</label><input name="exit_to" class="form-control" id="exit_to"></div><div class="form-group"><label for="into_talent" class="control-label">是否进入人才库:</label><select name="into_talent" class="form-control" id="into_talent"><option value="1">是</option><option value="0">否</option></select></div></form>';
-    var footer = '<button type="button" class="btn btn-danger">离职</button><button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>';
+    var footer = '<button type="button" onclick="del()" class="btn btn-danger">离职</button><button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>';
     showModal(header, body, footer, {}, function () {
         $('#exit_date').datepicker({
             format: "yyyy/mm/dd",
@@ -70,3 +87,7 @@ function exit_modal_show() {
     });
 }
 
+function del() {
+    sessionStorage.setItem("exit_z", "a")
+    hideModal();
+}

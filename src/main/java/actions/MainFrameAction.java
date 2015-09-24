@@ -82,6 +82,13 @@ public class MainFrameAction extends ActionSupport{
         return SUCCESS;
     }
 
+    @Action(value = "empExit",results = {
+            @Result(name = ActionSupport.SUCCESS,location = "/WEB-INF/empManage/emp_exit.jsp")
+    })
+    public String empExit(){
+        return SUCCESS;
+    }
+
     @Action(value = "empExited",results = {
             @Result(name = ActionSupport.SUCCESS,location = "/WEB-INF/empManage/emp_exited.jsp")
     })

@@ -31,7 +31,7 @@ var t = $('#post_table').DataTable({
         data: null,
         render: function (data, type, row) {
             return "<button class='btn btn-warning' role='edit_btn' style='margin-right: 10px;'>编辑</button>" +
-                "<button class='btn btn-danger' onclick='del_post_info(" + row[0] + ")' style='margin-right: 10px;' role='del_btn'>删除</button><button class='btn btn-info' onclick='view_post_emp()' role='del_btn'>查看员工信息</button>";
+                "<button class='btn btn-danger' onclick='del_post_info(" + row[0] + ")' style='margin-right: 10px;' role='del_btn'>删除</button><button class='btn btn-info' onclick='view_post_emp(" + row[0] + ")' role='del_btn'>查看员工信息</button>";
         }
     }],
     order: [[0, 'asc']],
@@ -70,15 +70,24 @@ function del_post_info(post_id) {
     $.ajax({
         url: '/postDelete',
         type: 'POST',
-        dataType: 'JSOM',
+        dataType: 'json',
         data: {
             post_id: post_id
         },
         success: function (data) {
             if (data['success'] == "1") {
+                var header = '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+                    '<h4 class="modal-title" id="myModalLabel">信息</h4>';
+                var body = '删除成功';
+                var footer = '<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>';
+                showModal(header, body, footer, {})
                 t.ajax.reload();
             } else {
-                alert(data);
+                var header = '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+                    '<h4 class="modal-title" id="myModalLabel">信息</h4>';
+                var body = '添加失败';
+                var footer = '<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>';
+                t.ajax.reload();
             }
         }
     });
@@ -88,13 +97,13 @@ function save_edit_info() {
     alert("save")
 }
 
-function view_post_emp() {
+function view_post_emp(post_id) {
     var header = '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
         '<h4 class="modal-title" id="myModalLabel">岗位员工信息列表</h4>';
     var body = '<table id="dept_emp_table" class="table table-bordered table-striped table-hover" cellspacing="0"><thead><tr><th>员工编号</th><th>员工姓名</th><th>联系电话</th><th>入职日期</th></tr></thead><tbody></tbody><tfoot><tr><th>员工编号</th><th>员工姓名</th><th>联系电话</th><th>入职日期</th></tr></tfoot></table>';
     var footer = '<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>';
-    showModal(header, body, footer, {}, function () {
-        var t = $("#dept_emp_table").DataTable({
+    showModal(header, body, footer, {}, function (data) {
+        var tt = $("#dept_emp_table").DataTable({
             language: {
                 lengthMenu: "每一页显示_MENU_条记录",
                 zeroRecords: "对不起，找不到任何员工",
@@ -120,7 +129,8 @@ function view_post_emp() {
             order: [[0, 'asc']],
             autoWidth: true,
             searching: false,
-            ordering: false
+            ordering: false,
+            ajax: '/getEmpByPostID?post_id=' + post_id
         });
     });
 }

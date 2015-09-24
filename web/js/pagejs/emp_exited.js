@@ -27,21 +27,30 @@ var t = $('#emp_exit_result').DataTable({
     },
     searching: false,
     ordering: false,
-    columnDefs: [{
-        searchable: false,
-        orderable: false,
-        targets: 0
-    }],
-    order: [[1, 'asc']],
+    order: [[0, 'asc']],
     autoWidth: true
 });
 
-t.on('order.dt search.dt', function () {
-    t.column(0, {search: 'applied', order: 'applied'}).nodes().each(function (cell, i) {
-        cell.innerHTML = i + 1;
-    });
-}).draw();
-
 $("#emp_search_btn").click(function () {
-    $("#emp_exit_resultdiv").attr("class", "row animated fadeInDown");
+    if ($("#search_emp_num").val() == "3303" && ($("#search_emp_name").val() == "" || $("#search_emp_name").val() == '张') && sessionStorage.getItem("exit_z") != undefined) {
+        t.row.add([
+            "3303",
+            "张然",
+            "行政部",
+            "员工",
+            "2015-09-24",
+            "主动",
+            "无"
+        ]).draw(false);
+        if ($("#emp_exit_resultdiv").hasClass("rhide")) {
+            $("#emp_exit_resultdiv").attr("class", "row animated fadeInDown");
+        }
+    } else {
+        var header = '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+            '<h4 class="modal-title" id="myModalLabel">信息</h4>';
+        var body = '找不到对应的员工';
+        var footer = '<button type="button" class="btn btn-default" data-dismiss="modal">确定</button>';
+        showModal(header, body, footer, {})
+    }
+
 });

@@ -152,7 +152,6 @@
                     <table class="table table-bordered table-striped table-hover" id="emp_exit_result">
                         <thead>
                         <tr>
-                            <th></th>
                             <th>员工编号</th>
                             <th>姓名</th>
                             <th>部门名称</th>
@@ -163,22 +162,8 @@
                         </tr>
                         </thead>
 
-                        <tbody>
-                        <tr>
-                            <td></td>
-                            <td>员工编号</td>
-                            <td>姓名</td>
-                            <td>部门名称</td>
-                            <td>岗位名称</td>
-                            <td>离职日期</td>
-                            <td>离职类型</td>
-                            <td>离职去向</td>
-                        </tr>
-                        </tbody>
-
                         <tfoot>
                         <tr>
-                            <th></th>
                             <th>员工编号</th>
                             <th>姓名</th>
                             <th>部门名称</th>
