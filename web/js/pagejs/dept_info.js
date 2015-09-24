@@ -185,7 +185,7 @@ function view_dept_emp(dept_id) {
             ordering: false
         });
 
-        if (dept_id == "2") {
+        if (dept_id == "2" && sessionStorage.getItem("trans_d") == undefined) {
             ts.row.add([
                 "豆豆",
                 "0001",
@@ -200,6 +200,16 @@ function view_dept_emp(dept_id) {
                 "蒋实知",
                 "0004",
                 "技术部-行政总监",
+                "213-213213213",
+                "2015-09-23"
+            ]).draw();
+        }
+
+        if (dept_id == "7" && sessionStorage.getItem("trans_d") != undefined) {
+            ts.row.add([
+                "豆豆",
+                "0001",
+                "技术部-行政主管",
                 "213-213213213",
                 "2015-09-23"
             ]).draw();
